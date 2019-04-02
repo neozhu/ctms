@@ -1,0 +1,83 @@
+﻿﻿@model WebApp.Models.CertAnRecord
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin certanrecord form  -->
+<form id="certanrecord_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Code) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.QualificationCertificateNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.QualificationCertificateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.SDate)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.NDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.NDate)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end certanrecord form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

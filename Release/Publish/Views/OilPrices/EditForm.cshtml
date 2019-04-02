@@ -1,0 +1,132 @@
+﻿﻿@model WebApp.Models.OilPrice
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin oilprice form  -->
+<form id="oilprice_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Name)" 
+				   name="@Html.NameFor(model => model.Name)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Name)" 
+				   value="@Html.ValueFor(model => model.Name)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Name)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Date1)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.Date1)" 
+			       name="@Html.NameFor(model => model.Date1)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Date1)" 
+				   tabindex="1" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.Date1)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Date1)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Date2)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.Date2)" 
+			       name="@Html.NameFor(model => model.Date2)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Date2)" 
+				   tabindex="2" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.Date2)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Date2)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Area) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Area)" 
+				   name="@Html.NameFor(model => model.Area)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Area)" 
+				   value="@Html.ValueFor(model => model.Area)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Area)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Price)"
+				   name="@Html.NameFor(model => model.Price)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Price)" 
+				   value="@Html.ValueFor(model => model.Price)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Price)</b>
+			    </label>
+            </section>
+				 
+	    
+			  
+              <section class="col col-3">
+              <label class="label"><span class="required">@Html.DisplayNameFor(model => model.IsEnabled)</span> </label>
+              <label class="checkbox">
+                 <input id="@Html.IdFor(model => model.IsEnabled)"
+                       name="@Html.NameFor(model => model.IsEnabled)"
+                       value="true" @(Model.IsEnabled ? "checked=\"checked\"" : "")
+                       tabindex="6"
+                       type="checkbox" />
+                <i></i> @Html.DisplayNameFor(model => model.IsEnabled)
+                <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.IsEnabled)</b>
+               </label>
+              </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end oilprice form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#oilprice_form').form('load', data);
+            
+    }
+
+
+   var oilpriceid=@Model.Id;
+    $(function(){
+        initFormData(oilpriceid);
+    });
+ </script>
+

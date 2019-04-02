@@ -1,0 +1,312 @@
+﻿﻿@model WebApp.Models.ShippingTask
+<!-- begin master section -->
+<div  class="main-form">
+<!--begin shippingtask form  -->
+<form id="shippingtask_form" method="post" novalidate="novalidate" >
+@Html.AntiForgeryToken()
+<fieldset>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--派车单号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ShipOrderNo) </label>
+			@Html.EditorFor(x => x.ShipOrderNo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShipOrderNo) } })
+      
+         </div>
+
+        <!--派车类型-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span> </label>
+			@Html.EditorFor(x => x.ZPCLX, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZPCLX) } })
+      
+         </div>
+
+        <!--车牌号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCPH)</span> </label>
+			@Html.EditorFor(x => x.ZCPH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZCPH) } })
+      
+         </div>
+
+        <!--车板号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCBH)</span> </label>
+			@Html.EditorFor(x => x.ZCBH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZCBH) } })
+      
+         </div>
+
+		<!--派车状态-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCZT)</span> </label>
+            @Html.EditorFor(x => x.ZCZT, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZCZT) } })
+
+        </div>
+
+        <!--备注-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZBZ) </label>
+			@Html.EditorFor(x => x.ZBZ, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZBZ) } })
+      
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+		
+      <!--是否甩板-->
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+              <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZSFSB)</span> </label>
+              <div class="checkbox  no-margin">
+              <label>
+                 <input id="@Html.IdFor(model => model.ZSFSB)"
+                       name="@Html.NameFor(model => model.ZSFSB)"
+                       value="true" @(Model.ZSFSB ? "checked=\"checked\"" : "")
+                       class="checkbox style-0"
+                       tabindex="6"
+                       type="checkbox" />
+                <span>@Html.DisplayNameFor(model => model.ZSFSB)</span>
+              </label>
+            </div>
+      </div>
+
+        <!--调度员-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZDDY) </label>
+			@Html.EditorFor(x => x.ZDDY, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZDDY) } })
+      
+         </div>
+
+       <!--调度派车时间-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZDDPCSJ)</span> </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.ZDDPCSJ, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.ZDDPCSJ ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+
+       <!--要求运输完成时间-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZYYWCSJ) </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.ZYYWCSJ, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.ZYYWCSJ ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+
+       <!--实际开始运输时间-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZSJKSYYSJ) </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.ZSJKSYYSJ, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.ZSJKSYYSJ ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+
+       <!--实际运输完成时间-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZSJYYWXSJ) </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.ZSJYYWXSJ, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.ZSJYYWXSJ ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--起始地-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span> </label>
+			@Html.EditorFor(x => x.ZQSD, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZQSD) } })
+      
+         </div>
+
+        <!--起始地描述-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span> </label>
+			@Html.EditorFor(x => x.ZQSDMS, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZQSDMS) } })
+      
+         </div>
+
+        <!--目的地-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span> </label>
+			@Html.EditorFor(x => x.ZMDD, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZMDD) } })
+      
+         </div>
+
+        <!--目的地描述-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span> </label>
+			@Html.EditorFor(x => x.ZMDDMS, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZMDDMS) } })
+      
+         </div>
+
+        <!--白卡号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZBKH) </label>
+			@Html.EditorFor(x => x.ZBKH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZBKH) } })
+      
+         </div>
+
+        <!--司机姓名-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZSJXM) </label>
+			@Html.EditorFor(x => x.ZSJXM, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZSJXM) } })
+      
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--司机电话-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZSJDH) </label>
+			@Html.EditorFor(x => x.ZSJDH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZSJDH) } })
+      
+         </div>
+
+        <!--司机身份证号码-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZSJSFZ) </label>
+			@Html.EditorFor(x => x.ZSJSFZ, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZSJSFZ) } })
+      
+         </div>
+
+        <!--结算方-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZJSF) </label>
+			@Html.EditorFor(x => x.ZJSF, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZJSF) } })
+      
+         </div>
+
+        <!--结算方名称-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZJSFMS) </label>
+			@Html.EditorFor(x => x.ZJSFMS, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZJSFMS) } })
+      
+         </div>
+
+        <!--结算备注-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZJSBZ) </label>
+			@Html.EditorFor(x => x.ZJSBZ, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZJSBZ) } })
+      
+         </div>
+
+        <!--油耗代码-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZYHDM) </label>
+			@Html.EditorFor(x => x.ZYHDM, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZYHDM) } })
+      
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+		<!--运输里程-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZYSLC) </label>
+            @Html.EditorFor(x => x.ZYSLC, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZYSLC) } })
+
+        </div>
+
+		<!--箱公里-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZXGL) </label>
+            @Html.EditorFor(x => x.ZXGL, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZXGL) } })
+
+        </div>
+
+		<!--应耗油-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZYHY) </label>
+            @Html.EditorFor(x => x.ZYHY, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZYHY) } })
+
+        </div>
+
+		<!--补贴-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Compensation) </label>
+            @Html.EditorFor(x => x.Compensation, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.Compensation) } })
+
+        </div>
+
+		<!--GPS记录里程-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZGPSJLLC) </label>
+            @Html.EditorFor(x => x.ZGPSJLLC, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZGPSJLLC) } })
+
+        </div>
+	    
+   </div>
+  </div>
+</fieldset>
+</form>
+<!-- end shippingtask form  -->
+</div>
+
+<!-- end master section -->
+<!--========================================================================================-->
+<!-- begin detail section -->
+<div class="row">
+        <div class="col col-md-12 col-lg-12">
+        <!-- details tabs -->
+        <div class="tabs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs bordered">
+								<li class="active"><a data-toggle="tab" href="#tab-shippingtaskitems"> ShippingTaskItems</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+		 		  <div id="tab-shippingtaskitems" class="tab-pane active">
+                   <div class="panel-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-8  ">
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_append()" class="btn btn-sm btn-default"> <i class="fa fa-plus"></i> @Html.L("Add") </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_removeit()" class="btn btn-sm btn-default"> <i class="fa fa-trash-o"></i> @Html.L("Delete") </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_accept()" class="btn btn-sm btn-default"> <i class="fa fa-floppy-o"></i> @Html.L("Save") </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_reload()" class="btn btn-sm btn-default"> <i class="fa fa-refresh"></i> @Html.L("Refresh") </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_reject()" class="btn btn-sm btn-default"> <i class="fa fa-window-close-o"></i> @Html.L("Cancel") </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                   </div>
+                <div class="table-responsive">
+				<table id="shippingtaskitems_datagrid" >
+                </table>
+              
+            </div>
+        </div>
+		  	</div>
+	</div>
+ 
+<!--end details tabs -->
+        </div>
+    </div>
+<!-- end detail section -->
+

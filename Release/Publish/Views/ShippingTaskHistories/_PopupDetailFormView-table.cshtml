@@ -1,0 +1,368 @@
+﻿﻿@model WebApp.Models.ShippingTaskHistory
+<!-- 弹出窗体form表单 -->
+ <div id="detailswindow" hidden="hidden" class="easyui-window" 
+      title="明细数据" 
+      data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    iconCls:'icon-more',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    onBeforeClose:function(){
+                      var that = $(this);
+                      if(hasmodified()){
+                        $.messager.confirm('确认','你确定要放弃保存修改的记录?',function(r){
+                        if (r){
+                          var opts = that.panel('options');
+                          var onBeforeClose = opts.onBeforeClose;
+                          opts.onBeforeClose = function(){};
+                          that.panel('close');
+                          opts.onBeforeClose = onBeforeClose;
+                        }
+                        });
+                        return false;
+                      }
+                    },
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1350px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group btn-group-sm">
+                       <button onclick="saveitem()" class="btn btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </button>
+                </div>
+                <div class="btn-group btn-group-sm" style="display:none">
+                    <button onclick="todo()" class="btn btn-default">
+                        <i class="fa fa-print"></i> ToDo
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn   btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+          <form id="shippingtaskhistory_form" 
+              class="easyui-form form-horizontal padding-10" 
+              method="post" 
+              data-options="novalidate:true,
+                            onChange: function(target){
+                              hasChanged = true;
+                             },
+                             onLoadSuccess:function(data){
+                               hasChanged = false;
+                             }">
+  @Html.AntiForgeryToken()
+   <!--Primary Key-->
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  
+ <table class="table table-bordered"> 
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ShipOrderNo)</span></td>
+	   <td> 
+            <!--派车单号-->
+			<input id="@Html.IdFor(model => model.ShipOrderNo)" 
+				   name="@Html.NameFor(model => model.ShipOrderNo)" 
+				   value="@Html.ValueFor(model => model.ShipOrderNo)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ShipOrderNo)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[8,20]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span></td>
+	   <td> 
+            <!--派车类型-->
+			<input id="@Html.IdFor(model => model.ZPCLX)" 
+				   name="@Html.NameFor(model => model.ZPCLX)" 
+				   value="@Html.ValueFor(model => model.ZPCLX)"
+				   tabindex="1" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZPCLX)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[1,2]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCPH)</span></td>
+	   <td> 
+            <!--车牌号-->
+			<input id="@Html.IdFor(model => model.ZCPH)" 
+				   name="@Html.NameFor(model => model.ZCPH)" 
+				   value="@Html.ValueFor(model => model.ZCPH)"
+				   tabindex="2" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCPH)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[1,10]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCBH)</span></td>
+	   <td> 
+            <!--车板号-->
+			<input id="@Html.IdFor(model => model.ZCBH)" 
+				   name="@Html.NameFor(model => model.ZCBH)" 
+				   value="@Html.ValueFor(model => model.ZCBH)"
+				   tabindex="3" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCBH)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[7,10]'
+                                 " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCZT)</span></td>
+	   <td> 
+            <!--派车状态-->
+			<input id="@Html.IdFor(model => model.ZCZT)"
+				   name="@Html.NameFor(model => model.ZCZT)" 
+				   value="@Html.ValueFor(model => model.ZCZT)"
+				   tabindex="4" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCZT)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType:'integer',
+                                 
+                                 " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZBZ)</td>
+	   <td> 
+            <!--备注-->
+			<input id="@Html.IdFor(model => model.ZBZ)" 
+				   name="@Html.NameFor(model => model.ZBZ)" 
+				   value="@Html.ValueFor(model => model.ZBZ)"
+				   tabindex="5" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZBZ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 validType: 'length[0,50]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span></td>
+	   <td> 
+            <!--起始地-->
+			<input id="@Html.IdFor(model => model.ZQSD)" 
+				   name="@Html.NameFor(model => model.ZQSD)" 
+				   value="@Html.ValueFor(model => model.ZQSD)"
+				   tabindex="6" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZQSD)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[0,20]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span></td>
+	   <td> 
+            <!--起始地描述-->
+			<input id="@Html.IdFor(model => model.ZQSDMS)" 
+				   name="@Html.NameFor(model => model.ZQSDMS)" 
+				   value="@Html.ValueFor(model => model.ZQSDMS)"
+				   tabindex="7" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZQSDMS)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[0,80]'
+                                 " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span></td>
+	   <td> 
+            <!--目的地-->
+			<input id="@Html.IdFor(model => model.ZMDD)" 
+				   name="@Html.NameFor(model => model.ZMDD)" 
+				   value="@Html.ValueFor(model => model.ZMDD)"
+				   tabindex="8" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZMDD)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[0,20]'
+                                 " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span></td>
+	   <td> 
+            <!--目的地描述-->
+			<input id="@Html.IdFor(model => model.ZMDDMS)" 
+				   name="@Html.NameFor(model => model.ZMDDMS)" 
+				   value="@Html.ValueFor(model => model.ZMDDMS)"
+				   tabindex="9" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZMDDMS)',
+								 label:'',
+                                 width:200,
+								 required:true,
+                                 validType: 'length[0,80]'
+                                 " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TmNumbers)</td>
+	   <td> 
+            <!--配载订单号-->
+			<input id="@Html.IdFor(model => model.TmNumbers)" 
+				   name="@Html.NameFor(model => model.TmNumbers)" 
+				   value="@Html.ValueFor(model => model.TmNumbers)"
+				   tabindex="10" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TmNumbers)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 validType: 'length[0,50]'
+                                 " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TmContainers)</td>
+	   <td> 
+            <!--配载集装箱号-->
+			<input id="@Html.IdFor(model => model.TmContainers)" 
+				   name="@Html.NameFor(model => model.TmContainers)" 
+				   value="@Html.ValueFor(model => model.TmContainers)"
+				   tabindex="11" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TmContainers)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 validType: 'length[0,80]'
+                                 " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.TransactionDateTime)</span></td>
+	   <td> 
+         
+            <!--记录时间-->
+			<input id="@Html.IdFor(model => model.TransactionDateTime)" 
+			       name="@Html.NameFor(model => model.TransactionDateTime)" 
+                   value="@Html.ValueFor(model => model.TransactionDateTime)"
+				   tabindex="12" required
+				   class="easyui-datetimebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TransactionDateTime)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:datetimeformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Long)</td>
+	   <td> 
+             <!--经度-->
+             <input id="@Html.IdFor(model => model.Long)"
+				   name="@Html.NameFor(model => model.Long)" 
+				   value="@Html.ValueFor(model => model.Long)"
+				   tabindex="13" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Long)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 precision:2,
+                                 validType:'decimal',
+                                 
+                                 "  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Lat)</td>
+	   <td> 
+             <!--维度-->
+             <input id="@Html.IdFor(model => model.Lat)"
+				   name="@Html.NameFor(model => model.Lat)" 
+				   value="@Html.ValueFor(model => model.Lat)"
+				   tabindex="14" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Lat)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 precision:2,
+                                 validType:'decimal',
+                                 
+                                 "  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Location)</td>
+	   <td> 
+            <!--地图位置-->
+			<input id="@Html.IdFor(model => model.Location)" 
+				   name="@Html.NameFor(model => model.Location)" 
+				   value="@Html.ValueFor(model => model.Location)"
+				   tabindex="15" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Location)',
+								 label:'',
+                                 width:200,
+								 required:false,
+                                 validType: 'length[0,100]'
+                                 " />
+				   </td>
+	   	   </tr>
+	   	           </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<!-- 弹出编辑对话框 -->
+
+

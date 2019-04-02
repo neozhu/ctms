@@ -1,0 +1,538 @@
+﻿@model WebApp.Models.ShippingTaskItem
+<div id="shippingtaskitemdlg" hidden="hidden" class="easyui-dialog"
+     title="ShippingTaskItem" style="padding:15px"
+     data-options="
+                iconCls: 'icon-more',
+                modal:true,
+                closed:true,
+                cache: false,
+                resizable:true,
+                width:890,
+                height:560,
+                /*toolbar: [], 注解*/
+                onOpen:function(){
+                   $('#shippingtaskitem_form').form('disableValidation');
+                },
+                buttons: [{
+                    text:'确认',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        confirm_shippingtaskitemform();
+                    }
+                },{
+                    text:'取消',
+                    handler:function(){
+                        $('#shippingtaskitemdlg').dialog('close');
+                    }
+                }]
+            ">
+  <div class="widget-body">
+    <form id="shippingtaskitem_form" class="bv-form" novalidate="novalidate">
+      <input type="hidden" id="ShippingTaskZCPH" name="ShippingTaskZCPH" value="">
+      <input id="@Html.IdFor(model => model.ShipOrderNo)"
+             name="@Html.NameFor(model => model.ShipOrderNo)"
+             value="@Html.ValueFor(model => model.ShipOrderNo)"
+             type="hidden" />
+      <fieldset>
+        <div class="form-group">
+          @Html.HiddenFor(model => model.Id)
+
+
+          <div class="row">
+
+
+            <div class="col-sm-12 col-md-3">
+              <input id="@Html.IdFor(model => model.Drirect)"
+                     name="@Html.NameFor(model => model.Drirect)"
+                     value="@Html.ValueFor(model => model.Drirect)"
+                     tabindex="2"
+                     class="easyui-combobox"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.Drirect)',
+                                 width:200,
+								                 label:'@Html.DisplayNameFor(model => model.Drirect)' ,
+								                 required:true,
+                                 readonly:true,
+                                 textField:'text',
+                                 valueField:'value',
+                                 data:drirectdatasource
+                               " />
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <input id="@Html.IdFor(model => model.TURES_ID)"
+                     name="@Html.NameFor(model => model.TURES_ID)"
+                     value="@Html.ValueFor(model => model.TURES_ID)"
+                     tabindex="8"
+                     class="easyui-textbox"
+                     type="text"
+                     required
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_ID)',
+                     width:200,
+                     label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.TURES_ID)</span>' ,
+                    required:true ,validType:['length[11,40]','containerNo'],
+                    editable:false,
+                    buttonText:'查询',prompt:'查询',
+                    onClickButton:function(){ open_selecttmorder(); }" />
+                  </div>
+
+                  <div class="col-sm-12 col-md-3">
+                    <input id="@Html.IdFor(model => model.TURES_TCO)"
+                           name="@Html.NameFor(model => model.TURES_TCO)"
+                           value="@Html.ValueFor(model => model.TURES_TCO)"
+                           tabindex="9"
+                           class="easyui-textbox"
+                           type="text"
+                           required
+                           data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_TCO)',
+                           width:200,
+                           label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.TURES_TCO)</span>' ,
+                          readonly:true,required:true ,validType:'length[0,10]'" />
+                        </div>
+
+                        <div class="col-sm-12 col-md-3">
+                          <input id="@Html.IdFor(model => model.ZXZT)"
+                                 name="@Html.NameFor(model => model.ZXZT)"
+                                 value="@Html.ValueFor(model => model.ZXZT)"
+                                 tabindex="10"
+                                 class="easyui-combobox"
+                                 type="text"
+                                 data-options="prompt:'@Html.DisplayNameFor(model => model.ZXZT)',
+                                 width:200,
+								                 label:'@Html.DisplayNameFor(model => model.ZXZT)' ,readonly:true,
+								                 required:false ,validType:'length[0,10]',
+                                 textField:'text',
+                                 valueField:'value',
+                                 data:efdatasource" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12 col-md-3">
+                          <input id="@Html.IdFor(model => model.ZQSD)"
+                                 name="@Html.NameFor(model => model.ZQSD)"
+                                 value="@Html.ValueFor(model => model.ZQSD)"
+                                 tabindex="3"
+                                 class="easyui-combogrid"
+                                 type="text"
+                                 required
+                                 data-options="prompt:'@Html.DisplayNameFor(model => model.ZQSD)',
+                                 width:200,
+                                 label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.ZQSD)</span>' ,
+                                required:true ,validType:'length[0,20]',
+                                delay: 500,
+                                panelWidth: 510,
+                                mode: 'remote',
+                                method: 'get',
+                                url: '',
+                                idField: 'LocNo',
+                                textField: 'LocNo',
+                                pagination: true,
+                                clientPaging: false,
+                                columns: [[
+                                { field: 'LocNo', title: '位置编码', width: 110, sortable: true },
+                                { field: 'Description', title: '名称', width: 280, sortable: true }
+                                ]],
+                                onClickRow:function(index,row){
+                                $('#shippingtaskitem_form #ZQSDMS').textbox('setValue',row.Description)
+                                }" />
+                              </div>
+
+                              <div class="col-sm-12 col-md-3">
+                                <input id="@Html.IdFor(model => model.ZQSDMS)"
+                                       name="@Html.NameFor(model => model.ZQSDMS)"
+                                       value="@Html.ValueFor(model => model.ZQSDMS)"
+                                       tabindex="4"
+                                       class="easyui-textbox"
+                                       type="text"
+                                       required
+                                       data-options="prompt:'@Html.DisplayNameFor(model => model.ZQSDMS)',
+                                       width:200,
+                                       label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.ZQSDMS)</span>' ,
+                                      required:true ,readonly:true,validType:'length[0,80]'" />
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                      <input id="@Html.IdFor(model => model.ZMDD)"
+                                             name="@Html.NameFor(model => model.ZMDD)"
+                                             value="@Html.ValueFor(model => model.ZMDD)"
+                                             tabindex="5"
+                                             class="easyui-combogrid"
+                                             type="text"
+                                             required
+                                             data-options="prompt:'@Html.DisplayNameFor(model => model.ZMDD)',
+                                             width:200,
+                                             label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.ZMDD)</span>' ,
+                                            required:true ,validType:'length[0,20]',
+                                            delay: 500,
+                                            panelWidth: 510,
+                                            mode: 'remote',
+                                            method: 'get',
+                                            url: '',
+                                            idField: 'LocNo',
+                                            textField: 'LocNo',
+                                            pagination: true,
+                                            clientPaging: false,
+                                            columns: [[
+                                            { field: 'LocNo', title: '位置编码', width: 110, sortable: true },
+                                            { field: 'Description', title: '名称', width: 280, sortable: true }
+                                            ]],
+                                            onClickRow:function(index,row){
+                                            $('#shippingtaskitem_form #ZMDDMS').textbox('setValue',row.Description)
+                                            }" />
+                                          </div>
+
+                                          <div class="col-sm-12 col-md-3">
+                                            <input id="@Html.IdFor(model => model.ZMDDMS)"
+                                                   name="@Html.NameFor(model => model.ZMDDMS)"
+                                                   value="@Html.ValueFor(model => model.ZMDDMS)"
+                                                   tabindex="6"
+                                                   class="easyui-textbox"
+                                                   type="text"
+                                                   required
+                                                   data-options="prompt:'@Html.DisplayNameFor(model => model.ZMDDMS)',
+                                                   width:200,
+                                                   label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.ZMDDMS)</span>' ,
+                                                  required:true ,readonly:true,validType:'length[0,80]'" />
+                                                </div>
+
+
+
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.ZFBCKHJ)"
+                                                         name="@Html.NameFor(model => model.ZFBCKHJ)"
+                                                         value="@Html.ValueFor(model => model.ZFBCKHJ)"
+                                                         tabindex="7"
+                                                         class="easyui-combobox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.ZFBCKHJ)',
+                                                                      width:200,
+								                                                      label:'@Html.DisplayNameFor(model => model.ZFBCKHJ)' ,
+								                                                      required:false ,
+                                                                      readonly:false,
+                                                                      textField:'Name',
+                                                                      valueField:'Name',
+                                                                      url:'',
+                                                                      mode:'remote',
+                                                                      method:'get'" />
+                                                </div>
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.ZZT)"
+                                                         name="@Html.NameFor(model => model.ZZT)"
+                                                         value="@Html.ValueFor(model => model.ZZT)"
+                                                         tabindex="11"
+                                                         class="easyui-combobox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.ZZT)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.ZZT)' ,readonly:true,
+								 required:false ,validType:'length[0,10]',
+                                                         textField:'text',
+                                                         valueField:'value',
+                                                         data:tmstatusdatasource" />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.QUA_PCS_VAL)"
+                                                         name="@Html.NameFor(model => model.QUA_PCS_VAL)"
+                                                         value="@Html.ValueFor(model => model.QUA_PCS_VAL)"
+                                                         tabindex="12"
+                                                         class="easyui-numberbox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+								 width:200,
+								 label:'@Html.DisplayNameFor(model => model.QUA_PCS_VAL)' ,
+                                 precision:2,readonly:true,
+								 required:false,
+                                 validType:'decimal'
+                                 " />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.QUA_PCS_UNI)"
+                                                         name="@Html.NameFor(model => model.QUA_PCS_UNI)"
+                                                         value="@Html.ValueFor(model => model.QUA_PCS_UNI)"
+                                                         tabindex="13"
+                                                         class="easyui-combobox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.QUA_PCS_UNI)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.QUA_PCS_UNI)' ,readonly:true,
+								 required:false ,validType:'length[0,3]',
+                                                         textField:'text',
+                                                         valueField:'value',
+                                                         data:unitdatasource" />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.PKGUN_WEI_VAL)"
+                                                         name="@Html.NameFor(model => model.PKGUN_WEI_VAL)"
+                                                         value="@Html.ValueFor(model => model.PKGUN_WEI_VAL)"
+                                                         tabindex="14"
+                                                         class="easyui-numberbox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+								 width:200,
+								 label:'@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)' ,readonly:true,
+                                 precision:2,
+								 required:false,
+                                 validType:'decimal'
+                                 " />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.PKGUN_WEI_UNI)"
+                                                         name="@Html.NameFor(model => model.PKGUN_WEI_UNI)"
+                                                         value="@Html.ValueFor(model => model.PKGUN_WEI_UNI)"
+                                                         tabindex="15"
+                                                         class="easyui-combobox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)',
+                                 width:200,readonly:true,
+								 label:'@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)',
+								 required:false ,validType:'length[0,3]',
+                                                         textField:'text',
+                                                         valueField:'value',
+                                                         data:unitdatasource" />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.GRO_VOL_VAL)"
+                                                         name="@Html.NameFor(model => model.GRO_VOL_VAL)"
+                                                         value="@Html.ValueFor(model => model.GRO_VOL_VAL)"
+                                                         tabindex="16"
+                                                         class="easyui-numberbox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+								 width:200,readonly:true,
+								 label:'@Html.DisplayNameFor(model => model.GRO_VOL_VAL)' ,
+                                 precision:2,
+								 required:false,
+                                 validType:'decimal'
+                                 " />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.GRO_VOL_UNI)"
+                                                         name="@Html.NameFor(model => model.GRO_VOL_UNI)"
+                                                         value="@Html.ValueFor(model => model.GRO_VOL_UNI)"
+                                                         tabindex="17"
+                                                         class="easyui-combobox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.GRO_VOL_UNI)',
+                                 width:200,readonly:true,
+								 label:'@Html.DisplayNameFor(model => model.GRO_VOL_UNI)' ,
+								 required:false ,validType:'length[0,3]',
+                                                         textField:'text',
+                                                         valueField:'value',
+                                                         data:unitdatasource" />
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-3">
+                                                  <input id="@Html.IdFor(model => model.ZWXPDJ)"
+                                                         name="@Html.NameFor(model => model.ZWXPDJ)"
+                                                         value="@Html.ValueFor(model => model.ZWXPDJ)"
+                                                         tabindex="18"
+                                                         class="easyui-textbox"
+                                                         type="text"
+                                                         data-options="prompt:'@Html.DisplayNameFor(model => model.ZWXPDJ)',
+                                 width:200,readonly:true,
+								 label:'@Html.DisplayNameFor(model => model.ZWXPDJ)' ,
+								 required:false ,validType:'length[0,2]'" />
+                                                </div>
+                                              </div>
+                      <div class="row">
+
+
+                        <div class="col-sm-12 col-md-3">
+                          <input id="@Html.IdFor(model => model.TRQ_ID)"
+                                 name="@Html.NameFor(model => model.TRQ_ID)"
+                                 value="@Html.ValueFor(model => model.TRQ_ID)"
+                                 tabindex="20"
+                                 class="easyui-textbox"
+                                 type="text"
+                                 required
+                                 data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_ID)',
+                                 width:200,
+                                 label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.TRQ_ID)</span>' ,
+                                required:true ,readonly:true,validType:'length[8,20]'" />
+                              </div>
+                              <div class="col-sm-12 col-md-3">
+                                <input id="@Html.IdFor(model => model.TRQ_TYPE)"
+                                       name="@Html.NameFor(model => model.TRQ_TYPE)"
+                                       value="@Html.ValueFor(model => model.TRQ_TYPE)"
+                                       tabindex="19"
+                                       class="easyui-combobox"
+                                       type="text"
+                                       required
+                                       data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_TYPE)',
+                                       width:200,
+                                       label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>' ,
+                                      required:true ,readonly:true,
+                                      textField:'text',
+                                      valueField:'value',
+                                      data:trqtypedatasource" />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                      <input id="@Html.IdFor(model => model.ZCZLX)"
+                                             name="@Html.NameFor(model => model.ZCZLX)"
+                                             value="@Html.ValueFor(model => model.ZCZLX)"
+                                             tabindex="21"
+                                             class="easyui-combobox"
+                                             type="text"
+                                             data-options="prompt:'@Html.DisplayNameFor(model => model.ZCZLX)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.ZCZLX)' ,
+								 required:false ,readonly:true,
+                                                                     textField:'text',
+                                                                     valueField:'value',
+                                                                     data:zczlxdatasource" />
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                      <input id="@Html.IdFor(model => model.TOR_ID)"
+                                             name="@Html.NameFor(model => model.TOR_ID)"
+                                             value="@Html.ValueFor(model => model.TOR_ID)"
+                                             tabindex="22"
+                                             class="easyui-textbox"
+                                             type="text"
+                                             data-options="prompt:'@Html.DisplayNameFor(model => model.TOR_ID)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.TOR_ID)' ,
+								 required:false ,readonly:true,validType:'length[0,20]'" />
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                      <input id="@Html.IdFor(model => model.ZFOZT)"
+                                             name="@Html.NameFor(model => model.ZFOZT)"
+                                             value="@Html.ValueFor(model => model.ZFOZT)"
+                                             tabindex="23"
+                                             class="easyui-combobox"
+                                             type="text"
+                                             data-options="prompt:'@Html.DisplayNameFor(model => model.ZFOZT)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.ZFOZT)' ,
+								 required:false ,readonly:true,
+                                                                    textField:'text',
+                                                                     valueField:'value',
+                                                                     data:fostatusdatasource " />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                      <input id="@Html.IdFor(model => model.ZSBTDH)"
+                                             name="@Html.NameFor(model => model.ZSBTDH)"
+                                             value="@Html.ValueFor(model => model.ZSBTDH)"
+                                             tabindex="23"
+                                             class="easyui-textbox"
+                                             type="text"
+                                             data-options="prompt:'@Html.DisplayNameFor(model => model.ZSBTDH)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.ZSBTDH)' ,
+								 required:false ,readonly:true,validType:'length[0,20]'
+                   " />
+                                    </div>
+                                  </div>
+                                                          <div class="row">
+                                                            <div class="col-sm-12 col-md-3">
+                                                              <input id="@Html.IdFor(model => model.SHIPPER_ID)"
+                                                                     name="@Html.NameFor(model => model.SHIPPER_ID)"
+                                                                     value="@Html.ValueFor(model => model.SHIPPER_ID)"
+                                                                     tabindex="24"
+                                                                     class="easyui-textbox"
+                                                                     type="text"
+                                                                     data-options="prompt:'@Html.DisplayNameFor(model => model.SHIPPER_ID)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.SHIPPER_ID)' ,
+								 required:false ,readonly:true,validType:'length[0,10]'" />
+                                                            </div>
+
+                                                            <div class="col-sm-12 col-md-3">
+                                                              <input id="@Html.IdFor(model => model.ZFHDWMS)"
+                                                                     name="@Html.NameFor(model => model.ZFHDWMS)"
+                                                                     value="@Html.ValueFor(model => model.ZFHDWMS)"
+                                                                     tabindex="25"
+                                                                     class="easyui-textbox"
+                                                                     type="text"
+                                                                     required
+                                                                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZFHDWMS)',
+                                                                     width:200,
+                                                                     label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.ZFHDWMS)</span>' ,
+                                                                    required:true ,readonly:true,validType:'length[0,80]'" />
+                                                                  </div>
+
+                                                                  <div class="col-sm-12 col-md-3">
+                                                                    <input id="@Html.IdFor(model => model.CONSIGNEE_ID)"
+                                                                           name="@Html.NameFor(model => model.CONSIGNEE_ID)"
+                                                                           value="@Html.ValueFor(model => model.CONSIGNEE_ID)"
+                                                                           tabindex="26"
+                                                                           class="easyui-textbox"
+                                                                           type="text"
+                                                                           required
+                                                                           data-options="prompt:'@Html.DisplayNameFor(model => model.CONSIGNEE_ID)',
+                                                                           width:200,
+                                                                           label:'<span class=\'required\'>@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span>' ,
+                                                                          required:true ,readonly:true,validType:'length[0,10]'" />
+                                                                        </div>
+
+                                                                        <div class="col-sm-12 col-md-3">
+                                                                          <input id="@Html.IdFor(model => model.ZSHDWMS)"
+                                                                                 name="@Html.NameFor(model => model.ZSHDWMS)"
+                                                                                 value="@Html.ValueFor(model => model.ZSHDWMS)"
+                                                                                 tabindex="27"
+                                                                                 class="easyui-textbox"
+                                                                                 type="text"
+                                                                                 data-options="prompt:'@Html.DisplayNameFor(model => model.ZSHDWMS)',
+                                 width:200,
+								 label:'@Html.DisplayNameFor(model => model.ZSHDWMS)' ,readonly:true,
+								 required:false ,validType:'length[0,80]'" />
+                                                                        </div>
+
+
+                                                                      </div>
+                                                                    </div>
+                                                                  </fieldset>
+                                                                </form>
+                                                              </div>
+                                                            </div>
+                                                            <script type="text/javascript">
+                                                              var form_state = 'Added';
+                                                              var current_index = -1;
+                                                              var shippingtaskitem = {};
+
+                                                              function open_shippingtaskitemdlg(index, row, state) {
+                                                                form_state = state;
+                                                                current_index = index;
+                                                                shippingtaskitem = row;
+
+                                                                $('#shippingtaskitemdlg').dialog('open');
+                                                                if (form_state === 'Added') {
+                                                                  $('#shippingtaskitemdlg').dialog('setTitle', '新增明细');
+                                                                } else {
+                                                                  $('#shippingtaskitemdlg').dialog('setTitle', '修改明细');
+                                                                }
+                                                                $('#shippingtaskitem_form').form('reset');
+                                                                $('#shippingtaskitem_form').form('load', shippingtaskitem);
+                                                                //优化初始化加载速度
+                                                                $('#shippingtaskitem_form #ZMDD').combogrid('grid').datagrid('load', '/TMLocs/GetComboGridDataAsync');
+                                                                $('#shippingtaskitem_form #ZQSD').combogrid('grid').datagrid('load', '/TMLocs/GetComboGridDataAsync');
+                                                                $('#shippingtaskitem_form #ZFBCKHJ').combobox('reload', '/Storages/GetComboData');
+                                                              
+                                                              }
+                                                              function confirm_shippingtaskitemform() {
+                                                                $shippingtaskitemform = $('#shippingtaskitem_form');
+                                                                if ($shippingtaskitemform.form('enableValidation').form('validate')) {
+                                                                  shippingtaskitem = $shippingtaskitemform.serializeJSON();
+
+                                                                  if (form_state === 'Added') {
+                                                                    $(document).trigger('shippingtaskitem_form.add', [current_index, shippingtaskitem])
+                                                                  } else {
+                                                                    $(document).trigger('shippingtaskitem_form.edit', [current_index, shippingtaskitem])
+                                                                  }
+                                                                  $('#shippingtaskitemdlg').dialog('close');
+                                                                }
+                                                              }
+                                                              //弹出选择集装箱运输计划
+                                                              function open_selecttmorder() {
+                                                                $('#selecttmorderwindow').dialog('open');
+
+                                                              }
+                                                            </script>
+

@@ -1,0 +1,75 @@
+﻿﻿@model WebApp.Models.VehAnRecord
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin vehanrecord form  -->
+<form id="vehanrecord_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Org) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Org)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.SDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.NDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.NDate)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end vehanrecord form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

@@ -1,0 +1,54 @@
+﻿﻿@model WebApp.Models.StdBrand
+ <!-- 输出form表单界面 -->
+<form id="stdbrand_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Model)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdbrand_form').form('load', data);
+            
+    }
+
+
+   var stdbrandid=@Model.Id;
+    $(function(){
+        initFormData(stdbrandid);
+    });
+ </script>
+

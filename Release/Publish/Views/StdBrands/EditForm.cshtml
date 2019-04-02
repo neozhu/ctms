@@ -1,0 +1,81 @@
+﻿﻿@model WebApp.Models.StdBrand
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin stdbrand form  -->
+<form id="stdbrand_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Name)" 
+				   name="@Html.NameFor(model => model.Name)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Name)" 
+				   value="@Html.ValueFor(model => model.Name)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Name)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Model)" 
+				   name="@Html.NameFor(model => model.Model)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Model)" 
+				   value="@Html.ValueFor(model => model.Model)"
+				   tabindex="1" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Model)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="2" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+</fieldset>
+</form>
+<!-- end stdbrand form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdbrand_form').form('load', data);
+            
+    }
+
+
+   var stdbrandid=@Model.Id;
+    $(function(){
+        initFormData(stdbrandid);
+    });
+ </script>
+

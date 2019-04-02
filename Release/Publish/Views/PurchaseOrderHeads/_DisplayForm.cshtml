@@ -1,0 +1,192 @@
+﻿﻿@model WebApp.Models.PurchaseOrderHead
+ <!-- 输出form表单界面 -->
+<form id="purchaseorderhead_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.OrderNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.PDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Proposer) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Proposer)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SupplierCode)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SupplierName)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Approver) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Approver)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ADate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ADate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.CDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerCode)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerName)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+    <div class="row">
+        <section class="col col-md-12 col-lg-12">
+    <!-- details tabs -->
+    <div class="tabs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#tab-purchaseorderdetails"> PurchaseOrderDetails</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+		 		  <div id="tab-purchaseorderdetails" class="tab-pane active">
+            <div class="panel-body">
+                <div class="table-responsive">
+				<table id="purchaseorderdetails_datagrid" >
+                </table>
+				<div id="purchaseorderdetails_toolbar" style="height:auto">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-refresh fa-fw',plain:true" onclick="purchaseorderdetails_reload()">刷新</a>
+                </div>
+                </div>
+            </div>
+        </div>
+		  	</div>
+	</div>
+ 
+<!--end details tabs -->
+        </section>
+    </div>
+
+
+
+@Html.Partial("_purchaseorderdetaildatagridjsview", new WebApp.Models.PurchaseOrderDetail())
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#purchaseorderhead_form').form('load', data);
+          var url='/PurchaseOrderDetails/GetDataByPurchaseOrderHeadIdAsync?purchaseorderheadid='+ id;
+          $purchaseorderdetailsdg.datagrid('load',url);
+          $purchaseorderdetailsdg.datagrid('resize');
+            
+    }
+
+
+   var purchaseorderheadid=@Model.Id;
+    //tab change && datagrid resize
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href"); 
+                if(target=="#tab-purchaseorderdetails")
+             $$purchaseorderdetailsdgdg.datagrid("resize");
+            });
+    $(function(){
+        initFormData(purchaseorderheadid);
+    });
+ </script>
+

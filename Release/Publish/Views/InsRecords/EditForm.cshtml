@@ -1,0 +1,164 @@
+﻿﻿@model WebApp.Models.InsRecord
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin insrecord form  -->
+<form id="insrecord_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PolicyNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PolicyNumber)" 
+				   name="@Html.NameFor(model => model.PolicyNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PolicyNumber)" 
+				   value="@Html.ValueFor(model => model.PolicyNumber)"
+				   tabindex="1" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PolicyNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ICBC)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.ICBC)" 
+				   name="@Html.NameFor(model => model.ICBC)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ICBC)" 
+				   value="@Html.ValueFor(model => model.ICBC)"
+				   tabindex="2" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ICBC)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Category)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Category)" 
+				   name="@Html.NameFor(model => model.Category)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Category)" 
+				   value="@Html.ValueFor(model => model.Category)"
+				   tabindex="3" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Category)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.SDate)" 
+			       name="@Html.NameFor(model => model.SDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.SDate)" 
+				   tabindex="4" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.SDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.SDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.EDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.EDate)" 
+			       name="@Html.NameFor(model => model.EDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.EDate)" 
+				   tabindex="5" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.EDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.EDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Amount)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.InsuredAmount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.InsuredAmount)"
+				   name="@Html.NameFor(model => model.InsuredAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsuredAmount)" 
+				   value="@Html.ValueFor(model => model.InsuredAmount)"
+				   tabindex="7" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsuredAmount)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="8" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end insrecord form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+

@@ -1,0 +1,49 @@
+﻿﻿@model WebApp.Models.Region
+<!-- begin master section -->
+<div  class="main-form">
+<!--begin region form  -->
+<form id="region_form" method="post" novalidate="novalidate" >
+@Html.AntiForgeryToken()
+   @Html.HiddenFor(x=>x.Id)
+ <fieldset>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--区域代码-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+			@Html.EditorFor(x => x.Code, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Code) } })
+      
+         </div>
+
+        <!--上级区域代码-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ParentCode) </label>
+			@Html.EditorFor(x => x.ParentCode, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ParentCode) } })
+      
+         </div>
+
+        <!--区域名称-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+			@Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Name) } })
+      
+         </div>
+
+        <!--类型-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Type)</span> </label>
+			@Html.EditorFor(x => x.Type, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Type) } })
+      
+         </div>
+	    
+   </div>
+  </div>
+</fieldset>
+</form>
+<!-- end region form  -->
+</div>
+
+<!-- end master section -->
+<!--========================================================================================-->
+

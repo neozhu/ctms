@@ -1,0 +1,142 @@
+﻿@model WebApp.Models.ShippingTask
+ 
+<link href="~/Content/css/smartadmin.min.css" rel="stylesheet" />
+<section id="widget-grid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="product-content product-wrap clearfix product-deatil">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <h2 class="name" style="text-align:center">
+              @(Model.ZPCLX == "0" ? "长程" : "短驳")派车单
+              <small style="text-align:left">
+                <span>派车单号: @Model.ShipOrderNo</span>
+                <span style="text-align:right;float:right">打印日期: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:00")</span>
+              </small>
+            </h2>
+            <table class="table table-bordered" style="margin-top:5px">
+              <tr>
+                <td style="width:50px">车号</td>
+                <td>@Model.ZCPH</td>
+                <td>车板号</td>
+                <td>@Model.ZCBH</td>
+                <td>司机</td>
+                <td>@Model.ZSJXM / @Model.ZSJDH </td>
+                <td>派车时间</td>
+                <td>@Model.ZDDPCSJ.ToString("yyyy-MM-dd HH:mm") </td>
+              </tr>
+              <tr style="background-color:#C8E6C9;">
+                <td><b>去程</b></td>
+                <td>集装箱号</td>
+                <td>规格</td>
+                <td>集装箱状态</td>
+                <td>操作类型</td>
+                <td>起始地</td>
+                <td>目的</td>
+                <td>中转仓</td>
+              </tr>
+              @foreach (var item in Model.ShippingTaskItems.Where(x => x.Drirect == "0"))
+              {
+                <tr>
+                  <td>自营</td>
+                  <td>@item.TURES_ID</td>
+                  <td>@item.TURES_TCO</td>
+                  <td>@(item.ZXZT == "E" ? "空箱" : "重箱")</td>
+                  <td>@item.ZCZLX</td>
+                  <td>@item.ZQSDMS</td>
+                  <td>@item.ZMDDMS</td>
+                  <td>@item.ZFBCKHJ</td>
+                </tr>
+
+              }
+              <tr style="background-color:#FFE0B2;">
+                <td><b>回程</b></td>
+                <td>集装箱号</td>
+                <td>规格</td>
+                <td>集装箱状态</td>
+                <td>操作类型</td>
+                <td>起始地</td>
+                <td>目的地</td>
+                <td>中转仓</td>
+              </tr>
+              @foreach (var item in Model.ShippingTaskItems.Where(x => x.Drirect == "1"))
+              {
+                <tr>
+                  <td>自营</td>
+                  <td>@item.TURES_ID</td>
+                  <td>@item.TURES_TCO</td>
+                  <td>@(item.ZXZT == "E" ? "空箱" : "重箱")</td>
+                  <td>@item.ZCZLX</td>
+                  <td>@item.ZQSDMS</td>
+                  <td>@item.ZMDDMS</td>
+                  <td>@item.ZFBCKHJ</td>
+                </tr>
+
+              }
+            </table>
+            <table class="table table-bordered">
+              <tr>
+                <td colspan="5">
+                  运输成本
+                </td>
+                <td colspan="5">
+                  代垫费用
+                </td>
+                <td colspan="4">
+                  运输考核
+                </td>
+              </tr>
+              <tr>
+                <td >过路费</td>
+                <td>过桥费</td>
+                <td>预录费</td>
+                <td>油耗</td>
+                <td>其它成本</td>
+                <td>坏污费</td>
+                <td>提箱费</td>
+                <td>还箱费</td>
+                <td>加封费</td>
+                <td>其它代垫</td>
+                <td>运输里程</td>
+                <td>箱公里</td>
+                <td>应油耗	</td>
+                <td>营收</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@Model.ZYSLC</td>
+                <td>@Model.ZXGL</td>
+                <td>@Model.ZYHY</td>
+                <td>@Model.ZYHYCB</td>
+              </tr>
+              <tr style="height:120px">
+                <td style="width:40px">
+                  调运
+                  度行
+                  附情
+                  言况
+                </td>
+                <td colspan="13"></td>
+              </tr>
+              <tr>
+                <td colspan="13"></td>
+                <td>调度: @Model.ZDDY</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

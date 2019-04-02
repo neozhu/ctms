@@ -1,0 +1,136 @@
+﻿﻿@model WebApp.Models.Attachment
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin attachment form  -->
+<form id="attachment_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--派车单号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ShipOrderNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ShipOrderNo)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FWO号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TOR_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TOR_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--文件名-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.FileName)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FileName)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Comment) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Comment)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--文件类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.FileType)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FileType)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--文件路径-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.FilePath)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FilePath)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--上传日期-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.UploadDateTime)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.UploadDateTime)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--上传用户-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.User) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.User)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--经度-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Long) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Long)
+			    </label>
+            </section>
+		 
+	    
+			  			<!--维度-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Lat) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Lat)
+			    </label>
+            </section>
+		 
+	    
+			              <!--地图位置-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Location) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Location)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+	    
+</fieldset>
+</form>
+<!-- end attachment form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

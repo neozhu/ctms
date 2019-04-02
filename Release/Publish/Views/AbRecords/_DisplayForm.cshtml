@@ -1,0 +1,143 @@
+﻿﻿@model WebApp.Models.AbRecord
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin abrecord form  -->
+<form id="abrecord_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.FWO)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FWO)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.FOO)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FOO)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RDate)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CustomerCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CustomerCode)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CustomerName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CustomerName)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AbType) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.AbType)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AbClass) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.AbClass)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Driver)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Dispatcher) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Dispatcher)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ContainerNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ContainerNo)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DoneDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.DoneDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end abrecord form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

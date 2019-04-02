@@ -1,0 +1,524 @@
+﻿@model WebApp.Models.TmOrder
+@{
+  ViewBag.Title = "选择运输计划";
+}
+<div id="selecttmorderwindow" hidden="hidden" class="easyui-dialog"
+     title="ShippingTaskItem" style="padding:15px"
+     data-options="
+                iconCls: 'icon-more',
+                modal:true,
+                closed:true,
+                cache: false,
+                resizable:true,
+                width:890,
+                height:500,
+                title:'选择集装箱信息',
+                onOpen:function(){
+                  inittmordedrdatagrid();
+                },
+                buttons: [{
+                    text:'确认',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        confirm_selecttmorderwindow();
+                    }
+                },{
+                    text:'取消',
+                    handler:function(){
+                        $('#selecttmorderwindow').dialog('close');
+                    }
+                }]
+            ">
+  <div class="widget-body no-padding">
+    <div class="table-responsive">
+      <table id="tmorders_datagrid"></table>
+    </div>
+  </div>
+  </div>
+
+
+  <script type="text/javascript">
+    var tmorderdg = $('#tmorders_datagrid');
+    function confirm_selecttmorderwindow() {
+      var checked = tmorderdg.datagrid('getChecked');
+      if (checked.length > 0) {
+        checked[0].Id = '0';
+        checked[0].ShipOrderNo = $('#shippingtaskitem_form #ShipOrderNo').val();
+        $('#shippingtaskitem_form').form('load', checked[0]);
+        $('#shippingtaskitem_form #ZQSD').combogrid('setValue', checked[0].SRC_LOC_ID);
+        $('#shippingtaskitem_form #ZQSDMS').textbox('setValue', checked[0].ZTHDZMS);
+        $('#shippingtaskitem_form #ZMDD').combogrid('setValue', checked[0].DES_LOC_ID);
+        $('#shippingtaskitem_form #ZMDDMS').textbox('setValue', checked[0].ZSHDZMS);
+        $('#selecttmorderwindow').dialog('close');
+      } else {
+        $.messager.alert('提示', '请先选中记录');
+      }
+    }
+    
+    function inittmordedrdatagrid() {
+
+      tmorderdg.datagrid({
+        rownumbers: true,
+        checkOnSelect: true,
+        selectOnCheck: true,
+        idField: 'Id',
+        sortName: 'Id',
+        sortOrder: 'desc',
+        remoteFilter: true,
+        singleSelect: true,
+        url: '/TmOrders/GetApproveDataAsync',
+        method: 'get',
+        pagination: true,
+        striped: true,
+        columns: [[
+          { field: 'ck', checkbox: true },
+        {    /*FWO号*/
+          field: 'TRQ_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_ID)', required: true, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+          },
+        {    /*FO号*/
+          field: 'TOR_ID',
+          title: '@Html.DisplayNameFor(model => model.TOR_ID)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TOR_ID)', required: false, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+          },
+        {    /*业务类型*/
+          field: 'TRQ_TYPE',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_TYPE)', required: true, validType: 'length[2,4]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: trqtypeformatter
+        },
+        {    /*操作类型*/
+          field: 'ZCZLX',
+          title: '@Html.DisplayNameFor(model => model.ZCZLX)',
+          width: 100,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCZLX)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: zczlxformatter
+          },
+        {    /*订单状态*/
+          field: 'ZZT',
+          title: '@Html.DisplayNameFor(model => model.ZZT)',
+          width: 80,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZZT)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: tmstatusformatter
+
+        },
+          {    /*箱号*/
+          field: 'TURES_ID',
+          title: '@Html.DisplayNameFor(model => model.TURES_ID)',
+          width: 120,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_ID)', required: false, validType: 'length[11,11]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*箱型*/
+          field: 'TURES_TCO',
+          title: '@Html.DisplayNameFor(model => model.TURES_TCO)',
+          width: 80,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_TCO)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+          },
+         {    /*箱状态*/
+          field: 'ZXZT',
+          title: '@Html.DisplayNameFor(model => model.ZXZT)',
+          width: 100,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZXZT)', required: false, validType: 'length[0,5]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: efformatter
+          },
+         {   /*接单日期*/
+          field: 'ZJDRQ',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZJDRQ)</span>',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJDRQ)', required: true }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+          {    /*提货地址描述*/
+          field: 'ZTHDZMS',
+          title: '@Html.DisplayNameFor(model => model.ZTHDZMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTHDZMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*送货地址描述*/
+          field: 'ZSHDZMS',
+          title: '@Html.DisplayNameFor(model => model.ZSHDZMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDZMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+          },
+        {    /*发货单位名称*/
+          field: 'ZFHDWMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span>',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFHDWMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*收货单位名称*/
+          field: 'ZSHDWMS',
+          title: '@Html.DisplayNameFor(model => model.ZSHDWMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDWMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*数量*/
+          field: 'QUA_PCS_VAL',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+          width: 80,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*数量计量单位*/
+          field: 'QUA_PCS_UNI',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)',
+          width: 100,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+          },
+        {    /*提货要求备注栏*/
+          field: 'ZTHYQBZL',
+          title: '@Html.DisplayNameFor(model => model.ZTHYQBZL)',
+          width: 300,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTHYQBZL)', required: false, validType: 'length[0,255]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*送货要求备注栏*/
+          field: 'ZSHYQBZL',
+          title: '@Html.DisplayNameFor(model => model.ZSHYQBZL)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHYQBZL)', required: false, validType: 'length[0,100]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        ]]
+      });
+      tmorderdg.datagrid('uncheckAll');
+      tmorderdg.datagrid('enableFilter', [
+        {   /*Id*/
+          field: 'Id',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*TRQ_TYPE*/
+          field: 'TRQ_TYPE',
+          type: 'trqtypefilter',
+
+        },
+        {   /*ZFOZT*/
+          field: 'ZFOZT',
+          type: 'fostatusfilter',
+
+        },
+        {   /*ZZT*/
+          field: 'ZZT',
+          type: 'tmstatusfilter',
+
+        },
+        {   /*ZCZLX*/
+          field: 'ZCZLX',
+          type: 'zczlxfilter',
+
+        },
+        {   /*数量*/
+          field: 'QUA_PCS_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*箱重*/
+          field: 'GRO_WEI_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*皮重*/
+          field: 'PKGUN_WEI_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*总体积 */
+          field: 'GRO_VOL_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {     /*接单日期*/
+          field: 'ZJDRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZJDRQ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划做柜日期*/
+          field: 'ZJHTHRQZGRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZJHTHRQZGRQ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划排出时间*/
+          field: 'ZJHPCSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZJHPCSJ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划提货日期*/
+          field: 'ZFOJHTHRQZGRQS',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZFOJHTHRQZGRQS',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划送货日期*/
+          field: 'ZJHSHRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZJHSHRQ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划到厂时间*/
+          field: 'ZJHDCSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZJHDCSJ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*提空箱日期/时间*/
+          field: 'ZTKXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZTKXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*提重箱日期/时间*/
+          field: 'ZTZXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZTZXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*实际送货日期*/
+          field: 'ZSJSHRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZSJSHRQ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*还空箱日期/时间（仅海运进口整柜）*/
+          field: 'ZHKXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZHKXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*派车日期*/
+          field: 'ZPCRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              tmorderdg.datagrid('addFilterRule', {
+                field: 'ZPCRQ',
+                op: 'between',
+                value: value
+              });
+
+              tmorderdg.datagrid('doFilter');
+            }
+          }
+        },
+        {   /*是否集装箱理货*/
+          field: 'ZSFLH',
+          type: 'booleanfilter'
+        },
+      ]);
+
+
+
+      
+    }
+    $(function () {
+
+      
+
+    })
+  </script>

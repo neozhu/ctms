@@ -1,0 +1,132 @@
+﻿﻿@model WebApp.Models.ReserveVehicle
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin reservevehicle form  -->
+<form id="reservevehicle_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BeginDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.BeginDate)" 
+			       name="@Html.NameFor(model => model.BeginDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.BeginDate)" 
+				   tabindex="1" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.BeginDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.BeginDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.EndDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.EndDate)" 
+			       name="@Html.NameFor(model => model.EndDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.EndDate)" 
+				   tabindex="2" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.EndDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.EndDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Status) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Status)" 
+				   name="@Html.NameFor(model => model.Status)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Status)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Dispatcher) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Dispatcher)" 
+				   name="@Html.NameFor(model => model.Dispatcher)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Dispatcher)" 
+				   value="@Html.ValueFor(model => model.Dispatcher)"
+				   tabindex="4" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Dispatcher)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Address) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Address)" 
+				   name="@Html.NameFor(model => model.Address)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Address)" 
+				   value="@Html.ValueFor(model => model.Address)"
+				   tabindex="5" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Address)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ReserveStatus)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.ReserveStatus)"
+				   name="@Html.NameFor(model => model.ReserveStatus)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ReserveStatus)" 
+				   value="@Html.ValueFor(model => model.ReserveStatus)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ReserveStatus)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end reservevehicle form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+

@@ -1,0 +1,128 @@
+﻿﻿@model WebApp.Models.Company
+ <!-- 输出form表单界面 -->
+<form id="company_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+<fieldset>
+    <div class="row">
+        	    			<section class="col col-3">
+           <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Id)</span> </label>
+           <label class="label">
+            @Html.DisplayFor(model => model.Id)
+			</label>
+            </section>
+              				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Name) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Address) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Address)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.City) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.City)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Province) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Province)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RegisterDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RegisterDate)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Employees)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Employees)
+			    </label>
+            </section>
+              				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CreatedDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.CreatedDate)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CreatedBy) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CreatedBy)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LastModifiedDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.LastModifiedDate)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LastModifiedBy) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.LastModifiedBy)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	    </div>
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#company_form').form('load', data);
+            
+    }
+
+
+   var companyid=@Model.Id;
+    $(function(){
+        initFormData(companyid);
+    });
+ </script>
+

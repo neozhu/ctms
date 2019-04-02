@@ -1,0 +1,1703 @@
+﻿@model WebApp.Models.TmOrder
+@{
+	ViewBag.Title = "进口运输计划";
+}
+<!-- MAIN CONTENT -->
+<div id="content">
+  <!-- quick navigation bar -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+      <h1 class="page-title txt-color-blueDark">
+        <i class="fa fa-table fa-fw "></i>
+        订单中心
+        <span>
+          >
+          进口运输计划
+        </span>
+      </h1>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+    </div>
+  </div>
+  <!-- end quick navigation bar -->
+  <!-- widget grid -->
+  <section id="widget-grid" class="">
+    <!-- row -->
+    <div class="row">
+      <!-- NEW WIDGET START -->
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+          <!-- widget options:
+          usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+          data-widget-colorbutton="false"
+          data-widget-editbutton="false"
+          data-widget-togglebutton="false"
+          data-widget-deletebutton="false"
+          data-widget-fullscreenbutton="false"
+          data-widget-custombutton="false"
+          data-widget-collapsed="true"
+          data-widget-sortable="false"
+          -->
+          <header>
+            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <h2>进口运输计划</h2>
+          </header>
+
+          <!-- widget div-->
+          <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+              <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body no-padding">
+              <div class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+              </div>
+              <div class="widget-body-toolbar">
+                <div class="row">
+                  <div class="col-sm-8  ">
+                    <!-- 开启授权控制请参考 @@if (Html.IsAuthorize("Create") -->
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="unboxing()" class="btn btn-default btn-info"> <i class="fa  fa-cubes"></i> 拆箱 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="merging()" class="btn btn-default btn-success"> <i class="fa fa-cube"></i> 拼箱 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="printworkreport()" class="btn btn-default btn-info"> <i class="fa fa-print"></i> 打印移箱作业单 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="reload()" class="btn btn-default"> <i class="fa fa-refresh"></i> @Html.L("Refresh") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="reject()" class="btn btn-default"> <i class="fa fa-ban"></i> @Html.L("Cancel") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm hidden-xs">
+                      <button type="button" onclick="importexcel()" class="btn btn-default"><i class="fa fa-cloud-upload"></i> @Html.L("Import") </button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="javascript:importexcel()"><i class="fa fa-file-excel-o"></i>  @Html.L("Upload") </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:downloadtemplate()"><i class="fa fa-download"></i> @Html.L("Download") </a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group btn-group-sm hidden-xs hidden-md">
+                      <button onclick="exportexcel()" class="btn btn-default"> <i class="fa fa-file-excel-o"></i> @Html.L("Export") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm visible-lg-inline-block">
+                      <button onclick="print()" class="btn btn-default"> <i class="fa fa-print"></i> @Html.L("Print") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm visible-lg-inline-block">
+                      <button onclick="dohelp()" class="btn btn-default"> <i class="fa fa-question-circle-o"></i> @Html.L("Help") </button>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 text-align-right visible-lg-inline-block">
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="window.history.back()" class="btn btn-sm btn-success"> <i class="fa fa-chevron-left"></i> @Html.L("GoBack") </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="alert alert-warning no-margin fade in">
+                <button class="close" data-dismiss="alert">
+                  ×
+                </button>
+                <i class="fa-fw fa fa-info"></i>
+                注意事项:
+              </div>
+              <!--begin datagrid-content -->
+              <div class="table-responsive">
+                <table id="tmorders_datagrid"></table>
+              </div>
+              <!--end datagrid-content -->
+            </div>
+            <!-- end widget content -->
+          </div>
+          <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+      </article>
+      <!-- WIDGET END -->
+    </div>
+    <!-- end row -->
+  </section>
+  <!-- end widget grid -->
+  <!-- file upload partial view -->
+  <!-- end detail popup window -->
+  @Html.Partial("_SPopupDetailFormView", new WebApp.Models.MoveContainer())
+  @Html.Partial("_PopupMoveRecordWindow", new WebApp.Models.MoveContainer())
+</div>
+<!-- END MAIN CONTENT -->
+
+@section Scripts {
+<script type="text/javascript">
+      //是否启用弹窗口模式新增编辑数据
+      const POPUPMODE = true;
+      //是否强制从后台取值
+      const REQUIRBACKEND = false;
+      //是否开启行内编辑
+      const EDITINLINE = false;
+      //上传导入参数设定
+      const entityname = "TmOrder";
+  var tmorder = {};
+  //打印移箱作业单
+  function printworkreport() {
+    toastr.success('打印移箱作业单!');
+  }
+      //拆箱作业
+  function unboxing(id, item){
+    if (id == null || id == undefined) {
+      var selected = $dg.datagrid('getChecked');
+      if (selected.length > 0 && selected[0].TRQ_TYPE == 'OI02') {
+        console.log('Do');
+        toastr.success('拆箱完成!');
+      } else {
+        $.messager.alert('提示', '请选择海运进口散货的业务才能做拆箱操作', 'info');
+      }
+    } else {
+      if (item.TRQ_TYPE == 'OI02') {
+        console.log('Do');
+      } else {
+        $.messager.alert('提示', '请选择海运进口散货的业务才能做拆箱操作', 'info');
+      }
+    }
+  }
+  //拼箱
+  function merging(id, item) {
+    if (id == null || id == undefined) {
+      var selected = $dg.datagrid('getChecked');
+      if (selected.length > 1 && selected[0].TRQ_TYPE == 'OE02') {
+        console.log('Do');
+        toastr.success('拼箱完成!');
+      } else {
+        $.messager.alert('提示', '请选择多条海运出口散货的业务才能做拼箱操作', 'info');
+      }
+    } else {
+      if (item.TRQ_TYPE == 'OE02') {
+        console.log('Do');
+      } else {
+        $.messager.alert('提示', '请选择海运出口散货的业务才能做拼箱操作', 'info');
+      }
+    }
+  }
+      //下载Excel导入模板
+      function downloadtemplate() {
+          //默认模板路径存放位置
+          const url = '/FileUpload/Download?file=/ExcelTemplate/TmOrder.xlsx';
+          $.fileDownload(url)
+           .done(() => {
+                    //console.log('file download a success!');
+                    toastr.success('模板下载完成!');  
+                })
+           .fail(() => {
+               $.messager.alert('失败','没有下载到导入模板[TmOrder.xlsx]文件!','error'); 
+            });           
+       }
+       //打印
+       function print() {
+            $dg.datagrid('print', 'DataGrid');
+       }
+        //打开Excel上传窗口
+	   function importexcel() {
+		    $('#importwindow').window('open');
+	   }
+	   //执行导出下载Excel
+	   function exportexcel() {
+				const filterRules = JSON.stringify($dg.datagrid('options').filterRules);
+				//console.log(filterRules);
+				$.messager.progress({ title: '正在执行导出!' });
+				let formData = new FormData();
+				formData.append('filterRules', filterRules);
+				formData.append('sort', 'Id');
+				formData.append('order', 'asc');
+				$.postDownload('/TmOrders/ExportExcel', formData).then(res => {
+                    $.messager.progress('close');
+                    toastr.success('导出成功!');
+                }).catch(err => {
+                    //console.log(err);
+                    $.messager.progress('close');
+                    $.messager.alert('失败', err.statusText, 'error');
+                });
+
+		}
+        //显示帮助信息
+        function dohelp() {
+            toastr.info('有问题请联系管理员 <br><i class="fa fa-envelope-o" aria-hidden="true"></i> : demo@admin.com','帮助');  
+        }
+       var editIndex = undefined;
+       //重新加载数据
+	   function reload() {
+			if (endEditing()) {
+			    $dg.datagrid('reload');
+		    }
+	   }
+      //关闭编辑状态
+	  function endEditing() {
+			if (editIndex === undefined) { 
+                return true; 
+            }
+			if ($dg.datagrid('validateRow', editIndex)) {
+				$dg.datagrid('endEdit', editIndex);
+				editIndex = undefined;
+                return true;
+			} else {
+				const invalidinput = $('input.validatebox-invalid','.datagrid');
+                const fieldnames = invalidinput.map((index, item) => {
+                  return $(item).attr('placeholder') || $(item).attr('id');
+                });
+                $.messager.alert('提示', `${Array.from(fieldnames)} 输入有误.`, 'error');
+				return false;
+			}
+		}
+    //单击列开启编辑功能
+	function onClickCell(index, field) {
+        tmorder = $dg.datagrid('getRows')[index];
+	    const _operates = ['_operate1', 'ck'];
+		if (!EDITINLINE || $.inArray(field, _operates) >= 0) {
+				return;
+		}
+		if (editIndex !== index) {
+		    if (endEditing()) {
+			    $dg.datagrid('selectRow', index)
+				   .datagrid('beginEdit', index);
+                hook = true;
+                editIndex = index;
+				const ed = $dg.datagrid('getEditor', { index: index, field: field });
+				if (ed) {
+						($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+				}
+			} else {
+				$dg.datagrid('selectRow', editIndex);
+			}
+		}
+	}
+    //新增记录
+  function append() {
+    if (POPUPMODE) {
+      //弹出新增窗口
+      showPopupCreateWindow();
+    } else {
+      if (endEditing()) {
+        //对必填字段进行默认值初始化
+        $dg.datagrid('insertRow',
+          {
+            index: 0,
+            row: {
+              TRQ_ID: '-',
+              TRQ_TYPE: 'OE01',
+              TOR_ID: '-',
+              ZFOZT: '0',
+              ZZT: '0',
+              ZCZLX: 'C',
+              SALES_ORG_ID: '00000001',
+              SALES_ORG_NAME: '集卡运输公司',
+              ZJDRQ: moment().format('YYYY-MM-DD HH:mm:00'),
+              TURES_ID: '-',
+              TURES_TCO: '20GP',
+              QUA_PCS_VAL: 1,
+              QUA_PCS_UNI: 'EA',
+              PKGUN_WEI_UNI: 'KG',
+              GRO_VOL_UNI: 'L1',
+              SRC_LOC_ID: '-',
+              ZTHDZMS: '-',
+              DES_LOC_ID: '-',
+              ZSHDZMS: '-',
+              ZSFLH: false,
+              ZSBTDH: '-',
+              ZJHTHRQZGRQ: null,
+              ZJHPCSJ: null,
+              ZFOJHTHRQZGRQS: null,
+              ZJHSHRQ: null,
+              ZJHDCSJ: null,
+              ZTKXRQSJ: null,
+              ZTZXRQSJ: null,
+              ZSJSHRQ: null,
+              ZHKXRQSJ: null,
+              ZPCRQ: null,
+
+            }
+          });
+        editIndex = 0;
+        $dg.datagrid('selectRow', editIndex)
+          .datagrid('beginEdit', editIndex);
+        hook = true;
+      }
+    }
+  }
+    //删除编辑的行
+  function removeit() {
+    if (EDITINLINE) {
+      if ($dg.datagrid('getChecked').length > 0) {
+        deletechecked();
+        return;
+      }
+      if (editIndex !== undefined) {
+        $dg.datagrid('cancelEdit', editIndex)
+          .datagrid('deleteRow', editIndex);
+        editIndex = undefined;
+        hook = true;
+      } else {
+        const row = $dg.datagrid('getSelected');
+        if (row) {
+          const rowindex = $dg.datagrid('getRowIndex', row);
+          $dg.datagrid('deleteRow', rowindex);
+          hook = true;
+        } else {
+          $.messager.alert('提示', '请选中需要删除的记录.', 'info');
+        }
+      }
+    } else {
+      if ($dg.datagrid('getChecked').length > 0) {
+        deletechecked();
+      }
+      else {
+        $.messager.alert('提示', '请选中需要删除的记录.', 'info');
+      }
+    }
+  }
+    //删除该行
+  function deleteRow(id) {
+    $.messager.confirm('确认', '你确定要删除该记录?', result => {
+      if (result) {
+        $.post('/TmOrders/DeleteCheckedAsync', { id: [id] })
+          .done(response => {
+            if (response.success) {
+              toastr.success('删除成功');
+              $dg.datagrid('uncheckAll');
+              $dg.datagrid('reload');
+            } else {
+              $.messager.alert('错误', response.err, 'error');
+            }
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+          });
+      }
+    });
+
+  }
+    //删除选中的行
+  function deletechecked() {
+    const rows = $dg.datagrid('getChecked');
+    if (rows.length > 0) {
+      const id = rows.filter(item => item.Id != null).map(item => {
+        return item.Id;
+      });
+      $.messager.confirm('确认', `你确定要删除这 <span class='badge bg-color-red'>${id.length} </span> 行记录?`, result => {
+        if (result) {
+          $.post('/TmOrders/DeleteCheckedAsync', { id: id })
+            .done(response => {
+              if (response.success) {
+                toastr.success('删除成功');
+                $dg.datagrid('uncheckAll');
+                $dg.datagrid('reload');
+              } else {
+                $.messager.alert('错误', response.err, 'error');
+              }
+            })
+            .fail((jqXHR, textStatus, errorThrown) => {
+              $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+            });
+        }
+      });
+    } else {
+      $.messager.alert('提示', '请先选择要删除的记录!', 'question');
+    }
+  }
+    //提交保存后台数据库
+  function accept() {
+    if (endEditing()) {
+      if ($dg.datagrid('getChanges').length > 0) {
+        const inserted = $dg.datagrid('getChanges', 'inserted').map(item => {
+          item.TrackingState = 1;
+          return item;
+        });
+        const updated = $dg.datagrid('getChanges', 'updated').map(item => {
+          item.TrackingState = 2
+          return item;
+        });
+        const deleted = $dg.datagrid('getChanges', 'deleted').map(item => {
+          item.TrackingState = 3
+          return item;
+        });
+        //过滤已删除的重复项
+        const changed = inserted.concat(updated.filter(item => {
+          return !deleted.includes(item);
+        })).concat(deleted);
+        //console.table(changed);
+        $.post('/TmOrders/SaveDataAsync', { tmorders: changed })
+          .done(response => {
+            //console.log(response);
+            if (response.success) {
+              toastr.success('保存成功');
+              $dg.datagrid('acceptChanges');
+              $dg.datagrid('reload');
+              hook = false;
+            } else {
+              $.messager.alert('错误', response.err, 'error');
+            }
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+          });
+      }
+    }
+  }
+	function reject() {
+	    $dg.datagrid('rejectChanges');
+	    editIndex = undefined;
+        hook = false;
+	}
+	function getChanges() {
+	    const rows = $dg.datagrid('getChanges');
+		//console.log(rows.length + ' rows are changed!');
+  }
+  //弹出该订单的所有移箱记录
+  function showRecordWindow(id, row) {
+    row = JSON.parse(row);
+    const trqid = row.TRQ_ID;
+    const torid = row.TOR_ID;
+    $('#mvrecordwindow').dialog('open');
+    initrecorddatagrid(trqid, torid);
+
+  }
+    //弹出明细信息
+  function showDetailsWindow(id, row, index) {
+    if (REQUIRBACKEND) {
+      //console.log(index, row);
+      $.get('/TmOrders/PopupEditAsync/' + id)
+        .done(data => {
+          //console.log(data);
+          loadData(id, data, 'Modified');
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+          $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+        });
+    } else {
+      loadData(id, JSON.parse(row), 'Modified');
+    }
+  }
+    //弹出新建窗口
+  function showPopupCreateWindow() {
+    //获取初始化对象
+    if (REQUIRBACKEND) {
+      $.get('/TmOrders/PopupCreate')
+        .done(data => {
+          loadData(-1, data, 'Added');
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+          $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+        });
+    } else {
+      let item = {
+        TRQ_ID: '-',
+        TRQ_TYPE: 'OE01',
+        TOR_ID: '-',
+        ZFOZT: '0',
+        ZZT: '0',
+        ZCZLX: 'C',
+        SALES_ORG_ID: '00000001',
+        SALES_ORG_NAME: '集卡运输公司',
+        ZJDRQ: moment().format('YYYY-MM-DD HH:mm:00'),
+        TURES_ID: '-',
+        TURES_TCO: '20GP',
+        QUA_PCS_VAL: 1,
+        QUA_PCS_UNI: 'EA',
+        PKGUN_WEI_UNI: 'KG',
+        GRO_VOL_UNI: 'L1',
+        SRC_LOC_ID: '-',
+        ZTHDZMS: '-',
+        DES_LOC_ID: '-',
+        ZSHDZMS: '-',
+        ZSFLH: false,
+        ZSBTDH: '-',
+        ZJHTHRQZGRQ: null,
+        ZJHPCSJ: null,
+        ZFOJHTHRQZGRQS: null,
+        ZJHSHRQ: null,
+        ZJHDCSJ: null,
+        ZTKXRQSJ: null,
+        ZTZXRQSJ: null,
+        ZSJSHRQ: null,
+        ZHKXRQSJ: null,
+        ZPCRQ: null,
+
+      };
+      loadData(-1, item, 'Added');
+    }
+  }
+    //初始化定义datagrid
+    var $dg = $('#tmorders_datagrid');
+    $(() => {
+		 //定义datagrid结构
+      $dg.datagrid({
+        rownumbers: true,
+        checkOnSelect: false,
+        selectOnCheck: false,
+        idField: 'Id',
+        sortName: 'Id',
+        sortOrder: 'desc',
+        remoteFilter: true,
+        singleSelect: true,
+        onBeforeLoad: function () {
+          //datagrid resize when jarvisWidgets resized.
+          const that = $(this);
+          $(window).on("resize.jarvisWidgets", () => {
+            that.datagrid('resize');
+          })
+        },
+        onSelect: function (index, row) {
+          tmorder = row;
+        },
+        onBeginEdit: function (index, row) {
+
+        },
+        onEndEdit: function (index, row) {
+
+        },
+        onBeforeEdit: function (index, row) {
+          row.editing = true;
+          $(this).datagrid('refreshRow', index);
+        },
+        onAfterEdit: function (index, row) {
+          row.editing = false;
+          $(this).datagrid('refreshRow', index);
+        },
+        onCancelEdit: function (index, row) {
+          row.editing = false;
+          $(this).datagrid('refreshRow', index);
+        },
+        url: '/TmOrders/GetSDataAsync',
+        method: 'get',
+        onClickCell: onClickCell,
+        pagination: true,
+        striped: true,
+        frozenColumns: [[
+          /*开启CheckBox选择功能*/
+          { field: 'ck', checkbox: true },
+          {
+            field: '_operate1',
+            title: '@Html.L("Command")',
+            width: 125,
+            sortable: false,
+            resizable: true,
+            formatter: function showdetailsformatter(value, row, index) {
+              if (!row.editing) {
+                if (row.TRQ_TYPE == 'OI02') {
+                  return '<div class="btn-group">\
+                           <button onclick="showDetailsWindow(\'' + row.Id + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="吊箱作业" ><i class="fa  fa-arrow-up"></i> </button>\
+                           <button onclick="unboxing(\'' + row.Id + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-info btn-xs" title="拆箱" ><i class="fa  fa-cubes"></i> </button>\
+                           <button onclick="showRecordWindow(\'' + row.Id + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="吊箱记录" ><i class="fa  fa-list"></i> </button>\
+                        </div>';
+
+                } else {
+                  return '<div class="btn-group">\
+                           <button onclick="showDetailsWindow(\'' + row.Id + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="吊箱作业" ><i class="fa  fa-arrow-up"></i> </button>\
+                           <button onclick="showRecordWindow(\'' + row.Id + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="吊箱记录" ><i class="fa  fa-list"></i> </button>\
+                        </div>';
+                }
+                } else {
+                return '<button class="btn btn-default btn-xs" disabled title="吊箱作业"  ><i class="fa fa-pencil-square-o"></i> </button>';
+              }
+            }
+          }
+        ]],
+        columns: [[
+          { /*Id*/
+          field: 'Id',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.Id)</span>',
+          width: 100,
+          sortable: true,
+          resizable: true,
+          hidden: true
+          },
+        {    /*箱号*/
+          field: 'TURES_ID',
+          title: '@Html.DisplayNameFor(model => model.TURES_ID)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_ID)', required: false, validType: 'length[11,11]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*箱型*/
+          field: 'TURES_TCO',
+          title: '@Html.DisplayNameFor(model => model.TURES_TCO)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_TCO)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*箱状态*/
+          field: 'ZXZT',
+          title: '@Html.DisplayNameFor(model => model.ZXZT)',
+          width: 100,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZXZT)', required: false, validType: 'length[0,5]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: efformatter
+          },
+        {    /*分拨仓库*/
+          field: 'ZFBCKHJ',
+          title: '@Html.DisplayNameFor(model => model.ZFBCKHJ)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFBCKHJ)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+          },
+        {    /*分拨仓库位置*/
+          field: 'Loc',
+          title: '@Html.DisplayNameFor(model => model.Loc)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.Loc)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*FWO号*/
+          field: 'TRQ_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_ID)', required: true, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*业务类型*/
+          field: 'TRQ_TYPE',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_TYPE)', required: true, validType: 'length[2,4]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: trqtypeformatter
+        },
+        {    /*FO号*/
+          field: 'TOR_ID',
+          title: '@Html.DisplayNameFor(model => model.TOR_ID)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TOR_ID)', required: false, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*FO状态*/
+          field: 'ZFOZT',
+          title: '@Html.DisplayNameFor(model => model.ZFOZT)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFOZT)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: fostatusformatter
+        },
+        {    /*订单状态*/
+          field: 'ZZT',
+          title: '@Html.DisplayNameFor(model => model.ZZT)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZZT)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: tmstatusformatter
+
+        },
+        {    /*操作类型*/
+          field: 'ZCZLX',
+          title: '@Html.DisplayNameFor(model => model.ZCZLX)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCZLX)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: zczlxformatter
+        },
+        {    /*销售组织*/
+          field: 'SALES_ORG_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_ID)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.SALES_ORG_ID)', required: true, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*销售组织名称*/
+          field: 'SALES_ORG_NAME',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_NAME)</span>',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.SALES_ORG_NAME)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {   /*接单日期*/
+          field: 'ZJDRQ',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZJDRQ)</span>',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJDRQ)', required: true }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*发货单位*/
+          field: 'SHIPPER_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.SHIPPER_ID)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.SHIPPER_ID)', required: true, validType: 'length[8,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*发货单位名称*/
+          field: 'ZFHDWMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span>',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFHDWMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*收货单位*/
+          field: 'CONSIGNEE_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span>',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.CONSIGNEE_ID)', required: true, validType: 'length[8,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*收货单位名称*/
+          field: 'ZSHDWMS',
+          title: '@Html.DisplayNameFor(model => model.ZSHDWMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDWMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*数量*/
+          field: 'QUA_PCS_VAL',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*数量计量单位*/
+          field: 'QUA_PCS_UNI',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {    /*箱重*/
+          field: 'GRO_WEI_VAL',
+          title: '@Html.DisplayNameFor(model => model.GRO_WEI_VAL)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.GRO_WEI_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*皮重*/
+          field: 'PKGUN_WEI_VAL',
+          title: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*皮重计量单位*/
+          field: 'PKGUN_WEI_UNI',
+          title: '@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {    /*总体积 */
+          field: 'GRO_VOL_VAL',
+          title: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*总体积计量单位 */
+          field: 'GRO_VOL_UNI',
+          title: '@Html.DisplayNameFor(model => model.GRO_VOL_UNI)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.GRO_VOL_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {    /*危险品等级 */
+          field: 'ZWXPDJ',
+          title: '@Html.DisplayNameFor(model => model.ZWXPDJ)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZWXPDJ)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*封号*/
+          field: 'ZFH1',
+          title: '@Html.DisplayNameFor(model => model.ZFH1)',
+          width: 140,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFH1)', required: false, validType: 'length[0,30]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*提货地址*/
+          field: 'SRC_LOC_ID',
+          title: '@Html.DisplayNameFor(model => model.SRC_LOC_ID)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.SRC_LOC_ID)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*提货地址描述*/
+          field: 'ZTHDZMS',
+          title: '@Html.DisplayNameFor(model => model.ZTHDZMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTHDZMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*送货地址*/
+          field: 'DES_LOC_ID',
+          title: '@Html.DisplayNameFor(model => model.DES_LOC_ID)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.DES_LOC_ID)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*送货地址描述*/
+          field: 'ZSHDZMS',
+          title: '@Html.DisplayNameFor(model => model.ZSHDZMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDZMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {  /*是否集装箱理货*/
+          field: 'ZSFLH',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZSFLH)</span>',
+          width: 120,
+          align: 'center',
+          hidden: false,
+          editor: {
+            type: 'booleaneditor',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZSFLH)',
+              required: true
+            }
+          },
+          formatter: booleanformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*提货要求备注栏*/
+          field: 'ZTHYQBZL',
+          title: '@Html.DisplayNameFor(model => model.ZTHYQBZL)',
+          width: 300,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTHYQBZL)', required: false, validType: 'length[0,255]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*送货要求备注栏*/
+          field: 'ZSHYQBZL',
+          title: '@Html.DisplayNameFor(model => model.ZSHYQBZL)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHYQBZL)', required: false, validType: 'length[0,100]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*装箱要求备注栏*/
+          field: 'ZZXYQBZL',
+          title: '@Html.DisplayNameFor(model => model.ZZXYQBZL)',
+          width: 300,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZZXYQBZL)', required: false, validType: 'length[0,255]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*海运放箱提单号*/
+          field: 'ZSBTDH',
+          title: '@Html.DisplayNameFor(model => model.ZSBTDH)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSBTDH)', required: false, validType: 'length[0,24]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {   /*计划做柜日期*/
+          field: 'ZJHTHRQZGRQ',
+          title: '@Html.DisplayNameFor(model => model.ZJHTHRQZGRQ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJHTHRQZGRQ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*计划排出时间*/
+          field: 'ZJHPCSJ',
+          title: '@Html.DisplayNameFor(model => model.ZJHPCSJ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJHPCSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*计划提货日期*/
+          field: 'ZFOJHTHRQZGRQS',
+          title: '@Html.DisplayNameFor(model => model.ZFOJHTHRQZGRQS)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFOJHTHRQZGRQS)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*计划送货日期*/
+          field: 'ZJHSHRQ',
+          title: '@Html.DisplayNameFor(model => model.ZJHSHRQ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJHSHRQ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*计划到厂时间*/
+          field: 'ZJHDCSJ',
+          title: '@Html.DisplayNameFor(model => model.ZJHDCSJ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJHDCSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*提空箱日期/时间*/
+          field: 'ZTKXRQSJ',
+          title: '@Html.DisplayNameFor(model => model.ZTKXRQSJ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTKXRQSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*提重箱日期/时间*/
+          field: 'ZTZXRQSJ',
+          title: '@Html.DisplayNameFor(model => model.ZTZXRQSJ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZTZXRQSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*实际送货日期*/
+          field: 'ZSJSHRQ',
+          title: '@Html.DisplayNameFor(model => model.ZSJSHRQ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJSHRQ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*实际到厂时间*/
+          field: 'ZSJDCSJ',
+          title: '@Html.DisplayNameFor(model => model.ZSJDCSJ)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJDCSJ)', required: false, validType: 'length[0,12]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*实际离厂时间*/
+          field: 'ZSJLCSJ',
+          title: '@Html.DisplayNameFor(model => model.ZSJLCSJ)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJLCSJ)', required: false, validType: 'length[0,12]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {   /*还空箱日期/时间（仅海运进口整柜）*/
+          field: 'ZHKXRQSJ',
+          title: '@Html.DisplayNameFor(model => model.ZHKXRQSJ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZHKXRQSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*还空箱地点（仅海运进口整柜）*/
+          field: 'ZHKXDD',
+          title: '@Html.DisplayNameFor(model => model.ZHKXDD)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZHKXDD)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*执行运输公司*/
+          field: 'TSPEXECID',
+          title: '@Html.DisplayNameFor(model => model.TSPEXECID)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TSPEXECID)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*车辆*/
+          field: 'VEHICLERES_ID',
+          title: '@Html.DisplayNameFor(model => model.VEHICLERES_ID)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.VEHICLERES_ID)', required: false, validType: 'length[0,40]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*车板号*/
+          field: 'PLATENUMBER_P',
+          title: '@Html.DisplayNameFor(model => model.PLATENUMBER_P)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.PLATENUMBER_P)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*白卡号*/
+          field: 'ZBKH',
+          title: '@Html.DisplayNameFor(model => model.ZBKH)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZBKH)', required: false, validType: 'length[0,30]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机证件号*/
+          field: 'ZSJXM',
+          title: '@Html.DisplayNameFor(model => model.ZSJXM)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJXM)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机姓名*/
+          field: 'ZSJZJH',
+          title: '@Html.DisplayNameFor(model => model.ZSJZJH)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJZJH)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机电话*/
+          field: 'ZSJDH',
+          title: '@Html.DisplayNameFor(model => model.ZSJDH)',
+          width: 140,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJDH)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {   /*派车日期*/
+          field: 'ZPCRQ',
+          title: '@Html.DisplayNameFor(model => model.ZPCRQ)',
+          width: 120,
+          align: 'right',
+          hidden: true,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZPCRQ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*备注*/
+          field: 'ZCOMMENT',
+          title: '@Html.DisplayNameFor(model => model.ZCOMMENT)',
+          width: 300,
+          hidden: true,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCOMMENT)', required: false, validType: 'length[0,256]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        ]]
+      });
+
+      $dg.datagrid('enableFilter', [
+        {   /*Id*/
+          field: 'Id',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*TRQ_TYPE*/
+          field: 'TRQ_TYPE',
+          type: 'trqtypefilter',
+
+        },
+        {   /*ZFOZT*/
+          field: 'ZFOZT',
+          type: 'fostatusfilter',
+
+        },
+        {   /*ZZT*/
+          field: 'ZZT',
+          type: 'tmstatusfilter',
+
+        },
+        {   /*ZCZLX*/
+          field: 'ZCZLX',
+          type: 'zczlxfilter',
+
+        },
+        {
+          field: 'ZXZT',
+          type: 'effilter'
+        },
+        {   /*数量*/
+          field: 'QUA_PCS_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*箱重*/
+          field: 'GRO_WEI_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*皮重*/
+          field: 'PKGUN_WEI_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*总体积 */
+          field: 'GRO_VOL_VAL',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {     /*接单日期*/
+          field: 'ZJDRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZJDRQ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划做柜日期*/
+          field: 'ZJHTHRQZGRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZJHTHRQZGRQ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划排出时间*/
+          field: 'ZJHPCSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZJHPCSJ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划提货日期*/
+          field: 'ZFOJHTHRQZGRQS',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZFOJHTHRQZGRQS',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划送货日期*/
+          field: 'ZJHSHRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZJHSHRQ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*计划到厂时间*/
+          field: 'ZJHDCSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZJHDCSJ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*提空箱日期/时间*/
+          field: 'ZTKXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZTKXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*提重箱日期/时间*/
+          field: 'ZTZXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZTZXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*实际送货日期*/
+          field: 'ZSJSHRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZSJSHRQ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*还空箱日期/时间（仅海运进口整柜）*/
+          field: 'ZHKXRQSJ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZHKXRQSJ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {     /*派车日期*/
+          field: 'ZPCRQ',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              $dg.datagrid('addFilterRule', {
+                field: 'ZPCRQ',
+                op: 'between',
+                value: value
+              });
+
+              $dg.datagrid('doFilter');
+            }
+          }
+        },
+        {   /*是否集装箱理货*/
+          field: 'ZSFLH',
+          type: 'booleanfilter'
+        },
+      ]);
+    });
+ 
+</script>
+<!--begin popup detailview javascript block -->
+<script type="text/javascript">
+  //判断新增编辑状态
+  var MODELSTATE = 'Added';
+  var movecontainerid = null;
+  var hasChanged = false;
+  function loadData(id, data, state) {
+    MODELSTATE = 'Added';
+    movecontainerid = id;
+    $("#detailswindow").window("open");
+    $('#movecontainer_form').form('reset');
+    data.FromLoc = data.Loc;
+    data.ToLoc = '';
+    data.RDate = moment().format('YYYY-MM-DD HH:mm:00');
+    data.OpType = '6';
+    data.FCount = '1';
+    data.CStatus = '0';
+    data.Cost='50.00'
+    $('#movecontainer_form').form('load', data);
+  }
+  var $editform = $('#movecontainer_form');
+  //async 保存数据
+  async function saveitem() {
+    if ($editform.form('enableValidation').form('validate')) {
+      let movecontainer = $editform.serializeJSON();
+      let url = '/MoveContainers/EditAsync';
+      //判断是新增或是修改方法
+      if (MODELSTATE === 'Added') {
+        url = '/MoveContainers/CreateAsync';
+      }
+      var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          __RequestVerificationToken: token,
+          movecontainer: movecontainer
+        },
+        dataType: 'json',
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+      })
+        .done(response => {
+          if (response.success) {
+            hasChanged = false;
+            $editform.form('disableValidation');
+            $dg.datagrid('reload');
+            $('#detailswindow').window("close");
+            toastr.success("保存成功");
+          } else {
+            $.messager.alert("错误", response.err, "error");
+          }
+        })
+        .fail((jqXHR, textStatus, errorThrown) => {
+          $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+        });
+    }
+  }
+  //关闭窗口
+  function closewindow() {
+    $('#detailswindow').window('close');
+  }
+  //todo
+  function todo() {
+    console.log('todo.....');
+  }
+  //判断是否有没有保存的记录
+  function hasmodified() {
+    return hasChanged;
+
+  }
+
+  //回车光标移动到下个输入控件
+  $(() => {
+    //如果是枚举类型需要把numberbox改成combobox
+    //翻箱次数
+    $('#FCount').numberbox('textbox').bind('keydown', function (e) {
+      if (e.keyCode == 13) {
+        $(e.target).emulateTab();
+      }
+    });
+    //如果是枚举类型需要把numberbox改成combobox
+    //移箱费用
+    $('#Cost').numberbox('textbox').bind('keydown', function (e) {
+      if (e.keyCode == 13) {
+        $(e.target).emulateTab();
+      }
+    });
+    //日期类型 操作日期
+    $('#RDate').datebox('textbox').bind('keydown', function (e) {
+      if (e.keyCode == 13) {
+        $(e.target).emulateTab();
+      }
+    });
+  });
+</script>
+<!--end popup detailview javascript block -->
+<script src="~/Scripts/jquery.filerupload.min.js"></script>
+}
+
+ 

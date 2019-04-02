@@ -1,0 +1,98 @@
+﻿﻿@model WebApp.Models.StdConsume
+ <!-- 输出form表单界面 -->
+<form id="stdconsume_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Transportation)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Transportation)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Description)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.CKM)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.CKM)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.KM)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Oil)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Oil)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Compensation)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Compensation)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdconsume_form').form('load', data);
+            
+    }
+
+
+   var stdconsumeid=@Model.Id;
+    $(function(){
+        initFormData(stdconsumeid);
+    });
+ </script>
+

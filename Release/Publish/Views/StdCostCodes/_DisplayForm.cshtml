@@ -1,0 +1,72 @@
+﻿﻿@model WebApp.Models.StdCostCode
+ <!-- 输出form表单界面 -->
+<form id="stdcostcode_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Tax)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Tax)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TaxRate)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.TaxRate)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdcostcode_form').form('load', data);
+            
+    }
+
+
+   var stdcostcodeid=@Model.Id;
+    $(function(){
+        initFormData(stdcostcodeid);
+    });
+ </script>
+

@@ -1,0 +1,188 @@
+﻿﻿@model WebApp.Models.TMLoc
+<!-- 弹出窗体form表单 -->
+ <div id="detailswindow" hidden="hidden" class="easyui-window" 
+      title="明细数据" 
+      data-options="modal:true,
+                    closed:true,
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:200,
+                    openAnimation:'slide',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    }
+                    " style="width:960px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                       <a href="javascript:saveitem()" class="btn btn-sm btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </a>
+                </div>
+                <div class="btn-group">
+                       <a href="javascript:printitem()" class="btn btn-sm btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <button type="button" class="btn btn-sm btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="tmloc_form" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+   <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.LocId)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LocId)" 
+				   name="@Html.NameFor(model => model.LocId)" 
+				   value="@Html.ValueFor(model => model.LocId)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LocId)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,32]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.LocNo)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LocNo)" 
+				   name="@Html.NameFor(model => model.LocNo)" 
+				   value="@Html.ValueFor(model => model.LocNo)"
+				   tabindex="1" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LocNo)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Description)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Description)" 
+				   name="@Html.NameFor(model => model.Description)" 
+				   value="@Html.ValueFor(model => model.Description)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Description)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,40]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.LocType)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LocType)" 
+				   name="@Html.NameFor(model => model.LocType)" 
+				   value="@Html.ValueFor(model => model.LocType)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LocType)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,4]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Partner)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Partner)" 
+				   name="@Html.NameFor(model => model.Partner)" 
+				   value="@Html.ValueFor(model => model.Partner)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Partner)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	    		<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var tmlocid = 0;
+    function loadData(id,data) {
+         $("#detailswindow").window("open");
+         tmlocid = id;
+         $('#tmloc_form').form('load', data);
+             }
+    var $editform = $('#tmloc_form');
+    // save item
+    function saveitem() { 
+        if ($editform.form('enableValidation').form('validate')) {
+            var tmloc = $editform.serializeJSON();
+                        var url = '/TMLocs/EditAsync';
+            if (tmloc.Id <= 0 || tmloc.Id === null || tmloc.Id === '') {
+                url = '/TMLocs/CreateAsync';
+            }
+            var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+            $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        __RequestVerificationToken: token,
+                        tmloc:tmloc
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#detailswindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#detailswindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

@@ -1,0 +1,226 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li>
+                <a href="#" title="组织架构"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">组织架构</span></a>
+                <ul>
+                    <li class="@Html.IsSelected(action: "Index", controller: "Companies")">
+                        <a href="@Url.Action("index", "Companies")" title="公司信息"><span class="menu-item-parent">公司信息</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "Departments")">
+                        <a href="@Url.Action("index", "Departments")" title="部门信息"><span class="menu-item-parent">部门信息</span></a>
+                    </li>
+
+                    <li class="@Html.IsSelected(action: "Index", controller: "Partners")">
+                        <a href="@Url.Action("index", "Partners")" title="业务伙伴"><span class="menu-item-parent">业务伙伴</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "Drivers")">
+                        <a href="@Url.Action("index", "Drivers")" title="司机信息"><span class="menu-item-parent">司机信息</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" title="订单中心"><i class="fa fa-lg fa-fw fa-folder-o"></i> <span class="menu-item-parent">订单中心</span></a>
+                <ul>
+                  <li class="@Html.IsSelected(action: "IIndex", controller: "TmOrders")">
+                    <a href="@Url.Action("IIndex", "TmOrders")" title="进口运输计划"><span class="menu-item-parent">进口计划核对表</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "EIndex", controller: "TmOrders")">
+                    <a href="@Url.Action("EIndex", "TmOrders")" title="出口运输计划"><span class="menu-item-parent">出口计划核对表</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Pod", controller: "TmOrders")">
+                    <a href="@Url.Action("Pod", "TmOrders")" title="Pod管理"><span class="menu-item-parent">Pod管理</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "TmOrderHistories")">
+                    <a href="@Url.Action("Index", "TmOrderHistories")" title="订单状态历史记录"><span class="menu-item-parent">订单状态历史记录</span></a>
+                  </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#" title="调度模块"><i class="fa fa-lg fa-fw fa-folder-o"></i> <span class="menu-item-parent">调度模块</span></a>
+                <ul>
+                  <li class="@Html.IsSelected(action: "Index", controller: "TmOrderExceptions")">
+                    <a href="@Url.Action("Index", "TmOrderExceptions")" title="异常处理"><span class="menu-item-parent">异常处理</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "DriverMgts")">
+                    <a href="@Url.Action("Index", "DriverMgts")" title="司机管理"><span class="menu-item-parent">司机管理</span></a>
+                  </li>
+
+                  <li class="@Html.IsSelected(action: "Index", controller: "ReserveVehicles")">
+                    <a href="@Url.Action("Index", "ReserveVehicles")" title="车辆预定跟踪"><span class="menu-item-parent">车辆预定跟踪</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "SIndex", controller: "ShippingTasks")">
+                    <a href="@Url.Action("SIndex", "ShippingTasks")" title="吊箱作业"><span class="menu-item-parent">吊箱作业</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "DIndex", controller: "ShippingTasks")">
+                    <a href="@Url.Action("DIndex", "ShippingTasks")" title="短驳派车"><span class="menu-item-parent">短驳派车</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "ShippingTasks")">
+                    <a href="@Url.Action("Index", "ShippingTasks")" title="长程派车"><span class="menu-item-parent">长程派车</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "BIndex", controller: "ShippingTasks")">
+                    <a href="@Url.Action("BIndex", "ShippingTasks")" title="甩板管理"><span class="menu-item-parent">甩板管理</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "ShippingTaskCosts")">
+                    <a href="@Url.Action("Index", "ShippingTaskCosts")" title="费用审核"><span class="menu-item-parent">费用审核</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "ShippingTaskHistories")">
+                    <a href="@Url.Action("Index", "ShippingTaskHistories")" title="派车状态历史记录"><span class="menu-item-parent">派车状态历史记录</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "Attachments")">
+                    <a href="@Url.Action("Index", "Attachments")" title="单证附件管理"><span class="menu-item-parent">单证附件管理</span></a>
+                  </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-lg fa-fw fa-folder-o"></i> <span class="menu-item-parent">堆场管理</span></a>
+              
+              <ul>
+                <li class="@Html.RouteIf("Storages", "active")">
+                  <a href="@Url.Action("index", "Storages")" title="堆场信息"><span class="menu-item-parent">堆场信息</span> </a>
+                </li>
+                <li class="@Html.IsSelected(action: "Index", controller: "MoveContainers")">
+                  <a href="@Url.Action("Index", "MoveContainers")" title="吊箱记录"><span class="menu-item-parent">吊箱记录</span></a>
+                </li>
+              </ul>
+            </li>
+            <li >
+                <a href="#" title="机务管理"><i class="fa fa-lg fa-fw fa-folder-o"></i> <span class="menu-item-parent">机务管理</span></a>
+                <ul>
+                    <li class="@Html.IsSelected(action: "Index", controller: "Vehicles")">
+                        <a href="@Url.Action("index", "Vehicles")" title="车辆信息"><span class="menu-item-parent">车辆信息</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "VehAnRecords")">
+                        <a href="@Url.Action("index", "VehAnRecords")" title="车辆年审记录"><span class="menu-item-parent">车辆年审记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "VehMaRecords")">
+                        <a href="@Url.Action("index", "VehMaRecords")" title="车辆常规维护记录"><span class="menu-item-parent">车辆常规维护记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "InsRecords")">
+                        <a href="@Url.Action("index", "InsRecords")" title="车辆保险记录"><span class="menu-item-parent">车辆保险记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "CertAnRecords")">
+                        <a href="@Url.Action("index", "CertAnRecords")" title="资格证书年审记录"><span class="menu-item-parent">资格证书年审记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "HealthRecords")">
+                        <a href="@Url.Action("index", "HealthRecords")" title="驾驶员体检记录"><span class="menu-item-parent">驾驶员体检记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "PurchaseOrderHeads")">
+                        <a href="@Url.Action("index", "PurchaseOrderHeads")" title="采购单管理"><span class="menu-item-parent">采购单管理</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "MaintainHeads")">
+                        <a href="@Url.Action("index", "MaintainHeads")" title="维修单管理"><span class="menu-item-parent">维修单管理</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "OilPrices")">
+                        <a href="@Url.Action("index", "OilPrices")" title="燃油价格"><span class="menu-item-parent">燃油价格</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "OilRecords")">
+                        <a href="@Url.Action("index", "OilRecords")" title="加油记录"><span class="menu-item-parent">加油记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "Tyres")">
+                        <a href="@Url.Action("index", "Tyres")" title="轮胎库存"><span class="menu-item-parent">轮胎库存</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "TyMounts")">
+                        <a href="@Url.Action("index", "TyMounts")" title="轮胎使用记录"><span class="menu-item-parent">轮胎使用记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "TyRefurbishments")">
+                        <a href="@Url.Action("index", "TyRefurbishments")" title="轮胎翻新记录"><span class="menu-item-parent">轮胎翻新记录</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "Index", controller: "TyRepairs")">
+                        <a href="@Url.Action("index", "TyRepairs")" title="补胎记录"><span class="menu-item-parent">补胎记录</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" title="业务主数据"><i class="fa fa-lg fa-fw fa-folder-o"></i> <span class="menu-item-parent">业务主数据</span></a>
+                <ul>
+                  <li class="@Html.IsSelected(action: "Index", controller: "Parts")">
+                    <a href="@Url.Action("index", "Parts")" title="配件信息"><span class="menu-item-parent">配件信息</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "StdBrands")">
+                    <a href="@Url.Action("index", "StdBrands")" title="车辆品牌"><span class="menu-item-parent">车辆品牌</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "StdConsumes")">
+                    <a href="@Url.Action("index", "StdConsumes")" title="标准油耗信息"><span class="menu-item-parent">标准油耗信息</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "StdCostCodes")">
+                    <a href="@Url.Action("index", "StdCostCodes")" title="费用代码"><span class="menu-item-parent">费用代码</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "StdMaintains")">
+                    <a href="@Url.Action("index", "StdMaintains")" title="维修项目"><span class="menu-item-parent">维修项目</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "TMLocs")">
+                    <a href="@Url.Action("index", "TMLocs")" title="地址库"><span class="menu-item-parent">地址库</span></a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Index", controller: "Regions")">
+                    <a href="@Url.Action("index", "Regions")" title="通用地址库"><span class="menu-item-parent">通用地址库</span></a>
+                  </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">系统管理</span></a>
+                <ul>
+                  <li class="@Html.RouteIf("AccountManage", "active")">
+                    <a href="@Url.Action("index", "AccountManage")"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">系统登录账号</span><span class="badge bg-color-greenLight pull-right inbox-badge">9</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("management", "active")">
+                    <a href="@Url.Action("index", "management")"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">角色分配管理</span> </a>
+                  </li>
+                  <li class="@Html.RouteIf("menuitems", "active")">
+                    <a href="@Url.Action("index", "menuitems")"><i class="fa fa-lg fa-fw fa-bars"></i> <span class="menu-item-parent">系统菜单</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("rolemenus", "active")">
+                    <a href="@Url.Action("index", "rolemenus")"><i class="fa fa-lg fa-fw fa-magnet"></i> <span class="menu-item-parent">菜单授权管理</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("DataTableImportMappings", "active")">
+                    <a href="@Url.Action("index", "DataTableImportMappings")"><i class="fa fa-lg fa-fw fa-file-excel-o"></i> <span class="menu-item-parent">Excel导入配置</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("codeitems", "active")">
+                    <a href="@Url.Action("index", "codeitems")"><i class="fa fa-lg fa-fw fa-list"></i> <span class="menu-item-parent">键值对维护</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("messages", "active")">
+                    <a href="@Url.Action("index", "messages")"><i class="fa fa-lg fa-fw fa-file-text-o"></i> <span class="menu-item-parent">系统日志</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("notifications", "active")">
+                    <a href="@Url.Action("index", "Notifications")"><i class="fa fa-lg fa-fw fa-bullhorn"></i> <span class="menu-item-parent">消息通知</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("efmigrationsmanager", "active")">
+                    <a href="@Url.Action("publish", "efmigrationsmanager")"><i class="fa fa-lg fa-fw fa-database"></i> <span class="menu-item-parent">更新数据库</span></a>
+                  </li>
+                  <li class="@Html.RouteIf("hangfire", "active")">
+                    <a target="_blank" href="@Url.Action("index", "hangfire")"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">执行任务</span></a>
+                  </li>
+
+                  <li class="@Html.RouteIf("swagger", "ui/index")">
+                    <a target="_blank" href="@Url.Action("ui/index", "swagger")"><i class="fa fa-lg fa-fw fa-question"></i> <span class="menu-item-parent">API</span></a>
+                  </li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

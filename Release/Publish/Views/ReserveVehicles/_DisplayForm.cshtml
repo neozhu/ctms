@@ -1,0 +1,83 @@
+﻿﻿@model WebApp.Models.ReserveVehicle
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin reservevehicle form  -->
+<form id="reservevehicle_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BeginDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.BeginDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.EndDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.EndDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Status) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Status)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Dispatcher) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Dispatcher)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Address) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Address)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ReserveStatus)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ReserveStatus)
+			    </label>
+            </section>
+              		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end reservevehicle form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

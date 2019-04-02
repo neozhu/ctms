@@ -1,0 +1,160 @@
+﻿﻿@model WebApp.Models.StdConsume
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin stdconsume form  -->
+<form id="stdconsume_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Code)" 
+				   name="@Html.NameFor(model => model.Code)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Code)" 
+				   value="@Html.ValueFor(model => model.Code)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Code)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Transportation)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Transportation)"
+				   name="@Html.NameFor(model => model.Transportation)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Transportation)" 
+				   value="@Html.ValueFor(model => model.Transportation)"
+				   tabindex="1" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Transportation)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Description)" 
+				   name="@Html.NameFor(model => model.Description)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Description)" 
+				   value="@Html.ValueFor(model => model.Description)"
+				   tabindex="2" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Description)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.CKM)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.CKM)"
+				   name="@Html.NameFor(model => model.CKM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CKM)" 
+				   value="@Html.ValueFor(model => model.CKM)"
+				   tabindex="3" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CKM)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.KM)"
+				   name="@Html.NameFor(model => model.KM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.KM)" 
+				   value="@Html.ValueFor(model => model.KM)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.KM)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Oil)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Oil)"
+				   name="@Html.NameFor(model => model.Oil)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Oil)" 
+				   value="@Html.ValueFor(model => model.Oil)"
+				   tabindex="5" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Oil)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Compensation)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Compensation)"
+				   name="@Html.NameFor(model => model.Compensation)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Compensation)" 
+				   value="@Html.ValueFor(model => model.Compensation)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Compensation)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="7" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end stdconsume form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdconsume_form').form('load', data);
+            
+    }
+
+
+   var stdconsumeid=@Model.Id;
+    $(function(){
+        initFormData(stdconsumeid);
+    });
+ </script>
+

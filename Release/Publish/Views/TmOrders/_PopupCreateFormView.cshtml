@@ -1,0 +1,1284 @@
+﻿﻿@model WebApp.Models.TmOrder
+<!-- 弹出窗体form表单 -->
+ <div id="createwindow" hidden="hidden" class="easyui-window" 
+      title="新增数据" 
+      data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1350;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                 <div class="btn-group btn-group-sm">
+                       <button onclick="saveitem()" class="btn btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </button>
+                </div>
+                <div class="btn-group btn-group-sm">
+                       <button onclick="printitem()" class="btn btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </button>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <div class="btn-group btn-group-sm">
+                <button type="button" class="btn   btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="tmorder_createform" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TRQ_ID)" 
+				   name="@Html.NameFor(model => model.TRQ_ID)" 
+				   value="@Html.ValueFor(model => model.TRQ_ID)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_ID)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TRQ_TYPE)" 
+				   name="@Html.NameFor(model => model.TRQ_TYPE)" 
+				   value="@Html.ValueFor(model => model.TRQ_TYPE)"
+				   tabindex="1" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_TYPE)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,4]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TOR_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TOR_ID)" 
+				   name="@Html.NameFor(model => model.TOR_ID)" 
+				   value="@Html.ValueFor(model => model.TOR_ID)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TOR_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFOZT)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFOZT)" 
+				   name="@Html.NameFor(model => model.ZFOZT)" 
+				   value="@Html.ValueFor(model => model.ZFOZT)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFOZT)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,2]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZZT)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZZT)" 
+				   name="@Html.NameFor(model => model.ZZT)" 
+				   value="@Html.ValueFor(model => model.ZZT)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZZT)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZCZLX)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZCZLX)" 
+				   name="@Html.NameFor(model => model.ZCZLX)" 
+				   value="@Html.ValueFor(model => model.ZCZLX)"
+				   tabindex="5" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCZLX)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,2]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_ID)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SALES_ORG_ID)" 
+				   name="@Html.NameFor(model => model.SALES_ORG_ID)" 
+				   value="@Html.ValueFor(model => model.SALES_ORG_ID)"
+				   tabindex="6" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SALES_ORG_ID)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.SHIPPER_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SHIPPER_ID)" 
+				   name="@Html.NameFor(model => model.SHIPPER_ID)" 
+				   value="@Html.ValueFor(model => model.SHIPPER_ID)"
+				   tabindex="7" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SHIPPER_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFHDWMS)" 
+				   name="@Html.NameFor(model => model.ZFHDWMS)" 
+				   value="@Html.ValueFor(model => model.ZFHDWMS)"
+				   tabindex="8" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFHDWMS)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,80]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TURES_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TURES_ID)" 
+				   name="@Html.NameFor(model => model.TURES_ID)" 
+				   value="@Html.ValueFor(model => model.TURES_ID)"
+				   tabindex="9" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[11,40]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.CONSIGNEE_ID)" 
+				   name="@Html.NameFor(model => model.CONSIGNEE_ID)" 
+				   value="@Html.ValueFor(model => model.CONSIGNEE_ID)"
+				   tabindex="10" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CONSIGNEE_ID)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSHDWMS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSHDWMS)" 
+				   name="@Html.NameFor(model => model.ZSHDWMS)" 
+				   value="@Html.ValueFor(model => model.ZSHDWMS)"
+				   tabindex="11" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSHDWMS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,80]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSBTDH)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSBTDH)" 
+				   name="@Html.NameFor(model => model.ZSBTDH)" 
+				   value="@Html.ValueFor(model => model.ZSBTDH)"
+				   tabindex="12" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSBTDH)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,24]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TURES_ID_FD)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TURES_ID_FD)" 
+				   name="@Html.NameFor(model => model.TURES_ID_FD)" 
+				   value="@Html.ValueFor(model => model.TURES_ID_FD)"
+				   tabindex="13" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_ID_FD)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[11,40]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TURES_TCO)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TURES_TCO)" 
+				   name="@Html.NameFor(model => model.TURES_TCO)" 
+				   value="@Html.ValueFor(model => model.TURES_TCO)"
+				   tabindex="14" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_TCO)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.GRO_WEI_VAL)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.GRO_WEI_VAL)"
+				   name="@Html.NameFor(model => model.GRO_WEI_VAL)" 
+				   value="@Html.ValueFor(model => model.GRO_WEI_VAL)"
+				   tabindex="15" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.GRO_WEI_VAL)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.QUA_PCS_VAL)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.QUA_PCS_VAL)"
+				   name="@Html.NameFor(model => model.QUA_PCS_VAL)" 
+				   value="@Html.ValueFor(model => model.QUA_PCS_VAL)"
+				   tabindex="16" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.QUA_PCS_UNI)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.QUA_PCS_UNI)" 
+				   name="@Html.NameFor(model => model.QUA_PCS_UNI)" 
+				   value="@Html.ValueFor(model => model.QUA_PCS_UNI)"
+				   tabindex="17" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.QUA_PCS_UNI)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.PKGUN_WEI_VAL)"
+				   name="@Html.NameFor(model => model.PKGUN_WEI_VAL)" 
+				   value="@Html.ValueFor(model => model.PKGUN_WEI_VAL)"
+				   tabindex="18" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PKGUN_WEI_UNI)" 
+				   name="@Html.NameFor(model => model.PKGUN_WEI_UNI)" 
+				   value="@Html.ValueFor(model => model.PKGUN_WEI_UNI)"
+				   tabindex="19" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.GRO_VOL_VAL)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.GRO_VOL_VAL)"
+				   name="@Html.NameFor(model => model.GRO_VOL_VAL)" 
+				   value="@Html.ValueFor(model => model.GRO_VOL_VAL)"
+				   tabindex="20" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.GRO_VOL_UNI)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.GRO_VOL_UNI)" 
+				   name="@Html.NameFor(model => model.GRO_VOL_UNI)" 
+				   value="@Html.ValueFor(model => model.GRO_VOL_UNI)"
+				   tabindex="21" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.GRO_VOL_UNI)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZWXPDJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZWXPDJ)" 
+				   name="@Html.NameFor(model => model.ZWXPDJ)" 
+				   value="@Html.ValueFor(model => model.ZWXPDJ)"
+				   tabindex="22" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZWXPDJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,2]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFH1)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFH1)" 
+				   name="@Html.NameFor(model => model.ZFH1)" 
+				   value="@Html.ValueFor(model => model.ZFH1)"
+				   tabindex="23" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFH1)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.SRC_LOC_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SRC_LOC_ID)" 
+				   name="@Html.NameFor(model => model.SRC_LOC_ID)" 
+				   value="@Html.ValueFor(model => model.SRC_LOC_ID)"
+				   tabindex="24" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SRC_LOC_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTHDZMS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZTHDZMS)" 
+				   name="@Html.NameFor(model => model.ZTHDZMS)" 
+				   value="@Html.ValueFor(model => model.ZTHDZMS)"
+				   tabindex="25" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTHDZMS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,80]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DES_LOC_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DES_LOC_ID)" 
+				   name="@Html.NameFor(model => model.DES_LOC_ID)" 
+				   value="@Html.ValueFor(model => model.DES_LOC_ID)"
+				   tabindex="26" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DES_LOC_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSHDZMS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSHDZMS)" 
+				   name="@Html.NameFor(model => model.ZSHDZMS)" 
+				   value="@Html.ValueFor(model => model.ZSHDZMS)"
+				   tabindex="27" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSHDZMS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,80]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTHYQBZL)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZTHYQBZL)" 
+				   name="@Html.NameFor(model => model.ZTHYQBZL)" 
+				   value="@Html.ValueFor(model => model.ZTHYQBZL)"
+				   tabindex="28" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTHYQBZL)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,255]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSHYQBZL)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSHYQBZL)" 
+				   name="@Html.NameFor(model => model.ZSHYQBZL)" 
+				   value="@Html.ValueFor(model => model.ZSHYQBZL)"
+				   tabindex="29" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSHYQBZL)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,100]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZZXYQBZL)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZZXYQBZL)" 
+				   name="@Html.NameFor(model => model.ZZXYQBZL)" 
+				   value="@Html.ValueFor(model => model.ZZXYQBZL)"
+				   tabindex="30" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZZXYQBZL)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,255]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZCMHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZCMHC)" 
+				   name="@Html.NameFor(model => model.ZCMHC)" 
+				   value="@Html.ValueFor(model => model.ZCMHC)"
+				   tabindex="31" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCMHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZHCHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZHCHC)" 
+				   name="@Html.NameFor(model => model.ZHCHC)" 
+				   value="@Html.ValueFor(model => model.ZHCHC)"
+				   tabindex="32" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZHCHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZECCMHJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZECCMHJ)" 
+				   name="@Html.NameFor(model => model.ZECCMHJ)" 
+				   value="@Html.ValueFor(model => model.ZECCMHJ)"
+				   tabindex="33" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZECCMHJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZECHCHJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZECHCHJ)" 
+				   name="@Html.NameFor(model => model.ZECHCHJ)" 
+				   value="@Html.ValueFor(model => model.ZECHCHJ)"
+				   tabindex="34" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZECHCHJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZECTDHJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZECTDHJ)" 
+				   name="@Html.NameFor(model => model.ZECTDHJ)" 
+				   value="@Html.ValueFor(model => model.ZECTDHJ)"
+				   tabindex="35" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZECTDHJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTGFS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZTGFS)" 
+				   name="@Html.NameFor(model => model.ZTGFS)" 
+				   value="@Html.ValueFor(model => model.ZTGFS)"
+				   tabindex="36" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTGFS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,2]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTGFSMS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZTGFSMS)" 
+				   name="@Html.NameFor(model => model.ZTGFSMS)" 
+				   value="@Html.ValueFor(model => model.ZTGFSMS)"
+				   tabindex="37" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTGFSMS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZXHGQHS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZXHGQHS)" 
+				   name="@Html.NameFor(model => model.ZXHGQHS)" 
+				   value="@Html.ValueFor(model => model.ZXHGQHS)"
+				   tabindex="38" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZXHGQHS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZQYG)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZQYG)" 
+				   name="@Html.NameFor(model => model.ZQYG)" 
+				   value="@Html.ValueFor(model => model.ZQYG)"
+				   tabindex="39" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZQYG)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZZYGQHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZZYGQHC)" 
+				   name="@Html.NameFor(model => model.ZZYGQHC)" 
+				   value="@Html.ValueFor(model => model.ZZYGQHC)"
+				   tabindex="40" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZZYGQHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZZZGHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZZZGHC)" 
+				   name="@Html.NameFor(model => model.ZZZGHC)" 
+				   value="@Html.ValueFor(model => model.ZZZGHC)"
+				   tabindex="41" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZZZGHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZMDG)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZMDG)" 
+				   name="@Html.NameFor(model => model.ZMDG)" 
+				   value="@Html.ValueFor(model => model.ZMDG)"
+				   tabindex="42" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZMDG)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZKHRQ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZKHRQ)" 
+			       name="@Html.NameFor(model => model.ZKHRQ)"
+                   value="@Html.ValueFor(model => model.ZKHRQ)"
+           		   tabindex="43"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZKHRQ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJHTHRQZGRQ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZJHTHRQZGRQ)" 
+			       name="@Html.NameFor(model => model.ZJHTHRQZGRQ)"
+                   value="@Html.ValueFor(model => model.ZJHTHRQZGRQ)"
+           		   tabindex="44"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJHTHRQZGRQ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFBCKHJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFBCKHJ)" 
+				   name="@Html.NameFor(model => model.ZFBCKHJ)" 
+				   value="@Html.ValueFor(model => model.ZFBCKHJ)"
+				   tabindex="45" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFBCKHJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJCCKHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZJCCKHC)" 
+				   name="@Html.NameFor(model => model.ZJCCKHC)" 
+				   value="@Html.ValueFor(model => model.ZJCCKHC)"
+				   tabindex="46" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJCCKHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJCBHHC)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZJCBHHC)" 
+				   name="@Html.NameFor(model => model.ZJCBHHC)" 
+				   value="@Html.ValueFor(model => model.ZJCBHHC)"
+				   tabindex="47" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJCBHHC)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.VEHICLERES_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VEHICLERES_ID)" 
+				   name="@Html.NameFor(model => model.VEHICLERES_ID)" 
+				   value="@Html.ValueFor(model => model.VEHICLERES_ID)"
+				   tabindex="48" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VEHICLERES_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,40]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZBKH)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZBKH)" 
+				   name="@Html.NameFor(model => model.ZBKH)" 
+				   value="@Html.ValueFor(model => model.ZBKH)"
+				   tabindex="49" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZBKH)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJXM)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSJXM)" 
+				   name="@Html.NameFor(model => model.ZSJXM)" 
+				   value="@Html.ValueFor(model => model.ZSJXM)"
+				   tabindex="50" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJXM)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJZJH)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSJZJH)" 
+				   name="@Html.NameFor(model => model.ZSJZJH)" 
+				   value="@Html.ValueFor(model => model.ZSJZJH)"
+				   tabindex="51" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJZJH)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJDH)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSJDH)" 
+				   name="@Html.NameFor(model => model.ZSJDH)" 
+				   value="@Html.ValueFor(model => model.ZSJDH)"
+				   tabindex="52" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJDH)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.COUNTRY_T)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.COUNTRY_T)" 
+				   name="@Html.NameFor(model => model.COUNTRY_T)" 
+				   value="@Html.ValueFor(model => model.COUNTRY_T)"
+				   tabindex="53" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.COUNTRY_T)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PLATENUMBER_T)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PLATENUMBER_T)" 
+				   name="@Html.NameFor(model => model.PLATENUMBER_T)" 
+				   value="@Html.ValueFor(model => model.PLATENUMBER_T)"
+				   tabindex="54" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PLATENUMBER_T)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.COUNTRY_P)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.COUNTRY_P)" 
+				   name="@Html.NameFor(model => model.COUNTRY_P)" 
+				   value="@Html.ValueFor(model => model.COUNTRY_P)"
+				   tabindex="55" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.COUNTRY_P)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.PLATENUMBER_P)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PLATENUMBER_P)" 
+				   name="@Html.NameFor(model => model.PLATENUMBER_P)" 
+				   value="@Html.ValueFor(model => model.PLATENUMBER_P)"
+				   tabindex="56" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PLATENUMBER_P)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJGRQSJ1)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZJGRQSJ1)" 
+			       name="@Html.NameFor(model => model.ZJGRQSJ1)"
+                   value="@Html.ValueFor(model => model.ZJGRQSJ1)"
+           		   tabindex="57"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJGRQSJ1)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFSBDWCSJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFSBDWCSJ)" 
+				   name="@Html.NameFor(model => model.ZFSBDWCSJ)" 
+				   value="@Html.ValueFor(model => model.ZFSBDWCSJ)"
+				   tabindex="58" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFSBDWCSJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,12]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSFLH)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSFLH)" 
+				   name="@Html.NameFor(model => model.ZSFLH)" 
+				   value="@Html.ValueFor(model => model.ZSFLH)"
+				   tabindex="59" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSFLH)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,1]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTKXRQSJ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZTKXRQSJ)" 
+			       name="@Html.NameFor(model => model.ZTKXRQSJ)"
+                   value="@Html.ValueFor(model => model.ZTKXRQSJ)"
+           		   tabindex="60"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTKXRQSJ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJHPCSJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZJHPCSJ)" 
+				   name="@Html.NameFor(model => model.ZJHPCSJ)" 
+				   value="@Html.ValueFor(model => model.ZJHPCSJ)"
+				   tabindex="61" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJHPCSJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,12]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZTZXRQSJ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZTZXRQSJ)" 
+			       name="@Html.NameFor(model => model.ZTZXRQSJ)"
+                   value="@Html.ValueFor(model => model.ZTZXRQSJ)"
+           		   tabindex="62"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZTZXRQSJ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZHKXRQSJ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZHKXRQSJ)" 
+			       name="@Html.NameFor(model => model.ZHKXRQSJ)"
+                   value="@Html.ValueFor(model => model.ZHKXRQSJ)"
+           		   tabindex="63"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZHKXRQSJ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZHKXDD)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZHKXDD)" 
+				   name="@Html.NameFor(model => model.ZHKXDD)" 
+				   value="@Html.ValueFor(model => model.ZHKXDD)"
+				   tabindex="64" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZHKXDD)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFOJHTHRQZGRQS)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZFOJHTHRQZGRQS)" 
+			       name="@Html.NameFor(model => model.ZFOJHTHRQZGRQS)"
+                   value="@Html.ValueFor(model => model.ZFOJHTHRQZGRQS)"
+           		   tabindex="65"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFOJHTHRQZGRQS)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJHDCSJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZJHDCSJ)" 
+				   name="@Html.NameFor(model => model.ZJHDCSJ)" 
+				   value="@Html.ValueFor(model => model.ZJHDCSJ)"
+				   tabindex="66" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJHDCSJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,12]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJDCSJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSJDCSJ)" 
+				   name="@Html.NameFor(model => model.ZSJDCSJ)" 
+				   value="@Html.ValueFor(model => model.ZSJDCSJ)"
+				   tabindex="67" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJDCSJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,12]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJLCSJ)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSJLCSJ)" 
+				   name="@Html.NameFor(model => model.ZSJLCSJ)" 
+				   value="@Html.ValueFor(model => model.ZSJLCSJ)"
+				   tabindex="68" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJLCSJ)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,12]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZJHSHRQ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZJHSHRQ)" 
+			       name="@Html.NameFor(model => model.ZJHSHRQ)"
+                   value="@Html.ValueFor(model => model.ZJHSHRQ)"
+           		   tabindex="69"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZJHSHRQ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSJSHRQ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZSJSHRQ)" 
+			       name="@Html.NameFor(model => model.ZSJSHRQ)"
+                   value="@Html.ValueFor(model => model.ZSJSHRQ)"
+           		   tabindex="70"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJSHRQ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZPCRQ)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ZPCRQ)" 
+			       name="@Html.NameFor(model => model.ZPCRQ)"
+                   value="@Html.ValueFor(model => model.ZPCRQ)"
+           		   tabindex="71"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZPCRQ)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.TSPEXECID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TSPEXECID)" 
+				   name="@Html.NameFor(model => model.TSPEXECID)" 
+				   value="@Html.ValueFor(model => model.TSPEXECID)"
+				   tabindex="72" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TSPEXECID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFXGS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFXGS)" 
+				   name="@Html.NameFor(model => model.ZFXGS)" 
+				   value="@Html.ValueFor(model => model.ZFXGS)"
+				   tabindex="73" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFXGS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZCOMMENT)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZCOMMENT)" 
+				   name="@Html.NameFor(model => model.ZCOMMENT)" 
+				   value="@Html.ValueFor(model => model.ZCOMMENT)"
+				   tabindex="74" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZCOMMENT)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,256]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSRV_KEY)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSRV_KEY)" 
+				   name="@Html.NameFor(model => model.ZSRV_KEY)" 
+				   value="@Html.ValueFor(model => model.ZSRV_KEY)"
+				   tabindex="75" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSRV_KEY)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,36]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZFWZT)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZFWZT)" 
+				   name="@Html.NameFor(model => model.ZFWZT)" 
+				   value="@Html.ValueFor(model => model.ZFWZT)"
+				   tabindex="76" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZFWZT)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,2]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ITEM_KEY)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ITEM_KEY)" 
+				   name="@Html.NameFor(model => model.ITEM_KEY)" 
+				   value="@Html.ValueFor(model => model.ITEM_KEY)"
+				   tabindex="77" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ITEM_KEY)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,36]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PURCH_ORG_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PURCH_ORG_ID)" 
+				   name="@Html.NameFor(model => model.PURCH_ORG_ID)" 
+				   value="@Html.ValueFor(model => model.PURCH_ORG_ID)"
+				   tabindex="78" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PURCH_ORG_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,8]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PURCH_GRP_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PURCH_GRP_ID)" 
+				   name="@Html.NameFor(model => model.PURCH_GRP_ID)" 
+				   value="@Html.ValueFor(model => model.PURCH_GRP_ID)"
+				   tabindex="79" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PURCH_GRP_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,8]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.EXEC_ORG_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.EXEC_ORG_ID)" 
+				   name="@Html.NameFor(model => model.EXEC_ORG_ID)" 
+				   value="@Html.ValueFor(model => model.EXEC_ORG_ID)"
+				   tabindex="80" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.EXEC_ORG_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,8]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.EXEC_GRP_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.EXEC_GRP_ID)" 
+				   name="@Html.NameFor(model => model.EXEC_GRP_ID)" 
+				   value="@Html.ValueFor(model => model.EXEC_GRP_ID)"
+				   tabindex="81" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.EXEC_GRP_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,8]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.TURES_CAT)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.TURES_CAT)" 
+				   name="@Html.NameFor(model => model.TURES_CAT)" 
+				   value="@Html.ValueFor(model => model.TURES_CAT)"
+				   tabindex="82" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_CAT)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,3]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.SALES_OFF_ID)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SALES_OFF_ID)" 
+				   name="@Html.NameFor(model => model.SALES_OFF_ID)" 
+				   value="@Html.ValueFor(model => model.SALES_OFF_ID)"
+				   tabindex="83" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SALES_OFF_ID)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,8]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ZSPDMMS)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ZSPDMMS)" 
+				   name="@Html.NameFor(model => model.ZSPDMMS)" 
+				   value="@Html.ValueFor(model => model.ZSPDMMS)"
+				   tabindex="84" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ZSPDMMS)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,40]'" />
+				   </td>
+	   	    		<td></td> <td></td>
+			<td></td> <td></td>
+			<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var tmorderid = 0;
+    function loadCreateData(data) {
+         $("#createwindow").window("open");
+         tmorderid = 0;
+         $('#tmorder_form').form('load', data);
+             }
+    var $createform = $('#tmorder_createform');
+    // save item
+    function createitem() { 
+        if ($createform.form('enableValidation').form('validate')) {
+            var tmorder = $createform.serializeJSON();
+                        var token = $('input[name="__RequestVerificationToken"]', $createform).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/TmOrders/CreateAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        tmorder:tmorder
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#createwindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#createwindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

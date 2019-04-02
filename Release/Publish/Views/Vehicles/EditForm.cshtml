@@ -1,0 +1,1437 @@
+﻿﻿@model WebApp.Models.Vehicle
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin vehicle form  -->
+<form id="vehicle_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="1" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerCode)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="2" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerName)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.OrderNo) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.OrderNo)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExternalNo) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.ExternalNo)" 
+				   name="@Html.NameFor(model => model.ExternalNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ExternalNo)" 
+				   value="@Html.ValueFor(model => model.ExternalNo)"
+				   tabindex="4" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ExternalNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.UsingDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.UsingDate)" 
+			       name="@Html.NameFor(model => model.UsingDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.UsingDate)" 
+				   tabindex="5" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.UsingDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.UsingDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Location1) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Location1)" 
+				   name="@Html.NameFor(model => model.Location1)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Location1)" 
+				   value="@Html.ValueFor(model => model.Location1)"
+				   tabindex="6" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Location1)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Location2) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Location2)" 
+				   name="@Html.NameFor(model => model.Location2)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Location2)" 
+				   value="@Html.ValueFor(model => model.Location2)"
+				   tabindex="7" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Location2)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InputUser) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.InputUser)" 
+				   name="@Html.NameFor(model => model.InputUser)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InputUser)" 
+				   value="@Html.ValueFor(model => model.InputUser)"
+				   tabindex="8" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InputUser)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Driver)" 
+				   name="@Html.NameFor(model => model.Driver)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Driver)" 
+				   value="@Html.ValueFor(model => model.Driver)"
+				   tabindex="9" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Driver)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.DriverPhone)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DriverPhone)" 
+				   name="@Html.NameFor(model => model.DriverPhone)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DriverPhone)" 
+				   value="@Html.ValueFor(model => model.DriverPhone)"
+				   tabindex="10" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DriverPhone)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumberPosition)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumberPosition)" 
+				   name="@Html.NameFor(model => model.PlateNumberPosition)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumberPosition)" 
+				   value="@Html.ValueFor(model => model.PlateNumberPosition)"
+				   tabindex="11" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumberPosition)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.VehStatus)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehStatus)" 
+				   name="@Html.NameFor(model => model.VehStatus)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehStatus)" 
+				   value="@Html.ValueFor(model => model.VehStatus)"
+				   tabindex="12" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehStatus)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.CarType)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.CarType)" 
+				   name="@Html.NameFor(model => model.CarType)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CarType)" 
+				   value="@Html.ValueFor(model => model.CarType)"
+				   tabindex="13" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CarType)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehicleType) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehicleType)" 
+				   name="@Html.NameFor(model => model.VehicleType)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehicleType)" 
+				   value="@Html.ValueFor(model => model.VehicleType)"
+				   tabindex="14" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehicleType)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.VehicleProperty)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehicleProperty)" 
+				   name="@Html.NameFor(model => model.VehicleProperty)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehicleProperty)" 
+				   value="@Html.ValueFor(model => model.VehicleProperty)"
+				   tabindex="15" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehicleProperty)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ECOMark)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.ECOMark)" 
+				   name="@Html.NameFor(model => model.ECOMark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ECOMark)" 
+				   value="@Html.ValueFor(model => model.ECOMark)"
+				   tabindex="16" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ECOMark)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.StdLoadWeight) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.StdLoadWeight)"
+				   name="@Html.NameFor(model => model.StdLoadWeight)" 
+                   placeholder="@Html.DisplayNameFor(model => model.StdLoadWeight)" 
+				   value="@Html.ValueFor(model => model.StdLoadWeight)"
+				   tabindex="17" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.StdLoadWeight)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoadWeight) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.LoadWeight)"
+				   name="@Html.NameFor(model => model.LoadWeight)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoadWeight)" 
+				   value="@Html.ValueFor(model => model.LoadWeight)"
+				   tabindex="18" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoadWeight)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoadVolume) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.LoadVolume)"
+				   name="@Html.NameFor(model => model.LoadVolume)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoadVolume)" 
+				   value="@Html.ValueFor(model => model.LoadVolume)"
+				   tabindex="19" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoadVolume)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CarriageSize) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.CarriageSize)"
+				   name="@Html.NameFor(model => model.CarriageSize)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CarriageSize)" 
+				   value="@Html.ValueFor(model => model.CarriageSize)"
+				   tabindex="20" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CarriageSize)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehLongSize) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehLongSize)"
+				   name="@Html.NameFor(model => model.VehLongSize)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehLongSize)" 
+				   value="@Html.ValueFor(model => model.VehLongSize)"
+				   tabindex="21" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehLongSize)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehHightSize) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehHightSize)"
+				   name="@Html.NameFor(model => model.VehHightSize)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehHightSize)" 
+				   value="@Html.ValueFor(model => model.VehHightSize)"
+				   tabindex="22" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehHightSize)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Axles) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Axles)"
+				   name="@Html.NameFor(model => model.Axles)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Axles)" 
+				   value="@Html.ValueFor(model => model.Axles)"
+				   tabindex="23" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Axles)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AssistantDriver) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.AssistantDriver)" 
+				   name="@Html.NameFor(model => model.AssistantDriver)" 
+                   placeholder="@Html.DisplayNameFor(model => model.AssistantDriver)" 
+				   value="@Html.ValueFor(model => model.AssistantDriver)"
+				   tabindex="24" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.AssistantDriver)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AssistantDriverPhone) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.AssistantDriverPhone)" 
+				   name="@Html.NameFor(model => model.AssistantDriverPhone)" 
+                   placeholder="@Html.DisplayNameFor(model => model.AssistantDriverPhone)" 
+				   value="@Html.ValueFor(model => model.AssistantDriverPhone)"
+				   tabindex="25" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.AssistantDriverPhone)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CubicleType) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.CubicleType)" 
+				   name="@Html.NameFor(model => model.CubicleType)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CubicleType)" 
+				   value="@Html.ValueFor(model => model.CubicleType)"
+				   tabindex="26" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CubicleType)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehUseType) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehUseType)" 
+				   name="@Html.NameFor(model => model.VehUseType)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehUseType)" 
+				   value="@Html.ValueFor(model => model.VehUseType)"
+				   tabindex="27" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehUseType)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CustomsNo) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.CustomsNo)" 
+				   name="@Html.NameFor(model => model.CustomsNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CustomsNo)" 
+				   value="@Html.ValueFor(model => model.CustomsNo)"
+				   tabindex="28" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CustomsNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehUse) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehUse)" 
+				   name="@Html.NameFor(model => model.VehUse)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehUse)" 
+				   value="@Html.ValueFor(model => model.VehUse)"
+				   tabindex="29" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehUse)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AVGECON) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.AVGECON)"
+				   name="@Html.NameFor(model => model.AVGECON)" 
+                   placeholder="@Html.DisplayNameFor(model => model.AVGECON)" 
+				   value="@Html.ValueFor(model => model.AVGECON)"
+				   tabindex="30" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.AVGECON)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.AVGECONScale) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.AVGECONScale)"
+				   name="@Html.NameFor(model => model.AVGECONScale)" 
+                   placeholder="@Html.DisplayNameFor(model => model.AVGECONScale)" 
+				   value="@Html.ValueFor(model => model.AVGECONScale)"
+				   tabindex="31" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.AVGECONScale)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RoadKM) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.RoadKM)"
+				   name="@Html.NameFor(model => model.RoadKM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RoadKM)" 
+				   value="@Html.ValueFor(model => model.RoadKM)"
+				   tabindex="32" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RoadKM)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RoadHours) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.RoadHours)"
+				   name="@Html.NameFor(model => model.RoadHours)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RoadHours)" 
+				   value="@Html.ValueFor(model => model.RoadHours)"
+				   tabindex="33" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RoadHours)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RoadKMScale) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.RoadKMScale)"
+				   name="@Html.NameFor(model => model.RoadKMScale)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RoadKMScale)" 
+				   value="@Html.ValueFor(model => model.RoadKMScale)"
+				   tabindex="34" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RoadKMScale)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.GPSDeviceId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.GPSDeviceId)" 
+				   name="@Html.NameFor(model => model.GPSDeviceId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.GPSDeviceId)" 
+				   value="@Html.ValueFor(model => model.GPSDeviceId)"
+				   tabindex="35" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.GPSDeviceId)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Owner) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Owner)" 
+				   name="@Html.NameFor(model => model.Owner)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Owner)" 
+				   value="@Html.ValueFor(model => model.Owner)"
+				   tabindex="36" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Owner)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.OwnerContactPhone) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.OwnerContactPhone)" 
+				   name="@Html.NameFor(model => model.OwnerContactPhone)" 
+                   placeholder="@Html.DisplayNameFor(model => model.OwnerContactPhone)" 
+				   value="@Html.ValueFor(model => model.OwnerContactPhone)"
+				   tabindex="37" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.OwnerContactPhone)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Brand) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Brand)" 
+				   name="@Html.NameFor(model => model.Brand)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Brand)" 
+				   value="@Html.ValueFor(model => model.Brand)"
+				   tabindex="38" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Brand)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RPM) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.RPM)"
+				   name="@Html.NameFor(model => model.RPM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RPM)" 
+				   value="@Html.ValueFor(model => model.RPM)"
+				   tabindex="39" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RPM)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PurchasedDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.PurchasedDate)" 
+			       name="@Html.NameFor(model => model.PurchasedDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PurchasedDate)" 
+				   tabindex="40" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.PurchasedDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PurchasedDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PurchasedAmount) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.PurchasedAmount)"
+				   name="@Html.NameFor(model => model.PurchasedAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PurchasedAmount)" 
+				   value="@Html.ValueFor(model => model.PurchasedAmount)"
+				   tabindex="41" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PurchasedAmount)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehLong) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehLong)"
+				   name="@Html.NameFor(model => model.VehLong)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehLong)" 
+				   value="@Html.ValueFor(model => model.VehLong)"
+				   tabindex="42" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehLong)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehWide) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehWide)"
+				   name="@Html.NameFor(model => model.VehWide)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehWide)" 
+				   value="@Html.ValueFor(model => model.VehWide)"
+				   tabindex="43" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehWide)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehHigh) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehHigh)"
+				   name="@Html.NameFor(model => model.VehHigh)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehHigh)" 
+				   value="@Html.ValueFor(model => model.VehHigh)"
+				   tabindex="44" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehHigh)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VIN) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VIN)" 
+				   name="@Html.NameFor(model => model.VIN)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VIN)" 
+				   value="@Html.ValueFor(model => model.VIN)"
+				   tabindex="45" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VIN)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ServiceLife) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.ServiceLife)"
+				   name="@Html.NameFor(model => model.ServiceLife)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ServiceLife)" 
+				   value="@Html.ValueFor(model => model.ServiceLife)"
+				   tabindex="46" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ServiceLife)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.MaintainKM) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.MaintainKM)"
+				   name="@Html.NameFor(model => model.MaintainKM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.MaintainKM)" 
+				   value="@Html.ValueFor(model => model.MaintainKM)"
+				   tabindex="47" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.MaintainKM)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.MaintainDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.MaintainDate)" 
+			       name="@Html.NameFor(model => model.MaintainDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.MaintainDate)" 
+				   tabindex="48" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.MaintainDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.MaintainDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.MaintainMonth) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.MaintainMonth)"
+				   name="@Html.NameFor(model => model.MaintainMonth)" 
+                   placeholder="@Html.DisplayNameFor(model => model.MaintainMonth)" 
+				   value="@Html.ValueFor(model => model.MaintainMonth)"
+				   tabindex="49" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.MaintainMonth)</b>
+			    </label>
+            </section>
+				 
+	    
+			  
+              <section class="col col-3">
+              <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ExistVehTailBoard)</span> </label>
+              <label class="checkbox">
+                 <input id="@Html.IdFor(model => model.ExistVehTailBoard)"
+                       name="@Html.NameFor(model => model.ExistVehTailBoard)"
+                       value="true" @(Model.ExistVehTailBoard ? "checked=\"checked\"" : "")
+                       tabindex="6"
+                       type="checkbox" />
+                <i></i> @Html.DisplayNameFor(model => model.ExistVehTailBoard)
+                <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ExistVehTailBoard)</b>
+               </label>
+              </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehTailBoardBrand) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehTailBoardBrand)" 
+				   name="@Html.NameFor(model => model.VehTailBoardBrand)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehTailBoardBrand)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardBrand)"
+				   tabindex="51" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehTailBoardBrand)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehTailBoardFactory) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehTailBoardFactory)" 
+				   name="@Html.NameFor(model => model.VehTailBoardFactory)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehTailBoardFactory)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardFactory)"
+				   tabindex="52" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehTailBoardFactory)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehTailBoardLife) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehTailBoardLife)"
+				   name="@Html.NameFor(model => model.VehTailBoardLife)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehTailBoardLife)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardLife)"
+				   tabindex="53" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehTailBoardLife)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehTailBoardAmount) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.VehTailBoardAmount)"
+				   name="@Html.NameFor(model => model.VehTailBoardAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehTailBoardAmount)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardAmount)"
+				   tabindex="54" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehTailBoardAmount)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VehTailBoardGPSDeviceId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.VehTailBoardGPSDeviceId)" 
+				   name="@Html.NameFor(model => model.VehTailBoardGPSDeviceId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.VehTailBoardGPSDeviceId)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardGPSDeviceId)"
+				   tabindex="55" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.VehTailBoardGPSDeviceId)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseModel) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DrLicenseModel)" 
+				   name="@Html.NameFor(model => model.DrLicenseModel)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseModel)" 
+				   value="@Html.ValueFor(model => model.DrLicenseModel)"
+				   tabindex="56" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseModel)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseUseNature) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DrLicenseUseNature)" 
+				   name="@Html.NameFor(model => model.DrLicenseUseNature)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseUseNature)" 
+				   value="@Html.ValueFor(model => model.DrLicenseUseNature)"
+				   tabindex="57" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseUseNature)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseBrand) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DrLicenseBrand)" 
+				   name="@Html.NameFor(model => model.DrLicenseBrand)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseBrand)" 
+				   value="@Html.ValueFor(model => model.DrLicenseBrand)"
+				   tabindex="58" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseBrand)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseDevId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DrLicenseDevId)" 
+				   name="@Html.NameFor(model => model.DrLicenseDevId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseDevId)" 
+				   value="@Html.ValueFor(model => model.DrLicenseDevId)"
+				   tabindex="59" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseDevId)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseEngineId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.DrLicenseEngineId)" 
+				   name="@Html.NameFor(model => model.DrLicenseEngineId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseEngineId)" 
+				   value="@Html.ValueFor(model => model.DrLicenseEngineId)"
+				   tabindex="60" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseEngineId)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseRegistrationDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.DrLicenseRegistrationDate)" 
+			       name="@Html.NameFor(model => model.DrLicenseRegistrationDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseRegistrationDate)" 
+				   tabindex="61" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.DrLicenseRegistrationDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseRegistrationDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicensePubDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.DrLicensePubDate)" 
+			       name="@Html.NameFor(model => model.DrLicensePubDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicensePubDate)" 
+				   tabindex="62" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.DrLicensePubDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicensePubDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseRatedUsers) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseRatedUsers)"
+				   name="@Html.NameFor(model => model.DrLicenseRatedUsers)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseRatedUsers)" 
+				   value="@Html.ValueFor(model => model.DrLicenseRatedUsers)"
+				   tabindex="63" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseRatedUsers)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseVehWeight) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseVehWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseVehWeight)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseVehWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehWeight)"
+				   tabindex="64" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseVehWeight)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseDevWeight) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseDevWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseDevWeight)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseDevWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseDevWeight)"
+				   tabindex="65" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseDevWeight)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseNetWeight) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseNetWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseNetWeight)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseNetWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseNetWeight)"
+				   tabindex="66" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseNetWeight)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseNetVolume) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseNetVolume)"
+				   name="@Html.NameFor(model => model.DrLicenseNetVolume)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseNetVolume)" 
+				   value="@Html.ValueFor(model => model.DrLicenseNetVolume)"
+				   tabindex="67" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseNetVolume)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseVehWide) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseVehWide)"
+				   name="@Html.NameFor(model => model.DrLicenseVehWide)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseVehWide)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehWide)"
+				   tabindex="68" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseVehWide)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseVehHigh) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseVehHigh)"
+				   name="@Html.NameFor(model => model.DrLicenseVehHigh)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseVehHigh)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehHigh)"
+				   tabindex="69" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseVehHigh)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseVehLong) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.DrLicenseVehLong)"
+				   name="@Html.NameFor(model => model.DrLicenseVehLong)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseVehLong)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehLong)"
+				   tabindex="70" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseVehLong)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrLicenseScrapedDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.DrLicenseScrapedDate)" 
+			       name="@Html.NameFor(model => model.DrLicenseScrapedDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.DrLicenseScrapedDate)" 
+				   tabindex="71" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.DrLicenseScrapedDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.DrLicenseScrapedDate)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicenseManageId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LoLicenseManageId)" 
+				   name="@Html.NameFor(model => model.LoLicenseManageId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicenseManageId)" 
+				   value="@Html.ValueFor(model => model.LoLicenseManageId)"
+				   tabindex="72" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicenseManageId)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicenseId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LoLicenseId)" 
+				   name="@Html.NameFor(model => model.LoLicenseId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicenseId)" 
+				   value="@Html.ValueFor(model => model.LoLicenseId)"
+				   tabindex="73" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicenseId)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicenseBusinessScope) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LoLicenseBusinessScope)" 
+				   name="@Html.NameFor(model => model.LoLicenseBusinessScope)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicenseBusinessScope)" 
+				   value="@Html.ValueFor(model => model.LoLicenseBusinessScope)"
+				   tabindex="74" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicenseBusinessScope)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicensePubDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.LoLicensePubDate)" 
+			       name="@Html.NameFor(model => model.LoLicensePubDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicensePubDate)" 
+				   tabindex="75" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.LoLicensePubDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicensePubDate)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicenseValidDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.LoLicenseValidDate)" 
+			       name="@Html.NameFor(model => model.LoLicenseValidDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicenseValidDate)" 
+				   tabindex="76" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.LoLicenseValidDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicenseValidDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicenseCheckDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.LoLicenseCheckDate)" 
+			       name="@Html.NameFor(model => model.LoLicenseCheckDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicenseCheckDate)" 
+				   tabindex="77" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.LoLicenseCheckDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicenseCheckDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LoLicensePlace) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LoLicensePlace)" 
+				   name="@Html.NameFor(model => model.LoLicensePlace)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LoLicensePlace)" 
+				   value="@Html.ValueFor(model => model.LoLicensePlace)"
+				   tabindex="78" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LoLicensePlace)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsTrafficPolicyId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyId)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsTrafficPolicyId)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyId)"
+				   tabindex="79" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsTrafficPolicyId)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsTrafficPolicyCompany) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyCompany)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyCompany)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsTrafficPolicyCompany)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyCompany)"
+				   tabindex="80" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsTrafficPolicyCompany)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsTrafficPolicyVaildateDate) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyVaildateDate)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyVaildateDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsTrafficPolicyVaildateDate)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyVaildateDate)"
+				   tabindex="81" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsTrafficPolicyVaildateDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsTrafficPolicyAmount) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.InsTrafficPolicyAmount)"
+				   name="@Html.NameFor(model => model.InsTrafficPolicyAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsTrafficPolicyAmount)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyAmount)"
+				   tabindex="82" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsTrafficPolicyAmount)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsThirdPartyId) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.InsThirdPartyId)" 
+				   name="@Html.NameFor(model => model.InsThirdPartyId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsThirdPartyId)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyId)"
+				   tabindex="83" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsThirdPartyId)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsThirdPartyVaildateDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.InsThirdPartyVaildateDate)" 
+			       name="@Html.NameFor(model => model.InsThirdPartyVaildateDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsThirdPartyVaildateDate)" 
+				   tabindex="84" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyVaildateDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsThirdPartyVaildateDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsThirdPartyAmount) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.InsThirdPartyAmount)"
+				   name="@Html.NameFor(model => model.InsThirdPartyAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsThirdPartyAmount)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyAmount)"
+				   tabindex="85" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsThirdPartyAmount)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsAmount) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.InsThirdPartyLogisticsAmount)"
+				   name="@Html.NameFor(model => model.InsThirdPartyLogisticsAmount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsAmount)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyLogisticsAmount)"
+				   tabindex="86" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsAmount)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsVaildateDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.InsThirdPartyLogisticsVaildateDate)" 
+			       name="@Html.NameFor(model => model.InsThirdPartyLogisticsVaildateDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsVaildateDate)" 
+				   tabindex="87" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyLogisticsVaildateDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsVaildateDate)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Status) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Status)" 
+				   name="@Html.NameFor(model => model.Status)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="88" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Status)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end vehicle form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#vehicle_form').form('load', data);
+            
+    }
+
+
+   var vehicleid=@Model.Id;
+    $(function(){
+        initFormData(vehicleid);
+    });
+ </script>
+

@@ -1,0 +1,339 @@
+﻿﻿@model WebApp.Models.ShippingTask
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin shippingtask form  -->
+<form id="shippingtask_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.ShipOrderNo)" 
+                       name="@Html.NameFor(model => model.ShipOrderNo)" 
+                       value="@Html.ValueFor(model => model.ShipOrderNo)" />
+ <fieldset>
+     <div class="row">
+			              <!--派车类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZPCLX)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车牌号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZCPH)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCPH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车板号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZCBH)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCBH)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--派车状态-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZCZT)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ZCZT)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZBZ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZBZ)
+            </label>
+            </section>
+ 		 
+	    
+			  			  <!--是否甩板-->
+              <section class="col col-3">
+              <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZSFSB)</span> </label>
+              <label class="label">
+                @Html.DisplayFor(model => model.ZSFSB)
+            </label>
+            </section>
+		 
+	    
+			              <!--调度员-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZDDY) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZDDY)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--调度派车时间-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZDDPCSJ)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZDDPCSJ)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--要求运输完成时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZYYWCSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZYYWCSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--实际开始运输时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJKSYYSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZSJKSYYSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--实际运输完成时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJYYWXSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZSJYYWXSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--起始地-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZQSD)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--起始地描述-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZQSDMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--目的地-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZMDD)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--目的地描述-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZMDDMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--白卡号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZBKH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZBKH)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--司机姓名-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJXM) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJXM)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机电话-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJDH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJDH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机身份证号码-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJSFZ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJSFZ)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--结算方-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJSF) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZJSF)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--结算方名称-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJSFMS) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZJSFMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--结算备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJSBZ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZJSBZ)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--油耗代码-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZYHDM) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZYHDM)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--运输里程-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZYSLC) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ZYSLC)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			  			<!--箱公里-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZXGL) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ZXGL)
+			    </label>
+            </section>
+		 
+	    
+			  			<!--应耗油-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZYHY) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ZYHY)
+			    </label>
+            </section>
+		 
+	    
+			  			<!--补贴-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Compensation) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Compensation)
+			    </label>
+            </section>
+		 
+	    
+			  			<!--GPS记录里程-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZGPSJLLC) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.ZGPSJLLC)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+	    
+</fieldset>
+</form>
+<!-- end shippingtask form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+    <div class="row">
+        <section class="col col-md-12 col-lg-12">
+    <!-- details tabs -->
+    <div class="tabs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs bordered">
+								<li class="active"><a data-toggle="tab" href="#tab-shippingtaskitems"> ShippingTaskItems</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+              <div id="tab-shippingtaskitems" class="tab-pane active">
+                   <div class="panel-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-8  ">
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_append()" class="btn btn-sm btn-default"> <i class="fa fa-plus"></i> 新增 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_removeit()" class="btn btn-sm btn-default"> <i class="fa fa-trash-o"></i> 删除 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_accept()" class="btn btn-sm btn-default"> <i class="fa fa-floppy-o"></i> 保存 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_reload()" class="btn btn-sm btn-default"> <i class="fa fa-refresh"></i> 刷新 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:shippingtaskitems_reject()" class="btn btn-sm btn-default"> <i class="fa fa-window-close-o"></i> 取消 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                   </div>
+                <div class="table-responsive">
+				<table id="shippingtaskitems_datagrid" >
+                </table>
+              
+            </div>
+         </div>
+	</div>
+	</div>
+ 
+<!--end details tabs -->
+        </div>
+    </div>
+<!-- end detail section -->
+
+
+

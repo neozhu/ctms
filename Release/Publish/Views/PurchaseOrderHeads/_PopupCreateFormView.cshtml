@@ -1,0 +1,370 @@
+﻿﻿@model WebApp.Models.PurchaseOrderHead
+<!-- 弹出窗体form表单 -->
+ <div id="createwindow" hidden="hidden" class="easyui-window" 
+      title="新增数据" 
+      data-options="modal:true,
+                    closed:true,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:200,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    }
+                    " style="width:1440px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                       <a href="javascript:createitem()" class="btn btn-sm btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </a>
+                </div>
+                <div class="btn-group">
+                       <a href="javascript:printitem()" class="btn btn-sm btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <button type="button" class="btn btn-sm btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="purchaseorderhead_createform" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.OrderNo)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,12]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.PDate)" 
+			       name="@Html.NameFor(model => model.PDate)"
+                   value="@Html.ValueFor(model => model.PDate)"
+           		   tabindex="1"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.RDate)" 
+			       name="@Html.NameFor(model => model.RDate)"
+                   value="@Html.ValueFor(model => model.RDate)"
+           		   tabindex="2"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Proposer)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Proposer)" 
+				   name="@Html.NameFor(model => model.Proposer)" 
+				   value="@Html.ValueFor(model => model.Proposer)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Proposer)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.SupplierCode)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SupplierCode)" 
+				   name="@Html.NameFor(model => model.SupplierCode)" 
+				   value="@Html.ValueFor(model => model.SupplierCode)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SupplierCode)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.SupplierName)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SupplierName)" 
+				   name="@Html.NameFor(model => model.SupplierName)" 
+				   value="@Html.ValueFor(model => model.SupplierName)"
+				   tabindex="5" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SupplierName)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="6" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Amount)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Status)"
+				   name="@Html.NameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="7" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Status)',
+								 label:'',
+                                 width:200,
+								 required:true " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.Approver)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Approver)" 
+				   name="@Html.NameFor(model => model.Approver)" 
+				   value="@Html.ValueFor(model => model.Approver)"
+				   tabindex="8" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Approver)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ADate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.ADate)" 
+			       name="@Html.NameFor(model => model.ADate)"
+                   value="@Html.ValueFor(model => model.ADate)"
+           		   tabindex="9"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ADate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.CDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.CDate)" 
+			       name="@Html.NameFor(model => model.CDate)"
+                   value="@Html.ValueFor(model => model.CDate)"
+           		   tabindex="10"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Remark)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="11" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Remark)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,100]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerCode)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="12" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerCode)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerName)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="13" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerName)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	    		<td></td> <td></td>
+			<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     <!-- begin details row -->
+    <div class="row">
+        <div class="col-md-12">
+    <!-- details tabs -->
+    <div class="tabs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs bordered">
+								<li class="active"><a data-toggle="tab" href="#tab-purchaseorderdetails"> PurchaseOrderDetails</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+		  		  <div id="tab-purchaseorderdetails" class="tab-pane active">
+                  <div class="panel-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-8  ">
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_append()" class="btn btn-sm btn-default"> <i class="fa fa-plus"></i> 新增 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_removeit()" class="btn btn-sm btn-default"> <i class="fa fa-trash-o"></i> 删除 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_accept()" class="btn btn-sm btn-default"> <i class="fa fa-floppy-o"></i> 保存 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_reload()" class="btn btn-sm btn-default"> <i class="fa fa-refresh"></i> 刷新 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_reject()" class="btn btn-sm btn-default"> <i class="fa fa-window-close-o"></i> 取消 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                <div class="table-responsive">
+				<table id="purchaseorderdetails_datagrid" >
+                </table>
+			
+            </div>
+            </div>
+		  	</div>
+	</div>
+	</div>
+	</div> 
+<!--end details tabs -->
+    </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+@Html.Partial("_purchaseorderdetaildatagridjsview", new WebApp.Models.PurchaseOrderDetail())
+<script type="text/javascript">
+    //load data by foreign key
+    var purchaseorderheadid = 0;
+    function loadCreateData(data) {
+         $("#createwindow").window("open");
+         purchaseorderheadid = 0;
+         $('#purchaseorderhead_form').form('load', data);
+                   var url='/PurchaseOrderDetails/GetDataByPurchaseOrderHeadIdAsync?purchaseorderheadid=' +  purchaseorderheadid;
+          $purchaseorderdetailsdg.datagrid('load',url);
+          $purchaseorderdetailsdg.datagrid('resize');
+             }
+    var $createform = $('#purchaseorderhead_createform');
+    // save item
+    function createitem() { 
+        if ($createform.form('enableValidation').form('validate')) {
+            var purchaseorderhead = $createform.serializeJSON();
+            				  //获取明细表数据
+		    
+						if (!purchaseorderdetails_endEditing())
+								return false;                    
+                        var purchaseorderdetails = $purchaseorderdetailsdg.datagrid("getChanges");
+						purchaseorderhead.PurchaseOrderDetails = purchaseorderdetails ;
+		   		               var token = $('input[name="__RequestVerificationToken"]', $createform).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/PurchaseOrderHeads/CreateAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        purchaseorderhead:purchaseorderhead
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#createwindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#createwindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href");
+                if(target === "#tab-purchaseorderdetails")
+             $purchaseorderdetailsdg.datagrid("resize");
+            });
+ 
+</script>
+
+

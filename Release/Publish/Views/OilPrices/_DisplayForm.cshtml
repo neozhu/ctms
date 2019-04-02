@@ -1,0 +1,82 @@
+﻿﻿@model WebApp.Models.OilPrice
+ <!-- 输出form表单界面 -->
+<form id="oilprice_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Date1)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.Date1)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Date2)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.Date2)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Area) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Area)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Price)
+			    </label>
+            </section>
+              		 
+	    
+			  			  <section class="col col-3">
+              <label class="label"><span class="required">@Html.DisplayNameFor(model => model.IsEnabled)</span> </label>
+              <label class="label">
+                @Html.DisplayFor(model => model.IsEnabled)
+            </label>
+            </section>
+              		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#oilprice_form').form('load', data);
+            
+    }
+
+
+   var oilpriceid=@Model.Id;
+    $(function(){
+        initFormData(oilpriceid);
+    });
+ </script>
+

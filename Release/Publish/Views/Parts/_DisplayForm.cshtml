@@ -1,0 +1,122 @@
+﻿﻿@model WebApp.Models.Part
+ <!-- 输出form表单界面 -->
+<form id="part_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartName)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartName)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Spec) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Spec)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Model)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Unit)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Unit)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Price)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Origin) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Origin)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.UseTo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.UseTo)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SupplierCode)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SupplierName)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#part_form').form('load', data);
+            
+    }
+
+
+   var partid=@Model.Id;
+    $(function(){
+        initFormData(partid);
+    });
+ </script>
+

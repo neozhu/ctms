@@ -1,0 +1,72 @@
+﻿﻿@model WebApp.Models.TMLoc
+ <!-- 输出form表单界面 -->
+<form id="tmloc_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.LocId)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.LocId)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.LocNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.LocNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Description)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.LocType) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.LocType)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Partner) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Partner)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#tmloc_form').form('load', data);
+            
+    }
+
+
+   var tmlocid=@Model.Id;
+    $(function(){
+        initFormData(tmlocid);
+    });
+ </script>
+

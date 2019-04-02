@@ -1,0 +1,493 @@
+﻿﻿@model WebApp.Models.TmOrderException
+<!-- 弹出窗体form表单 -->
+<div id="exdetailswindow" hidden="hidden" class="easyui-window"
+     title="登记异常"
+     data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    iconCls:'icon-more',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1350px;height:520px">
+  <!-- begin toolbar -->
+  <div class="window-body-toolbar">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="btn-group btn-group-sm">
+          <button onclick="addtmorderexception()" class="btn btn-default">
+            <i class="fa fa-floppy-o"></i> @Html.L("Save")
+          </button>
+        </div>
+        <div class="btn-group btn-group-sm" style="display:none">
+          <button onclick="todo()" class="btn btn-default">
+            <i class="fa fa-print"></i> ToDo
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-4 text-align-right">
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn   btn-success" onclick="closeexwindow()">
+            <i class="fa fa-chevron-left"></i>
+            @Html.L("Close")
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end toolbar -->
+  <!-- begin window body -->
+  <div class="widget-body">
+    <form id="tmorderexception_form"
+          class="easyui-form form-horizontal padding-10"
+          method="post"
+          data-options="novalidate:true,
+                            onChange: function(target){
+                              hasChanged = true;
+                             },
+                             onLoadSuccess:function(data){
+                               hasChanged = false;
+                             }">
+      @Html.AntiForgeryToken()
+      <!--Primary Key-->
+      <input type="hidden" id="@Html.IdFor(model => model.Id)"
+             name="@Html.NameFor(model => model.Id)"
+             value="@Html.ValueFor(model => model.Id)" />
+      <fieldset>
+        <div class="form-group-sm">
+          <div class="row" style="margin:0px">
+            <!--FWO号-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%"><span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span></label>
+              <input id="@Html.IdFor(model => model.TRQ_ID)"
+                     name="@Html.NameFor(model => model.TRQ_ID)"
+                     value="@Html.ValueFor(model => model.TRQ_ID)"
+                     tabindex="0" required
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_ID)',
+								 required:true,readonly:true,
+                                 validType: 'length[8,20]'
+                                 " />
+            </div>
+            <!--业务类型-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%"><span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span></label>
+              <input id="@Html.IdFor(model => model.TRQ_TYPE)"
+                     name="@Html.NameFor(model => model.TRQ_TYPE)"
+                     value="@Html.ValueFor(model => model.TRQ_TYPE)"
+                     tabindex="1" required
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TRQ_TYPE)',
+								 required:true,readonly:true,
+                            data:trqtypedatasource
+                                 " />
+            </div>
+            <!--箱号-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.TURES_ID)</label>
+              <input id="@Html.IdFor(model => model.TURES_ID)"
+                     name="@Html.NameFor(model => model.TURES_ID)"
+                     value="@Html.ValueFor(model => model.TURES_ID)"
+                     tabindex="2"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_ID)',
+								 required:false,readonly:true,
+                                 validType: 'length[11,11]'
+                                 " />
+            </div>
+            <!--箱型-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.TURES_TCO)</label>
+              <input id="@Html.IdFor(model => model.TURES_TCO)"
+                     name="@Html.NameFor(model => model.TURES_TCO)"
+                     value="@Html.ValueFor(model => model.TURES_TCO)"
+                     tabindex="3"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TURES_TCO)',
+								                 required:false,
+                                 readonly:true,
+                                 validType: 'length[0,10]'
+                                 " />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+            <!--箱状态-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZXZT)</label>
+              <input id="@Html.IdFor(model => model.ZXZT)"
+                     name="@Html.NameFor(model => model.ZXZT)"
+                     value="@Html.ValueFor(model => model.ZXZT)"
+                     tabindex="4"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZXZT)',
+								 required:false,readonly:true,
+                                data:efdatasource
+                                 " />
+            </div>
+            <!--订单状态-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZZT)</label>
+              <input id="@Html.IdFor(model => model.ZZT)"
+                     name="@Html.NameFor(model => model.ZZT)"
+                     value="@Html.ValueFor(model => model.ZZT)"
+                     tabindex="5"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZZT)',
+								 required:false,readonly:true,
+                              data:tmstatusdatasource
+                                 " />
+            </div>
+            <!--FO号-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.TOR_ID)</label>
+              <input id="@Html.IdFor(model => model.TOR_ID)"
+                     name="@Html.NameFor(model => model.TOR_ID)"
+                     value="@Html.ValueFor(model => model.TOR_ID)"
+                     tabindex="6"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.TOR_ID)',
+								 required:false,readonly:true,
+                                 validType: 'length[8,20]'
+                                 " />
+            </div>
+            <!--FO状态-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZFOZT)</label>
+              <input id="@Html.IdFor(model => model.ZFOZT)"
+                     name="@Html.NameFor(model => model.ZFOZT)"
+                     value="@Html.ValueFor(model => model.ZFOZT)"
+                     tabindex="7"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZFOZT)',
+								 required:false,readonly:true,
+                             data:fostatusdatasource
+                                 " />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+            <!--操作类型-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZCZLX)</label>
+              <input id="@Html.IdFor(model => model.ZCZLX)"
+                     name="@Html.NameFor(model => model.ZCZLX)"
+                     value="@Html.ValueFor(model => model.ZCZLX)"
+                     tabindex="8"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZCZLX)',
+								 required:false,readonly:true,
+                     data:zczlxdatasource
+                                 " />
+            </div>
+            <!--接单日期-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%"><span class="required">@Html.DisplayNameFor(model => model.ZJDRQ)</span></label>
+              <input id="@Html.IdFor(model => model.ZJDRQ)"
+                     name="@Html.NameFor(model => model.ZJDRQ)"
+                     value="@Html.ValueFor(model => model.ZJDRQ)"
+                     tabindex="9" required
+                     class="easyui-datebox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZJDRQ)',
+								 required:true,readonly:true,
+								 formatter:dateformatter" />
+            </div>
+            <!--派车单号-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ShipOrderNo)</label>
+              <input id="@Html.IdFor(model => model.ShipOrderNo)"
+                     name="@Html.NameFor(model => model.ShipOrderNo)"
+                     value="@Html.ValueFor(model => model.ShipOrderNo)"
+                     tabindex="10"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ShipOrderNo)',
+								 required:false,readonly:true,
+                                 validType: 'length[8,20]'
+                                 " />
+            </div>
+            <!--车辆-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.VEHICLERES_ID)</label>
+              <input id="@Html.IdFor(model => model.VEHICLERES_ID)"
+                     name="@Html.NameFor(model => model.VEHICLERES_ID)"
+                     value="@Html.ValueFor(model => model.VEHICLERES_ID)"
+                     tabindex="11"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.VEHICLERES_ID)',
+								 required:false,readonly:true,
+                                 validType: 'length[0,40]'
+                                 " />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+            <!--车板号-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.PLATENUMBER_P)</label>
+              <input id="@Html.IdFor(model => model.PLATENUMBER_P)"
+                     name="@Html.NameFor(model => model.PLATENUMBER_P)"
+                     value="@Html.ValueFor(model => model.PLATENUMBER_P)"
+                     tabindex="12"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.PLATENUMBER_P)',
+								 required:false,readonly:true,
+                                 validType: 'length[0,20]'
+                                 " />
+            </div>
+            <!--司机姓名-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZSJXM)</label>
+              <input id="@Html.IdFor(model => model.ZSJXM)"
+                     name="@Html.NameFor(model => model.ZSJXM)"
+                     value="@Html.ValueFor(model => model.ZSJXM)"
+                     tabindex="13"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZSJXM)',
+								 required:false,readonly:true,
+                                 validType: 'length[0,20]'
+                                 " />
+            </div>
+            <!--调度员-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZDDY)</label>
+              <input id="@Html.IdFor(model => model.ZDDY)"
+                     name="@Html.NameFor(model => model.ZDDY)"
+                     value="@Html.ValueFor(model => model.ZDDY)"
+                     tabindex="14"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZDDY)',
+								 required:false,readonly:true,
+                                 validType: 'length[0,10]'
+                                 " />
+            </div>
+            <!--派车日期-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZPCRQ)</label>
+              <input id="@Html.IdFor(model => model.ZPCRQ)"
+                     name="@Html.NameFor(model => model.ZPCRQ)"
+                     value="@Html.ValueFor(model => model.ZPCRQ)"
+                     tabindex="15"
+                     class="easyui-datebox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZPCRQ)',
+								 required:false,readonly:true,
+								 formatter:dateformatter" />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+            <!--备注-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ZCOMMENT)</label>
+              <input id="@Html.IdFor(model => model.ZCOMMENT)"
+                     name="@Html.NameFor(model => model.ZCOMMENT)"
+                     value="@Html.ValueFor(model => model.ZCOMMENT)"
+                     tabindex="16"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ZCOMMENT)',
+								 required:false,readonly:true,
+                                 validType: 'length[0,256]'
+                                 " />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+
+            <!--异常类型-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ExType)</label>
+              <input id="@Html.IdFor(model => model.ExType)"
+                     name="@Html.NameFor(model => model.ExType)"
+                     value="@Html.ValueFor(model => model.ExType)"
+                     tabindex="18"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExType)',
+								                 required:false,readonly:false,
+                                 data:abtypedatasource
+                                 " />
+            </div>
+            <!--异常分类-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ExClass)</label>
+              <input id="@Html.IdFor(model => model.ExClass)"
+                     name="@Html.NameFor(model => model.ExClass)"
+                     value="@Html.ValueFor(model => model.ExClass)"
+                     tabindex="19"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExClass)',
+								                 required:false,
+                                 data:abclassdatasource
+                                 " />
+            </div>
+            <!--异常发送时间-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%"><span class="required">@Html.DisplayNameFor(model => model.ExDateTime)</span></label>
+              <input id="@Html.IdFor(model => model.ExDateTime)"
+                     name="@Html.NameFor(model => model.ExDateTime)"
+                     value="@Html.ValueFor(model => model.ExDateTime)"
+                     tabindex="20" required
+                     class="easyui-datetimebox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExDateTime)',
+								 required:true,
+								 formatter:datetimeformatter" />
+            </div>
+            <!--处理状态-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%"><span class="required">@Html.DisplayNameFor(model => model.Status)</span></label>
+              <input id="@Html.IdFor(model => model.Status)"
+                     name="@Html.NameFor(model => model.Status)"
+                     value="@Html.ValueFor(model => model.Status)"
+                     tabindex="17"
+                     class="easyui-combobox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.Status)',
+								 required:true,readonly:true,
+                              data:acstatusdatasource
+
+                                 " />
+            </div>
+
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+
+            <!--异常说明-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ExDescription)</label>
+              <input id="@Html.IdFor(model => model.ExDescription)"
+                     name="@Html.NameFor(model => model.ExDescription)"
+                     value="@Html.ValueFor(model => model.ExDescription)"
+                     tabindex="21"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExDescription)',
+								 required:false,
+                                 validType: 'length[0,150]'
+                                 " />
+            </div>
+            <!--处理结果-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ExResult)</label>
+              <input id="@Html.IdFor(model => model.ExResult)"
+                     name="@Html.NameFor(model => model.ExResult)"
+                     value="@Html.ValueFor(model => model.ExResult)"
+                     tabindex="22"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExResult)',
+								                 required:false,
+                                 validType: 'length[0,150]'
+                                 " />
+            </div>
+            <!--处理时间-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.ExDoneDate)</label>
+              <input id="@Html.IdFor(model => model.ExDoneDate)"
+                     name="@Html.NameFor(model => model.ExDoneDate)"
+                     value="@Html.ValueFor(model => model.ExDoneDate)"
+                     tabindex="23"
+                     class="easyui-datebox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.ExDoneDate)',
+								 required:false,
+								 formatter:dateformatter" />
+            </div>
+            <!--处理人-->
+            <div class="col-3 col-md-3 has-feedback" style="padding:0px;margin:0px">
+              <label class="control-label" style="width:30%">@Html.DisplayNameFor(model => model.DoneUser)</label>
+              <input id="@Html.IdFor(model => model.DoneUser)"
+                     name="@Html.NameFor(model => model.DoneUser)"
+                     value="@Html.ValueFor(model => model.DoneUser)"
+                     tabindex="24"
+                     class="easyui-textbox"
+                     style="width:68%"
+                     type="text"
+                     data-options="prompt:'@Html.DisplayNameFor(model => model.DoneUser)',
+								                 required:false,
+                                 validType: 'length[0,20]'
+                                 " />
+            </div>
+          </div>
+          <!--end row-->
+          <div class="row" style="margin:0px">
+            
+          </div>
+          <!--end row-->
+        </div>
+      </fieldset>
+    </form>
+
+    <!--end form表单界面-->
+    <!--========================================================================================-->
+  </div>
+  <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<!-- 弹出编辑对话框 -->
+<script>
+  function closeexwindow() {
+    $('#exdetailswindow').window('close');
+  }
+  function openexwindow(item) {
+    $('#exdetailswindow').window('open');
+    $('#tmorderexception_form').form('load', item);
+  }
+  function addtmorderexception() {
+
+  }
+
+</script>

@@ -1,0 +1,110 @@
+﻿﻿@model WebApp.Models.DriverMgt
+<!-- begin master section -->
+<div  class="main-form">
+<!--begin drivermgt form  -->
+<form id="drivermgt_form" method="post" novalidate="novalidate" >
+@Html.AntiForgeryToken()
+   @Html.HiddenFor(x=>x.Id)
+ <fieldset>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--司机工号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.DriverNo)</span> </label>
+			@Html.EditorFor(x => x.DriverNo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.DriverNo) } })
+      
+         </div>
+
+        <!--司机姓名-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span> </label>
+			@Html.EditorFor(x => x.Driver, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Driver) } })
+      
+         </div>
+
+        <!--联系电话-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.PhoneNumber) </label>
+			@Html.EditorFor(x => x.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.PhoneNumber) } })
+      
+         </div>
+
+        <!--车牌号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.PlateNumber) </label>
+			@Html.EditorFor(x => x.PlateNumber, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.PlateNumber) } })
+      
+         </div>
+
+       <!--开始日期-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.BeginDate)</span> </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.BeginDate, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.BeginDate ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+
+       <!--结束日期-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.EndDate)</span> </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.EndDate, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.EndDate ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--班别-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Shift) </label>
+			@Html.EditorFor(x => x.Shift, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Shift) } })
+      
+         </div>
+
+		<!--状态-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            @Html.EditorFor(x => x.Status, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.Status) } })
+
+        </div>
+
+        <!--上班时间-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.BeginTime)</span> </label>
+			@Html.EditorFor(x => x.BeginTime, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.BeginTime) } })
+      
+         </div>
+
+        <!--下班时间-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.EndTime)</span> </label>
+			@Html.EditorFor(x => x.EndTime, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.EndTime) } })
+      
+         </div>
+
+        <!--备注-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Remark) </label>
+			@Html.EditorFor(x => x.Remark, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Remark) } })
+      
+         </div>
+	    
+   </div>
+  </div>
+</fieldset>
+</form>
+<!-- end drivermgt form  -->
+</div>
+
+<!-- end master section -->
+<!--========================================================================================-->
+

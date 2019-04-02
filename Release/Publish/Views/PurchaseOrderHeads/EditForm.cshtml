@@ -1,0 +1,317 @@
+﻿﻿@model WebApp.Models.PurchaseOrderHead
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin purchaseorderhead form  -->
+<form id="purchaseorderhead_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.OrderNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.PDate)" 
+			       name="@Html.NameFor(model => model.PDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PDate)" 
+				   tabindex="1" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.PDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.RDate)" 
+			       name="@Html.NameFor(model => model.RDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RDate)" 
+				   tabindex="2" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.RDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Proposer) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Proposer)" 
+				   name="@Html.NameFor(model => model.Proposer)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Proposer)" 
+				   value="@Html.ValueFor(model => model.Proposer)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Proposer)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierCode) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.SupplierCode)" 
+				   name="@Html.NameFor(model => model.SupplierCode)" 
+                   placeholder="@Html.DisplayNameFor(model => model.SupplierCode)" 
+				   value="@Html.ValueFor(model => model.SupplierCode)"
+				   tabindex="4" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.SupplierCode)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SupplierName) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.SupplierName)" 
+				   name="@Html.NameFor(model => model.SupplierName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.SupplierName)" 
+				   value="@Html.ValueFor(model => model.SupplierName)"
+				   tabindex="5" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.SupplierName)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Amount)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Status)"
+				   name="@Html.NameFor(model => model.Status)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="7" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Status)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Approver) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Approver)" 
+				   name="@Html.NameFor(model => model.Approver)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Approver)" 
+				   value="@Html.ValueFor(model => model.Approver)"
+				   tabindex="8" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Approver)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ADate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.ADate)" 
+			       name="@Html.NameFor(model => model.ADate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.ADate)" 
+				   tabindex="9" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.ADate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.ADate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.CDate)" 
+			       name="@Html.NameFor(model => model.CDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.CDate)" 
+				   tabindex="10" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.CDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.CDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="11" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="12" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerCode)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="13" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerName)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end purchaseorderhead form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ <!-- begin detail section -->
+<div class="row">
+        <div class="col col-md-12 col-lg-12">
+        <!-- details tabs -->
+        <div class="tabs-container" style="padding-left:19px;padding-right:19px">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#tab-purchaseorderdetails"> PurchaseOrderDetails</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+		 		  <div id="tab-purchaseorderdetails" class="tab-pane active">
+                   <div class="panel-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-8  ">
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_append()" class="btn btn-sm btn-default"> <i class="fa fa-plus"></i> 新增 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_removeit()" class="btn btn-sm btn-default"> <i class="fa fa-trash-o"></i> 删除 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_accept()" class="btn btn-sm btn-default"> <i class="fa fa-floppy-o"></i> 保存 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_reload()" class="btn btn-sm btn-default"> <i class="fa fa-refresh"></i> 刷新 </a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <a href="javascript:purchaseorderdetails_reject()" class="btn btn-sm btn-default"> <i class="fa fa-window-close-o"></i> 取消 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                   </div>
+                <div class="table-responsive">
+				<table id="purchaseorderdetails_datagrid" >
+                </table>
+              
+            </div>
+        </div>
+		  	</div>
+	</div>
+ 
+<!--end details tabs -->
+        </div>
+    </div>
+<!-- end detail section -->
+
+
+@Html.Partial("_purchaseorderdetaildatagridjsview", new WebApp.Models.PurchaseOrderDetail())
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#purchaseorderhead_form').form('load', data);
+          var url='/PurchaseOrderDetails/GetDataByPurchaseOrderHeadIdAsync?purchaseorderheadid='+ id;
+          $purchaseorderdetailsdg.datagrid('load',url);
+          $purchaseorderdetailsdg.datagrid('resize');
+            
+    }
+
+
+   var purchaseorderheadid=@Model.Id;
+    //tab change && datagrid resize
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href"); 
+                if(target=="#tab-purchaseorderdetails")
+             $$purchaseorderdetailsdgdg.datagrid("resize");
+            });
+    $(function(){
+        initFormData(purchaseorderheadid);
+    });
+ </script>
+

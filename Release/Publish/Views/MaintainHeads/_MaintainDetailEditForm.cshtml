@@ -1,0 +1,390 @@
+﻿@model WebApp.Models.MaintainDetail
+<div class="ibox-content">
+ <!--输出form表单界面-->
+ <table class="table table-bordered">
+     <caption>
+     </caption>
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Id)</span>  </td>
+	   <td> 
+			   											<input  disabled  id="@Html.IdFor(model => model.Id)" name="@Html.NameFor(model => model.Id)" tabindex="0" style="width:100%" class="easyui-numberbox" type="text" data-options="prompt:'@Html.DisplayNameFor(model => model.Id)',label:'@Html.DisplayNameFor(model => model.Id):',required:true " />
+								  
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Name)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Name)" 
+							name="@Html.NameFor(model => model.Name)" 
+							value="@Html.ValueFor(model => model.Name)"
+							tabindex="1" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Name)',
+								 label:'@Html.DisplayNameFor(model => model.Name):',
+								 required:true ,validType:'length[0,50]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Trouble)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Trouble)" 
+							name="@Html.NameFor(model => model.Trouble)" 
+							value="@Html.ValueFor(model => model.Trouble)"
+							tabindex="2" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Trouble)',
+								 label:'@Html.DisplayNameFor(model => model.Trouble):',
+								 required:true ,validType:'length[0,500]'" />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.WHour)</span>  </td>
+	   <td> 
+			   
+					                        <input id="@Html.IdFor(model => model.WHour)"
+							name="@Html.NameFor(model => model.WHour)" 
+							value="@Html.ValueFor(model => model.WHour)"
+							tabindex="3" 
+							style="width:100%" 
+							class="easyui-numberbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.WHour)',
+								 label:'@Html.DisplayNameFor(model => model.WHour):',
+                                 precision:2,
+								 required:true " />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.PlateNumber)" 
+							name="@Html.NameFor(model => model.PlateNumber)" 
+							value="@Html.ValueFor(model => model.PlateNumber)"
+							tabindex="4" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber)',
+								 label:'@Html.DisplayNameFor(model => model.PlateNumber):',
+								 required:true ,validType:'length[0,10]'" />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.PlateNumber1)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.PlateNumber1)" 
+							name="@Html.NameFor(model => model.PlateNumber1)" 
+							value="@Html.ValueFor(model => model.PlateNumber1)"
+							tabindex="5" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber1)',
+								 label:'@Html.DisplayNameFor(model => model.PlateNumber1):',
+								 required:true ,validType:'length[0,10]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.PartNo)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.PartNo)" 
+							name="@Html.NameFor(model => model.PartNo)" 
+							value="@Html.ValueFor(model => model.PartNo)"
+							tabindex="6" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.PartNo)',
+								 label:'@Html.DisplayNameFor(model => model.PartNo):',
+								 required:true ,validType:'length[0,30]'" />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.PartName)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.PartName)" 
+							name="@Html.NameFor(model => model.PartName)" 
+							value="@Html.ValueFor(model => model.PartName)"
+							tabindex="7" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.PartName)',
+								 label:'@Html.DisplayNameFor(model => model.PartName):',
+								 required:true ,validType:'length[0,50]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.Spec)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Spec)" 
+							name="@Html.NameFor(model => model.Spec)" 
+							value="@Html.ValueFor(model => model.Spec)"
+							tabindex="8" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Spec)',
+								 label:'@Html.DisplayNameFor(model => model.Spec):',
+								 required:false ,validType:'length[0,30]'" />
+					             
+			 
+	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.Model)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Model)" 
+							name="@Html.NameFor(model => model.Model)" 
+							value="@Html.ValueFor(model => model.Model)"
+							tabindex="9" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Model)',
+								 label:'@Html.DisplayNameFor(model => model.Model):',
+								 required:false ,validType:'length[0,30]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Unit)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Unit)" 
+							name="@Html.NameFor(model => model.Unit)" 
+							value="@Html.ValueFor(model => model.Unit)"
+							tabindex="10" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Unit)',
+								 label:'@Html.DisplayNameFor(model => model.Unit):',
+								 required:true ,validType:'length[0,5]'" />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Price)</span>  </td>
+	   <td> 
+			   
+					                        <input id="@Html.IdFor(model => model.Price)"
+							name="@Html.NameFor(model => model.Price)" 
+							value="@Html.ValueFor(model => model.Price)"
+							tabindex="11" 
+							style="width:100%" 
+							class="easyui-numberbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Price)',
+								 label:'@Html.DisplayNameFor(model => model.Price):',
+                                 precision:2,
+								 required:true " />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Qty)</span>  </td>
+	   <td> 
+			   
+					                        <input id="@Html.IdFor(model => model.Qty)"
+							name="@Html.NameFor(model => model.Qty)" 
+							value="@Html.ValueFor(model => model.Qty)"
+							tabindex="12" 
+							style="width:100%" 
+							class="easyui-numberbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Qty)',
+								 label:'@Html.DisplayNameFor(model => model.Qty):',
+                                 precision:2,
+								 required:true " />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Amount)</span>  </td>
+	   <td> 
+			   
+					                        <input id="@Html.IdFor(model => model.Amount)"
+							name="@Html.NameFor(model => model.Amount)" 
+							value="@Html.ValueFor(model => model.Amount)"
+							tabindex="13" 
+							style="width:100%" 
+							class="easyui-numberbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Amount)',
+								 label:'@Html.DisplayNameFor(model => model.Amount):',
+                                 precision:2,
+								 required:true " />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Solved)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Solved)" 
+							name="@Html.NameFor(model => model.Solved)" 
+							value="@Html.ValueFor(model => model.Solved)"
+							tabindex="14" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Solved)',
+								 label:'@Html.DisplayNameFor(model => model.Solved):',
+								 required:true ,validType:'length[0,500]'" />
+					             
+			 
+	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.Worker)</span>  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.Worker)" 
+							name="@Html.NameFor(model => model.Worker)" 
+							value="@Html.ValueFor(model => model.Worker)"
+							tabindex="15" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            required
+							data-options="prompt:'@Html.DisplayNameFor(model => model.Worker)',
+								 label:'@Html.DisplayNameFor(model => model.Worker):',
+								 required:true ,validType:'length[0,10]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> <span class="required">@Html.DisplayNameFor(model => model.MaintainHeadId)</span>  </td>
+	   <td> 
+			   
+			<input id="@Html.IdFor(model => model.MaintainHeadId)"
+			       name="@Html.NameFor(model => model.MaintainHeadId)"
+				   value="@Html.ValueFor(model => model.MaintainHeadId)"
+                   required
+				   class="easyui-combobox" data-options="
+						prompt:'@Html.DisplayNameFor(model => model.MaintainHeadId)' ,
+						label:'@Html.DisplayNameFor(model => model.MaintainHeadId):' ,
+						required:true ,
+						valueField: 'Id',
+						textField: 'OrderNo' ,
+						url: '/MaintainHeads/GetMaintainHeads' ,
+						onSelect: function(item){
+						//console.log(item);
+				}">
+
+				
+	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.OrderNo)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.OrderNo)" 
+							name="@Html.NameFor(model => model.OrderNo)" 
+							value="@Html.ValueFor(model => model.OrderNo)"
+							tabindex="17" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            
+							data-options="prompt:'@Html.DisplayNameFor(model => model.OrderNo)',
+								 label:'@Html.DisplayNameFor(model => model.OrderNo):',
+								 required:false ,validType:'length[0,12]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.CreatedDate)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.CreatedDate)" 
+							name="@Html.NameFor(model => model.CreatedDate)" 
+							tabindex="18" 
+							style="width:100%" class="easyui-datebox" 
+							type="text" 
+                            
+							value="@Html.ValueFor(model => model.CreatedDate)"
+							data-options="prompt:'@Html.DisplayNameFor(model => model.CreatedDate)',
+								 label:'@Html.DisplayNameFor(model => model.CreatedDate):',
+								 required:false,
+								 formatter:dateformatter" />
+					             
+			 
+	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.CreatedBy)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.CreatedBy)" 
+							name="@Html.NameFor(model => model.CreatedBy)" 
+							value="@Html.ValueFor(model => model.CreatedBy)"
+							tabindex="19" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            
+							data-options="prompt:'@Html.DisplayNameFor(model => model.CreatedBy)',
+								 label:'@Html.DisplayNameFor(model => model.CreatedBy):',
+								 required:false ,validType:'length[0,20]'" />
+					             
+			 
+     <tr>
+     	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.LastModifiedDate)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.LastModifiedDate)" 
+							name="@Html.NameFor(model => model.LastModifiedDate)" 
+							tabindex="20" 
+							style="width:100%" class="easyui-datebox" 
+							type="text" 
+                            
+							value="@Html.ValueFor(model => model.LastModifiedDate)"
+							data-options="prompt:'@Html.DisplayNameFor(model => model.LastModifiedDate)',
+								 label:'@Html.DisplayNameFor(model => model.LastModifiedDate):',
+								 required:false,
+								 formatter:dateformatter" />
+					             
+			 
+	  
+  <td class="control-label"> @Html.DisplayNameFor(model => model.LastModifiedBy)  </td>
+	   <td> 
+			   
+											<input id="@Html.IdFor(model => model.LastModifiedBy)" 
+							name="@Html.NameFor(model => model.LastModifiedBy)" 
+							value="@Html.ValueFor(model => model.LastModifiedBy)"
+							tabindex="21" 
+							style="width:100%" 
+							class="easyui-textbox" 
+							type="text" 
+                            
+							data-options="prompt:'@Html.DisplayNameFor(model => model.LastModifiedBy)',
+								 label:'@Html.DisplayNameFor(model => model.LastModifiedBy):',
+								 required:false ,validType:'length[0,20]'" />
+					             
+			 
+	    </table>
+</div>
+
+ 

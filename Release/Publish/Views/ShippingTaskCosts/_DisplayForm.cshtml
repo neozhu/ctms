@@ -1,0 +1,224 @@
+﻿﻿@model WebApp.Models.ShippingTaskCost
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin shippingtaskcost form  -->
+<form id="shippingtaskcost_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--派车单号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ShipOrderNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ShipOrderNo)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--派车类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZPCLX)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车牌号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCPH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCPH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车板号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCBH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCBH)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--司机姓名-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJXM) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJXM)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机电话-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJDH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJDH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--费用名称-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.FeeName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FeeName)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--金额-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			  			<!--税率-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Tax)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Tax)
+			    </label>
+            </section>
+		 
+	    
+			              <!--记录时间-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TransactionDateTime)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.TransactionDateTime)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--上传用户-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.User) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.User)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--FWO号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TRQ_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TOR_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TOR_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--箱号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TURES_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TURES_ID)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--审核状态-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			              <!--审核意见-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Comment) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Comment)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--审批人-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ApproveUser) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ApproveUser)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--审核时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CheckedDateTime) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.CheckedDateTime)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<!--提取标志-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Flag)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Flag)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			              <!--拍照图片-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PhotoPath) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PhotoPath)
+            </label>
+            </section>
+ 		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end shippingtaskcost form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

@@ -1,0 +1,1331 @@
+﻿﻿@model WebApp.Models.Vehicle
+<!-- 弹出窗体form表单 -->
+ <div id="createwindow" hidden="hidden" class="easyui-window" 
+      title="新增数据" 
+      data-options="modal:true,
+                    closed:true,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:200,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    }
+                    " style="width:1440px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                       <a href="javascript:createitem()" class="btn btn-sm btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </a>
+                </div>
+                <div class="btn-group">
+                       <a href="javascript:printitem()" class="btn btn-sm btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <button type="button" class="btn btn-sm btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="vehicle_createform" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerCode)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="1" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerCode)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerName)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerName)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.OrderNo)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.OrderNo)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.ExternalNo)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ExternalNo)" 
+				   name="@Html.NameFor(model => model.ExternalNo)" 
+				   value="@Html.ValueFor(model => model.ExternalNo)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ExternalNo)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.UsingDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.UsingDate)" 
+			       name="@Html.NameFor(model => model.UsingDate)"
+                   value="@Html.ValueFor(model => model.UsingDate)"
+           		   tabindex="5"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.UsingDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Location1)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Location1)" 
+				   name="@Html.NameFor(model => model.Location1)" 
+				   value="@Html.ValueFor(model => model.Location1)"
+				   tabindex="6" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Location1)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,120]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Location2)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Location2)" 
+				   name="@Html.NameFor(model => model.Location2)" 
+				   value="@Html.ValueFor(model => model.Location2)"
+				   tabindex="7" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Location2)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,120]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.InputUser)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.InputUser)" 
+				   name="@Html.NameFor(model => model.InputUser)" 
+				   value="@Html.ValueFor(model => model.InputUser)"
+				   tabindex="8" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InputUser)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Driver)" 
+				   name="@Html.NameFor(model => model.Driver)" 
+				   value="@Html.ValueFor(model => model.Driver)"
+				   tabindex="9" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Driver)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.DriverPhone)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DriverPhone)" 
+				   name="@Html.NameFor(model => model.DriverPhone)" 
+				   value="@Html.ValueFor(model => model.DriverPhone)"
+				   tabindex="10" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DriverPhone)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumberPosition)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PlateNumberPosition)" 
+				   name="@Html.NameFor(model => model.PlateNumberPosition)" 
+				   value="@Html.ValueFor(model => model.PlateNumberPosition)"
+				   tabindex="11" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumberPosition)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.VehStatus)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehStatus)" 
+				   name="@Html.NameFor(model => model.VehStatus)" 
+				   value="@Html.ValueFor(model => model.VehStatus)"
+				   tabindex="12" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehStatus)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.CarType)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.CarType)" 
+				   name="@Html.NameFor(model => model.CarType)" 
+				   value="@Html.ValueFor(model => model.CarType)"
+				   tabindex="13" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CarType)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehicleType)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehicleType)" 
+				   name="@Html.NameFor(model => model.VehicleType)" 
+				   value="@Html.ValueFor(model => model.VehicleType)"
+				   tabindex="14" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehicleType)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.VehicleProperty)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehicleProperty)" 
+				   name="@Html.NameFor(model => model.VehicleProperty)" 
+				   value="@Html.ValueFor(model => model.VehicleProperty)"
+				   tabindex="15" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehicleProperty)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ECOMark)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ECOMark)" 
+				   name="@Html.NameFor(model => model.ECOMark)" 
+				   value="@Html.ValueFor(model => model.ECOMark)"
+				   tabindex="16" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ECOMark)',
+								 label:'',
+                                 width:200,
+								 required:true " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.StdLoadWeight)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.StdLoadWeight)"
+				   name="@Html.NameFor(model => model.StdLoadWeight)" 
+				   value="@Html.ValueFor(model => model.StdLoadWeight)"
+				   tabindex="17" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.StdLoadWeight)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoadWeight)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LoadWeight)"
+				   name="@Html.NameFor(model => model.LoadWeight)" 
+				   value="@Html.ValueFor(model => model.LoadWeight)"
+				   tabindex="18" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoadWeight)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoadVolume)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.LoadVolume)"
+				   name="@Html.NameFor(model => model.LoadVolume)" 
+				   value="@Html.ValueFor(model => model.LoadVolume)"
+				   tabindex="19" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoadVolume)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.CarriageSize)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.CarriageSize)"
+				   name="@Html.NameFor(model => model.CarriageSize)" 
+				   value="@Html.ValueFor(model => model.CarriageSize)"
+				   tabindex="20" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CarriageSize)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehLongSize)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehLongSize)"
+				   name="@Html.NameFor(model => model.VehLongSize)" 
+				   value="@Html.ValueFor(model => model.VehLongSize)"
+				   tabindex="21" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehLongSize)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehHightSize)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehHightSize)"
+				   name="@Html.NameFor(model => model.VehHightSize)" 
+				   value="@Html.ValueFor(model => model.VehHightSize)"
+				   tabindex="22" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehHightSize)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Axles)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Axles)"
+				   name="@Html.NameFor(model => model.Axles)" 
+				   value="@Html.ValueFor(model => model.Axles)"
+				   tabindex="23" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Axles)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.AssistantDriver)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.AssistantDriver)" 
+				   name="@Html.NameFor(model => model.AssistantDriver)" 
+				   value="@Html.ValueFor(model => model.AssistantDriver)"
+				   tabindex="24" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.AssistantDriver)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.AssistantDriverPhone)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.AssistantDriverPhone)" 
+				   name="@Html.NameFor(model => model.AssistantDriverPhone)" 
+				   value="@Html.ValueFor(model => model.AssistantDriverPhone)"
+				   tabindex="25" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.AssistantDriverPhone)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.CubicleType)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.CubicleType)" 
+				   name="@Html.NameFor(model => model.CubicleType)" 
+				   value="@Html.ValueFor(model => model.CubicleType)"
+				   tabindex="26" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CubicleType)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehUseType)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehUseType)" 
+				   name="@Html.NameFor(model => model.VehUseType)" 
+				   value="@Html.ValueFor(model => model.VehUseType)"
+				   tabindex="27" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehUseType)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.CustomsNo)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.CustomsNo)" 
+				   name="@Html.NameFor(model => model.CustomsNo)" 
+				   value="@Html.ValueFor(model => model.CustomsNo)"
+				   tabindex="28" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CustomsNo)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehUse)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehUse)" 
+				   name="@Html.NameFor(model => model.VehUse)" 
+				   value="@Html.ValueFor(model => model.VehUse)"
+				   tabindex="29" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehUse)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.AVGECON)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.AVGECON)"
+				   name="@Html.NameFor(model => model.AVGECON)" 
+				   value="@Html.ValueFor(model => model.AVGECON)"
+				   tabindex="30" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.AVGECON)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.AVGECONScale)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.AVGECONScale)"
+				   name="@Html.NameFor(model => model.AVGECONScale)" 
+				   value="@Html.ValueFor(model => model.AVGECONScale)"
+				   tabindex="31" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.AVGECONScale)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.RoadKM)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.RoadKM)"
+				   name="@Html.NameFor(model => model.RoadKM)" 
+				   value="@Html.ValueFor(model => model.RoadKM)"
+				   tabindex="32" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RoadKM)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.RoadHours)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.RoadHours)"
+				   name="@Html.NameFor(model => model.RoadHours)" 
+				   value="@Html.ValueFor(model => model.RoadHours)"
+				   tabindex="33" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RoadHours)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.RoadKMScale)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.RoadKMScale)"
+				   name="@Html.NameFor(model => model.RoadKMScale)" 
+				   value="@Html.ValueFor(model => model.RoadKMScale)"
+				   tabindex="34" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RoadKMScale)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.GPSDeviceId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.GPSDeviceId)" 
+				   name="@Html.NameFor(model => model.GPSDeviceId)" 
+				   value="@Html.ValueFor(model => model.GPSDeviceId)"
+				   tabindex="35" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.GPSDeviceId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.Owner)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Owner)" 
+				   name="@Html.NameFor(model => model.Owner)" 
+				   value="@Html.ValueFor(model => model.Owner)"
+				   tabindex="36" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Owner)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.OwnerContactPhone)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.OwnerContactPhone)" 
+				   name="@Html.NameFor(model => model.OwnerContactPhone)" 
+				   value="@Html.ValueFor(model => model.OwnerContactPhone)"
+				   tabindex="37" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.OwnerContactPhone)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Brand)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Brand)" 
+				   name="@Html.NameFor(model => model.Brand)" 
+				   value="@Html.ValueFor(model => model.Brand)"
+				   tabindex="38" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Brand)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.RPM)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.RPM)"
+				   name="@Html.NameFor(model => model.RPM)" 
+				   value="@Html.ValueFor(model => model.RPM)"
+				   tabindex="39" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RPM)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.PurchasedDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.PurchasedDate)" 
+			       name="@Html.NameFor(model => model.PurchasedDate)"
+                   value="@Html.ValueFor(model => model.PurchasedDate)"
+           		   tabindex="40"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PurchasedDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PurchasedAmount)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.PurchasedAmount)"
+				   name="@Html.NameFor(model => model.PurchasedAmount)" 
+				   value="@Html.ValueFor(model => model.PurchasedAmount)"
+				   tabindex="41" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PurchasedAmount)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehLong)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehLong)"
+				   name="@Html.NameFor(model => model.VehLong)" 
+				   value="@Html.ValueFor(model => model.VehLong)"
+				   tabindex="42" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehLong)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehWide)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehWide)"
+				   name="@Html.NameFor(model => model.VehWide)" 
+				   value="@Html.ValueFor(model => model.VehWide)"
+				   tabindex="43" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehWide)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.VehHigh)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehHigh)"
+				   name="@Html.NameFor(model => model.VehHigh)" 
+				   value="@Html.ValueFor(model => model.VehHigh)"
+				   tabindex="44" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehHigh)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VIN)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VIN)" 
+				   name="@Html.NameFor(model => model.VIN)" 
+				   value="@Html.ValueFor(model => model.VIN)"
+				   tabindex="45" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VIN)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.ServiceLife)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ServiceLife)"
+				   name="@Html.NameFor(model => model.ServiceLife)" 
+				   value="@Html.ValueFor(model => model.ServiceLife)"
+				   tabindex="46" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ServiceLife)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.MaintainKM)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.MaintainKM)"
+				   name="@Html.NameFor(model => model.MaintainKM)" 
+				   value="@Html.ValueFor(model => model.MaintainKM)"
+				   tabindex="47" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.MaintainKM)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.MaintainDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.MaintainDate)" 
+			       name="@Html.NameFor(model => model.MaintainDate)"
+                   value="@Html.ValueFor(model => model.MaintainDate)"
+           		   tabindex="48"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.MaintainDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.MaintainMonth)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.MaintainMonth)"
+				   name="@Html.NameFor(model => model.MaintainMonth)" 
+				   value="@Html.ValueFor(model => model.MaintainMonth)"
+				   tabindex="49" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.MaintainMonth)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ExistVehTailBoard)</span></td>
+	   <td> 
+            <div class="smart-form">
+               <label class="checkbox">
+                 <input id="@Html.IdFor(model => model.ExistVehTailBoard)"
+                       name="@Html.NameFor(model => model.ExistVehTailBoard)"
+                       value="true" @(Model.ExistVehTailBoard ? "checked=\"checked\"" : "")
+                       tabindex="6"
+                       type="checkbox" />
+                <i></i>
+              </label>
+            </div>
+              				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehTailBoardBrand)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehTailBoardBrand)" 
+				   name="@Html.NameFor(model => model.VehTailBoardBrand)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardBrand)"
+				   tabindex="51" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehTailBoardBrand)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.VehTailBoardFactory)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehTailBoardFactory)" 
+				   name="@Html.NameFor(model => model.VehTailBoardFactory)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardFactory)"
+				   tabindex="52" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehTailBoardFactory)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehTailBoardLife)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehTailBoardLife)"
+				   name="@Html.NameFor(model => model.VehTailBoardLife)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardLife)"
+				   tabindex="53" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehTailBoardLife)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehTailBoardAmount)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.VehTailBoardAmount)"
+				   name="@Html.NameFor(model => model.VehTailBoardAmount)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardAmount)"
+				   tabindex="54" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehTailBoardAmount)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.VehTailBoardGPSDeviceId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.VehTailBoardGPSDeviceId)" 
+				   name="@Html.NameFor(model => model.VehTailBoardGPSDeviceId)" 
+				   value="@Html.ValueFor(model => model.VehTailBoardGPSDeviceId)"
+				   tabindex="55" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.VehTailBoardGPSDeviceId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseModel)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseModel)" 
+				   name="@Html.NameFor(model => model.DrLicenseModel)" 
+				   value="@Html.ValueFor(model => model.DrLicenseModel)"
+				   tabindex="56" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseModel)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseUseNature)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseUseNature)" 
+				   name="@Html.NameFor(model => model.DrLicenseUseNature)" 
+				   value="@Html.ValueFor(model => model.DrLicenseUseNature)"
+				   tabindex="57" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseUseNature)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseBrand)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseBrand)" 
+				   name="@Html.NameFor(model => model.DrLicenseBrand)" 
+				   value="@Html.ValueFor(model => model.DrLicenseBrand)"
+				   tabindex="58" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseBrand)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseDevId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseDevId)" 
+				   name="@Html.NameFor(model => model.DrLicenseDevId)" 
+				   value="@Html.ValueFor(model => model.DrLicenseDevId)"
+				   tabindex="59" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseDevId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseEngineId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseEngineId)" 
+				   name="@Html.NameFor(model => model.DrLicenseEngineId)" 
+				   value="@Html.ValueFor(model => model.DrLicenseEngineId)"
+				   tabindex="60" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseEngineId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseRegistrationDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.DrLicenseRegistrationDate)" 
+			       name="@Html.NameFor(model => model.DrLicenseRegistrationDate)"
+                   value="@Html.ValueFor(model => model.DrLicenseRegistrationDate)"
+           		   tabindex="61"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseRegistrationDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicensePubDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.DrLicensePubDate)" 
+			       name="@Html.NameFor(model => model.DrLicensePubDate)"
+                   value="@Html.ValueFor(model => model.DrLicensePubDate)"
+           		   tabindex="62"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicensePubDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseRatedUsers)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.DrLicenseRatedUsers)"
+				   name="@Html.NameFor(model => model.DrLicenseRatedUsers)" 
+				   value="@Html.ValueFor(model => model.DrLicenseRatedUsers)"
+				   tabindex="63" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseRatedUsers)',
+								 label:'',
+                                 width:200,
+								 required:false " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseVehWeight)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseVehWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseVehWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehWeight)"
+				   tabindex="64" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseVehWeight)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseDevWeight)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseDevWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseDevWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseDevWeight)"
+				   tabindex="65" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseDevWeight)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseNetWeight)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseNetWeight)"
+				   name="@Html.NameFor(model => model.DrLicenseNetWeight)" 
+				   value="@Html.ValueFor(model => model.DrLicenseNetWeight)"
+				   tabindex="66" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseNetWeight)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseNetVolume)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseNetVolume)"
+				   name="@Html.NameFor(model => model.DrLicenseNetVolume)" 
+				   value="@Html.ValueFor(model => model.DrLicenseNetVolume)"
+				   tabindex="67" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseNetVolume)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseVehWide)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseVehWide)"
+				   name="@Html.NameFor(model => model.DrLicenseVehWide)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehWide)"
+				   tabindex="68" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseVehWide)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseVehHigh)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseVehHigh)"
+				   name="@Html.NameFor(model => model.DrLicenseVehHigh)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehHigh)"
+				   tabindex="69" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseVehHigh)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseVehLong)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.DrLicenseVehLong)"
+				   name="@Html.NameFor(model => model.DrLicenseVehLong)" 
+				   value="@Html.ValueFor(model => model.DrLicenseVehLong)"
+				   tabindex="70" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseVehLong)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.DrLicenseScrapedDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.DrLicenseScrapedDate)" 
+			       name="@Html.NameFor(model => model.DrLicenseScrapedDate)"
+                   value="@Html.ValueFor(model => model.DrLicenseScrapedDate)"
+           		   tabindex="71"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.DrLicenseScrapedDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicenseManageId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LoLicenseManageId)" 
+				   name="@Html.NameFor(model => model.LoLicenseManageId)" 
+				   value="@Html.ValueFor(model => model.LoLicenseManageId)"
+				   tabindex="72" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicenseManageId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicenseId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LoLicenseId)" 
+				   name="@Html.NameFor(model => model.LoLicenseId)" 
+				   value="@Html.ValueFor(model => model.LoLicenseId)"
+				   tabindex="73" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicenseId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicenseBusinessScope)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LoLicenseBusinessScope)" 
+				   name="@Html.NameFor(model => model.LoLicenseBusinessScope)" 
+				   value="@Html.ValueFor(model => model.LoLicenseBusinessScope)"
+				   tabindex="74" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicenseBusinessScope)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicensePubDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.LoLicensePubDate)" 
+			       name="@Html.NameFor(model => model.LoLicensePubDate)"
+                   value="@Html.ValueFor(model => model.LoLicensePubDate)"
+           		   tabindex="75"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicensePubDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicenseValidDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.LoLicenseValidDate)" 
+			       name="@Html.NameFor(model => model.LoLicenseValidDate)"
+                   value="@Html.ValueFor(model => model.LoLicenseValidDate)"
+           		   tabindex="76"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicenseValidDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicenseCheckDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.LoLicenseCheckDate)" 
+			       name="@Html.NameFor(model => model.LoLicenseCheckDate)"
+                   value="@Html.ValueFor(model => model.LoLicenseCheckDate)"
+           		   tabindex="77"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicenseCheckDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LoLicensePlace)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.LoLicensePlace)" 
+				   name="@Html.NameFor(model => model.LoLicensePlace)" 
+				   value="@Html.ValueFor(model => model.LoLicensePlace)"
+				   tabindex="78" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.LoLicensePlace)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsTrafficPolicyId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyId)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyId)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyId)"
+				   tabindex="79" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsTrafficPolicyId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.InsTrafficPolicyCompany)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyCompany)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyCompany)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyCompany)"
+				   tabindex="80" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsTrafficPolicyCompany)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsTrafficPolicyVaildateDate)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.InsTrafficPolicyVaildateDate)" 
+				   name="@Html.NameFor(model => model.InsTrafficPolicyVaildateDate)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyVaildateDate)"
+				   tabindex="81" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsTrafficPolicyVaildateDate)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsTrafficPolicyAmount)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.InsTrafficPolicyAmount)"
+				   name="@Html.NameFor(model => model.InsTrafficPolicyAmount)" 
+				   value="@Html.ValueFor(model => model.InsTrafficPolicyAmount)"
+				   tabindex="82" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsTrafficPolicyAmount)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsThirdPartyId)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.InsThirdPartyId)" 
+				   name="@Html.NameFor(model => model.InsThirdPartyId)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyId)"
+				   tabindex="83" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsThirdPartyId)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.InsThirdPartyVaildateDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.InsThirdPartyVaildateDate)" 
+			       name="@Html.NameFor(model => model.InsThirdPartyVaildateDate)"
+                   value="@Html.ValueFor(model => model.InsThirdPartyVaildateDate)"
+           		   tabindex="84"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsThirdPartyVaildateDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsThirdPartyAmount)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.InsThirdPartyAmount)"
+				   name="@Html.NameFor(model => model.InsThirdPartyAmount)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyAmount)"
+				   tabindex="85" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsThirdPartyAmount)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsAmount)</td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.InsThirdPartyLogisticsAmount)"
+				   name="@Html.NameFor(model => model.InsThirdPartyLogisticsAmount)" 
+				   value="@Html.ValueFor(model => model.InsThirdPartyLogisticsAmount)"
+				   tabindex="86" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsAmount)',
+								 label:'',
+                                 width:200,
+								 required:false  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsVaildateDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.InsThirdPartyLogisticsVaildateDate)" 
+			       name="@Html.NameFor(model => model.InsThirdPartyLogisticsVaildateDate)"
+                   value="@Html.ValueFor(model => model.InsThirdPartyLogisticsVaildateDate)"
+           		   tabindex="87"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.InsThirdPartyLogisticsVaildateDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.Status)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Status)" 
+				   name="@Html.NameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="88" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Status)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	    		<td></td> <td></td>
+			<td></td> <td></td>
+			<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var vehicleid = 0;
+    function loadCreateData(data) {
+         $("#createwindow").window("open");
+         vehicleid = 0;
+         $('#vehicle_form').form('load', data);
+             }
+    var $createform = $('#vehicle_createform');
+    // save item
+    function createitem() { 
+        if ($createform.form('enableValidation').form('validate')) {
+            var vehicle = $createform.serializeJSON();
+                        var token = $('input[name="__RequestVerificationToken"]', $createform).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/Vehicles/CreateAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        vehicle:vehicle
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#createwindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#createwindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

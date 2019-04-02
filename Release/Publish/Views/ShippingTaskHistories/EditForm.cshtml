@@ -1,0 +1,145 @@
+﻿﻿@model WebApp.Models.ShippingTaskHistory
+<!-- begin master section -->
+<div  class="main-form">
+<!--begin shippingtaskhistory form  -->
+<form id="shippingtaskhistory_form" method="post" novalidate="novalidate" >
+@Html.AntiForgeryToken()
+   @Html.HiddenFor(x=>x.Id)
+ <fieldset>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--派车单号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ShipOrderNo)</span> </label>
+			@Html.EditorFor(x => x.ShipOrderNo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ShipOrderNo) } })
+      
+         </div>
+
+        <!--派车类型-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span> </label>
+			@Html.EditorFor(x => x.ZPCLX, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZPCLX) } })
+      
+         </div>
+
+        <!--车牌号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCPH)</span> </label>
+			@Html.EditorFor(x => x.ZCPH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZCPH) } })
+      
+         </div>
+
+        <!--车板号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCBH)</span> </label>
+			@Html.EditorFor(x => x.ZCBH, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZCBH) } })
+      
+         </div>
+
+		<!--派车状态-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZCZT)</span> </label>
+            @Html.EditorFor(x => x.ZCZT, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.ZCZT) } })
+
+        </div>
+
+        <!--备注-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.ZBZ) </label>
+			@Html.EditorFor(x => x.ZBZ, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZBZ) } })
+      
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+        <!--起始地-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span> </label>
+			@Html.EditorFor(x => x.ZQSD, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZQSD) } })
+      
+         </div>
+
+        <!--起始地描述-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span> </label>
+			@Html.EditorFor(x => x.ZQSDMS, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZQSDMS) } })
+      
+         </div>
+
+        <!--目的地-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span> </label>
+			@Html.EditorFor(x => x.ZMDD, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZMDD) } })
+      
+         </div>
+
+        <!--目的地描述-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span> </label>
+			@Html.EditorFor(x => x.ZMDDMS, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.ZMDDMS) } })
+      
+         </div>
+
+        <!--配载订单号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.TmNumbers) </label>
+			@Html.EditorFor(x => x.TmNumbers, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.TmNumbers) } })
+      
+         </div>
+
+        <!--配载集装箱号-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.TmContainers) </label>
+			@Html.EditorFor(x => x.TmContainers, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.TmContainers) } })
+      
+         </div>
+	   </div>
+    </div>
+ <div class="form-group form-group-sm">
+      <div class="row">
+
+       <!--记录时间-->
+       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label"><span class="required">@Html.DisplayNameFor(model => model.TransactionDateTime)</span> </label>
+            <div class="input-group">
+			  @Html.EditorFor(x => x.TransactionDateTime, 
+                         new { htmlAttributes = new { @class = "form-control datepicker hasDatepicker",
+                               placeholder = Html.DisplayNameFor(x => x.TransactionDateTime ) } })
+               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			 </div>
+         </div>
+
+		<!--经度-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Long) </label>
+            @Html.EditorFor(x => x.Long, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.Long) } })
+
+        </div>
+
+		<!--维度-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Lat) </label>
+            @Html.EditorFor(x => x.Lat, new { htmlAttributes = new { @class = "form-control",@type="number", placeholder = Html.DisplayNameFor(x => x.Lat) } })
+
+        </div>
+
+        <!--地图位置-->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <label class="control-label">@Html.DisplayNameFor(model => model.Location) </label>
+			@Html.EditorFor(x => x.Location, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Location) } })
+      
+         </div>
+	    
+   </div>
+  </div>
+</fieldset>
+</form>
+<!-- end shippingtaskhistory form  -->
+</div>
+
+<!-- end master section -->
+<!--========================================================================================-->
+

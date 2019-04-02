@@ -1,0 +1,555 @@
+﻿﻿@model WebApp.Models.TmOrder
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin tmorder form  -->
+<form id="tmorder_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--FWO号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--业务类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_TYPE)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TOR_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TOR_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO状态-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZFOZT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZFOZT)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--订单状态-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZZT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZZT)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--操作类型-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCZLX) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCZLX)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--销售组织-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SALES_ORG_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--销售组织名称-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_NAME)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SALES_ORG_NAME)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--接单日期-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZJDRQ)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJDRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--发货单位-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.SHIPPER_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SHIPPER_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--发货单位名称-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZFHDWMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--收货单位-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CONSIGNEE_ID)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--收货单位名称-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSHDWMS) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSHDWMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--箱号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TURES_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TURES_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--箱型-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TURES_TCO) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TURES_TCO)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--数量-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.QUA_PCS_VAL) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.QUA_PCS_VAL)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			              <!--数量计量单位-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.QUA_PCS_UNI) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.QUA_PCS_UNI)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--箱重-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.GRO_WEI_VAL) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.GRO_WEI_VAL)
+			    </label>
+            </section>
+		 
+	    
+			  			<!--皮重-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.PKGUN_WEI_VAL)
+			    </label>
+            </section>
+		 
+	    
+			              <!--皮重计量单位-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PKGUN_WEI_UNI)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			  			<!--总体积 -->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.GRO_VOL_VAL) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.GRO_VOL_VAL)
+			    </label>
+            </section>
+		 
+	    
+			              <!--总体积计量单位 -->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.GRO_VOL_UNI) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.GRO_VOL_UNI)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--危险品等级 -->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZWXPDJ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZWXPDJ)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--封号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZFH1) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZFH1)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--提货地址-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.SRC_LOC_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.SRC_LOC_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--提货地址描述-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZTHDZMS) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZTHDZMS)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--送货地址-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DES_LOC_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DES_LOC_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--送货地址描述-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSHDZMS) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSHDZMS)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			  			  <!--是否集装箱理货-->
+              <section class="col col-3">
+              <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZSFLH)</span> </label>
+              <label class="label">
+                @Html.DisplayFor(model => model.ZSFLH)
+            </label>
+            </section>
+		 
+	    
+			              <!--提货要求备注栏-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZTHYQBZL) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZTHYQBZL)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--送货要求备注栏-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSHYQBZL) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSHYQBZL)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--装箱要求备注栏-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZZXYQBZL) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZZXYQBZL)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--分拨仓库-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZFBCKHJ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZFBCKHJ)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--海运放箱提单号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSBTDH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSBTDH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--计划做柜日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJHTHRQZGRQ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJHTHRQZGRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--计划排出时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJHPCSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJHPCSJ)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--计划提货日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZFOJHTHRQZGRQS) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZFOJHTHRQZGRQS)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--计划送货日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJHSHRQ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJHSHRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--计划到厂时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZJHDCSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJHDCSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--提空箱日期/时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZTKXRQSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZTKXRQSJ)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--提重箱日期/时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZTZXRQSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZTZXRQSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--实际送货日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJSHRQ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZSJSHRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--实际到厂时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJDCSJ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJDCSJ)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--实际离厂时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJLCSJ) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJLCSJ)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--还空箱日期/时间（仅海运进口整柜）-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZHKXRQSJ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZHKXRQSJ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--还空箱地点（仅海运进口整柜）-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZHKXDD) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZHKXDD)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--执行运输公司-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TSPEXECID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TSPEXECID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车辆-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VEHICLERES_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.VEHICLERES_ID)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--车板号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PLATENUMBER_P) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PLATENUMBER_P)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--白卡号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZBKH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZBKH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机证件号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJXM) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJXM)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机姓名-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJZJH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJZJH)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--司机电话-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJDH) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJDH)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--派车日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZPCRQ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZPCRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCOMMENT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCOMMENT)
+            </label>
+            </section>
+ 		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end tmorder form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

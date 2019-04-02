@@ -1,0 +1,174 @@
+﻿﻿@model WebApp.Models.MaintainDetail
+ <!-- 输出form表单界面 -->
+<form id="maintaindetail_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Trouble)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Trouble)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.WHour)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.WHour)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber1)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber1)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartName)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartName)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Spec) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Spec)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Model)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Unit)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Unit)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Price)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Qty)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Qty)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Solved)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Solved)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Worker)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Worker)
+            </label>
+            </section>
+			  		 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.MaintainHeadId)</span> </label>
+            <label class="label">
+			      @Html.DisplayFor(model => model.MaintainHeadId)
+			</label>
+            </section>
+			 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.OrderNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.OrderNo)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#maintaindetail_form').form('load', data);
+            
+    }
+
+
+   var maintaindetailid=@Model.Id;
+    $(function(){
+        initFormData(maintaindetailid);
+    });
+ </script>
+

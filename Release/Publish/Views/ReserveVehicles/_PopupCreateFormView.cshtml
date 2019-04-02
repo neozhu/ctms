@@ -1,0 +1,220 @@
+﻿﻿@model WebApp.Models.ReserveVehicle
+<!-- 弹出窗体form表单 -->
+ <div id="createwindow" hidden="hidden" class="easyui-window" 
+      title="新增数据" 
+      data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1350;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                 <div class="btn-group btn-group-sm">
+                       <button onclick="saveitem()" class="btn btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </button>
+                </div>
+                <div class="btn-group btn-group-sm">
+                       <button onclick="printitem()" class="btn btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </button>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <div class="btn-group btn-group-sm">
+                <button type="button" class="btn   btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="reservevehicle_createform" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.BeginDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.BeginDate)" 
+			       name="@Html.NameFor(model => model.BeginDate)"
+                   value="@Html.ValueFor(model => model.BeginDate)"
+           		   tabindex="1"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.BeginDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.EndDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.EndDate)" 
+			       name="@Html.NameFor(model => model.EndDate)"
+                   value="@Html.ValueFor(model => model.EndDate)"
+           		   tabindex="2"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.EndDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Status)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Status)" 
+				   name="@Html.NameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Status)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.Dispatcher)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Dispatcher)" 
+				   name="@Html.NameFor(model => model.Dispatcher)" 
+				   value="@Html.ValueFor(model => model.Dispatcher)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Dispatcher)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,20]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Address)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Address)" 
+				   name="@Html.NameFor(model => model.Address)" 
+				   value="@Html.ValueFor(model => model.Address)"
+				   tabindex="5" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Address)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,80]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.ReserveStatus)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.ReserveStatus)"
+				   name="@Html.NameFor(model => model.ReserveStatus)" 
+				   value="@Html.ValueFor(model => model.ReserveStatus)"
+				   tabindex="6" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.ReserveStatus)',
+								 label:'',
+                                 width:200,
+								 required:true " />
+				   </td>
+	   	    		<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var reservevehicleid = 0;
+    function loadCreateData(data) {
+         $("#createwindow").window("open");
+         reservevehicleid = 0;
+         $('#reservevehicle_form').form('load', data);
+             }
+    var $createform = $('#reservevehicle_createform');
+    // save item
+    function createitem() { 
+        if ($createform.form('enableValidation').form('validate')) {
+            var reservevehicle = $createform.serializeJSON();
+                        var token = $('input[name="__RequestVerificationToken"]', $createform).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/ReserveVehicles/CreateAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        reservevehicle:reservevehicle
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#createwindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#createwindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

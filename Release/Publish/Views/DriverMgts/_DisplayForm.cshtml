@@ -1,0 +1,128 @@
+﻿﻿@model WebApp.Models.DriverMgt
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin drivermgt form  -->
+<form id="drivermgt_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--司机工号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.DriverNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DriverNo)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机姓名-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Driver)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--联系电话-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PhoneNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PhoneNumber)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车牌号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PlateNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--开始日期-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BeginDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.BeginDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--结束日期-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.EndDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.EndDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--班别-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Shift) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Shift)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--状态-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+		 
+	   </div>
+	    
+     <div class="row">
+			              <!--上班时间-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BeginTime)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.BeginTime)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--下班时间-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.EndTime)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.EndTime)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+ 		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end drivermgt form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

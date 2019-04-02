@@ -1,0 +1,113 @@
+﻿﻿@model WebApp.Models.TMLoc
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin tmloc form  -->
+<form id="tmloc_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.LocId)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LocId)" 
+				   name="@Html.NameFor(model => model.LocId)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LocId)" 
+				   value="@Html.ValueFor(model => model.LocId)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LocId)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.LocNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LocNo)" 
+				   name="@Html.NameFor(model => model.LocNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LocNo)" 
+				   value="@Html.ValueFor(model => model.LocNo)"
+				   tabindex="1" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LocNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Description)" 
+				   name="@Html.NameFor(model => model.Description)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Description)" 
+				   value="@Html.ValueFor(model => model.Description)"
+				   tabindex="2" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Description)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.LocType) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.LocType)" 
+				   name="@Html.NameFor(model => model.LocType)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LocType)" 
+				   value="@Html.ValueFor(model => model.LocType)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LocType)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Partner) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Partner)" 
+				   name="@Html.NameFor(model => model.Partner)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Partner)" 
+				   value="@Html.ValueFor(model => model.Partner)"
+				   tabindex="4" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Partner)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end tmloc form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#tmloc_form').form('load', data);
+            
+    }
+
+
+   var tmlocid=@Model.Id;
+    $(function(){
+        initFormData(tmlocid);
+    });
+ </script>
+

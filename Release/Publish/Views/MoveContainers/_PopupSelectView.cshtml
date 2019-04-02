@@ -1,0 +1,487 @@
+﻿@model WebApp.Models.TmOrder
+  <style>
+    .easyui-dialog .datagrid .panel-body {
+      margin-bottom: 0 !important;
+      border-left-width: 0 !important;
+      border-right-width: 0 !important;
+    }
+
+  </style>
+<div id="selecttmorderdlg" hidden="hidden" class="easyui-dialog"
+     title="选择集装箱号"  
+     data-options="
+                iconCls: 'icon-more',
+                modal:true,
+                closed:true,
+                cache: false,
+                resizable:true,
+                width:700,
+                height:600,
+                /*toolbar: [], 注解*/
+                onOpen:function(){
+                                   },
+                buttons: [{
+                    text:'确认',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        confirm_selecttmorderdlg();
+                    }
+                },{
+                    text:'取消',
+                    handler:function(){
+                        $('#selecttmorderdlg').dialog('close');
+                    }
+                }]
+            ">
+  <div class="widget-body">
+    
+        <div class="alert alert-warning no-margin fade in">
+          <button class="close" data-dismiss="alert">
+            ×
+          </button>
+          <i class="fa-fw fa fa-info"></i>
+          注意事项:
+        </div>
+        <!--begin datagrid-content -->
+          <div class="table-responsive">
+            <table id="tmorders_datagrid"></table>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+
+    var $tmorderdg = $("#tmorders_datagrid");
+    function open_selecttmorderdlg() {
+
+
+      $('#selecttmorderdlg').dialog('open');
+      initdatagrid();
+    }
+
+    function confirm_selecttmorderdlg() {
+      var row = $tmorderdg.datagrid('getChecked');
+      if (row.length == 0) {
+        $.messager.alert('提示', '请选中需要操作的集装箱记录');
+      } else {
+        $('#ContainerNo').textbox('setValue', row[0].TURES_ID);
+        $('#TURES_TCO').textbox('setValue', row[0].TURES_TCO);
+        $('#ZZT').textbox('setValue', row[0].ZZT);
+        $('#PlateNumber').textbox('setValue', '-');
+        $('#CustomerCode').textbox('setValue', row[0].SHIPPER_ID);
+        $('#CustomerName').textbox('setValue', row[0].ZFHDWMS);
+        $('#FWO').textbox('setValue', row[0].TRQ_ID);
+        $('#TRQ_TYPE').combobox('setValue', row[0].TRQ_TYPE);
+        $('#FOO').textbox('setValue', row[0].TOR_ID);
+        $('#selecttmorderdlg').dialog('close');
+      }
+    }
+
+    function initdatagrid() {
+      $tmorderdg.datagrid({
+        rownumbers: true,
+        checkOnSelect: true,
+        selectOnCheck: false,
+        idField: 'Id',
+        sortName: 'Id',
+        sortOrder: 'desc',
+        remoteFilter: true,
+        singleSelect: true,
+        onSelect: onSelect,
+        url: '/TmOrders/GetDataAsync',
+        method: 'get',
+        onClickCell: onClickCell,
+        pagination: true,
+        striped: true,
+        columns: [[
+          /*开启CheckBox选择功能*/
+          { field: 'ck', checkbox: true },
+
+          {
+            field: 'TURES_ID',
+            title: '@Html.DisplayNameFor(model => model.TURES_ID)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TURES_ID)', required: false, validType: 'length[11,40]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'TURES_TCO',
+            title: '@Html.DisplayNameFor(model => model.TURES_TCO)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TURES_TCO)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'QUA_PCS_VAL',
+            title: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+            width: 100,
+            align: 'right',
+            editor: {
+              type: 'numberbox',
+              options: {
+                prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+                required: false,
+                precision: 2,
+                validType: 'decimal'
+              }
+            },
+            formatter: numberformatter,
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'TRQ_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span>',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_ID)', required: true, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'TRQ_TYPE',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_TYPE)', required: true, validType: 'length[0,4]' }
+            },
+            formatter: trqtypeformatter,
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'TOR_ID',
+            title: '@Html.DisplayNameFor(model => model.TOR_ID)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TOR_ID)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZFOZT',
+            title: '@Html.DisplayNameFor(model => model.ZFOZT)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFOZT)', required: false, validType: 'length[0,2]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZZT',
+            title: '@Html.DisplayNameFor(model => model.ZZT)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZZT)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZCZLX',
+            title: '@Html.DisplayNameFor(model => model.ZCZLX)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZCZLX)', required: false, validType: 'length[0,2]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'SALES_ORG_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.SALES_ORG_ID)</span>',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.SALES_ORG_ID)', required: true, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'SHIPPER_ID',
+            title: '@Html.DisplayNameFor(model => model.SHIPPER_ID)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.SHIPPER_ID)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZFHDWMS',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span>',
+            width: 260,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFHDWMS)', required: true, validType: 'length[0,80]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+
+          {
+            field: 'PKGUN_WEI_VAL',
+            title: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+            width: 100,
+            align: 'right',
+            editor: {
+              type: 'numberbox',
+              options: {
+                prompt: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+                required: false,
+                precision: 2,
+                validType: 'decimal'
+              }
+            },
+            formatter: numberformatter,
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'GRO_VOL_VAL',
+            title: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+            width: 100,
+            align: 'right',
+            editor: {
+              type: 'numberbox',
+              options: {
+                prompt: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+                required: false,
+                precision: 2,
+                validType: 'decimal'
+              }
+            },
+            formatter: numberformatter,
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZWXPDJ',
+            title: '@Html.DisplayNameFor(model => model.ZWXPDJ)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZWXPDJ)', required: false, validType: 'length[0,2]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {
+            field: 'ZFH1',
+            title: '@Html.DisplayNameFor(model => model.ZFH1)',
+            width: 140,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFH1)', required: false, validType: 'length[0,30]' }
+            },
+            sortable: true,
+            resizable: true
+          }
+           
+
+        ]]
+      });
+
+      $tmorderdg.datagrid("enableFilter", [
+        {
+          field: 'TRQ_TYPE',
+          type:'trqtypefilter'
+        },
+      {
+        field: "Id",
+        type: "numberbox",
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: "GRO_WEI_VAL",
+        type: "numberbox",
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: "QUA_PCS_VAL",
+        type: "numberbox",
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: "PKGUN_WEI_VAL",
+        type: "numberbox",
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: "GRO_VOL_VAL",
+        type: "numberbox",
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: "ZKHRQ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZKHRQ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZJHTHRQZGRQ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZJHTHRQZGRQ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZJGRQSJ1",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZJGRQSJ1",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZTKXRQSJ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZTKXRQSJ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZTZXRQSJ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZTZXRQSJ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZHKXRQSJ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZHKXRQSJ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZFOJHTHRQZGRQS",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZFOJHTHRQZGRQS",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZJHSHRQ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZJHSHRQ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZSJSHRQ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZSJSHRQ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+      {
+        field: "ZPCRQ",
+        type: "dateRange",
+        options: {
+          onChange: value => {
+            $tmorderdg.datagrid("addFilterRule", {
+              field: "ZPCRQ",
+              op: "between",
+              value: value
+            });
+
+            $tmorderdg.datagrid("doFilter");
+          }
+        }
+      },
+    ]);
+    }
+
+      </script>
+

@@ -1,0 +1,257 @@
+﻿﻿@model WebApp.Models.Company
+ <!-- 输出form表单界面 -->
+ <div id="detailswindow" hidden="hidden" class="easyui-window" 
+      title="明细数据" 
+      data-options="modal:true,
+                    closed:true,
+                    iconCls:'icon-menu'
+                    " style="width:1440px;height:520px">
+    <!--begin form表单界面-->
+    <form id="company_form" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+ <table class="table table-bordered">
+    <thead>
+                <tr>
+                    <td colspan="8">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" onclick="saveitem()">
+                                <i class="fa fa-floppy-o"></i>
+                                保存
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-pencil-square-o"></i>
+                                操作1
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-pencil-square-o"></i>
+                                操作2
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="refreshitem()">
+                                <i class="fa fa-refresh"></i>
+                                刷新
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="cancelitem()">
+                                <i class="fa fa-window-close-o"></i>
+                                关闭
+                            </button>
+                            
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+	    <tr>
+      	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Id)</span></td>
+	   <td> 
+			   			   			<input id="@Html.IdFor(model => model.Id)" 
+                   name="@Html.NameFor(model => model.Id)" 
+                   value="@Html.ValueFor(model => model.Id)"
+                   tabindex="0" required   
+                   class="easyui-numberbox" type="text" 
+                   data-options="prompt:'Id',
+                                 readonly:true,
+                                 width:200,
+                                 label:'',required:true ,precision:0" />
+			  				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Name)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.Name)" 
+				   name="@Html.NameFor(model => model.Name)" 
+				   value="@Html.ValueFor(model => model.Name)"
+				   tabindex="1" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'名称',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,50]'" />
+			  				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Address)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.Address)" 
+				   name="@Html.NameFor(model => model.Address)" 
+				   value="@Html.ValueFor(model => model.Address)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'地址',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,60]'" />
+			  				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.City)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.City)" 
+				   name="@Html.NameFor(model => model.City)" 
+				   value="@Html.ValueFor(model => model.City)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'城市',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,50]'" />
+			  				   </td>
+	   	   </tr>
+	   	    <tr>
+      	   <td class="control-label">@Html.DisplayNameFor(model => model.Province)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.Province)" 
+				   name="@Html.NameFor(model => model.Province)" 
+				   value="@Html.ValueFor(model => model.Province)"
+				   tabindex="4" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'省份',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,50]'" />
+			  				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.RegisterDate)</span></td>
+	   <td> 
+			   			                  <input id="@Html.IdFor(model => model.RegisterDate)" 
+			       name="@Html.NameFor(model => model.RegisterDate)"
+                   value="@Html.ValueFor(model => model.RegisterDate)"
+           		   tabindex="5"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'注册日期',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+			  				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Employees)</span></td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.Employees)"
+				   name="@Html.NameFor(model => model.Employees)" 
+				   value="@Html.ValueFor(model => model.Employees)"
+				   tabindex="6" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'员工数',
+								 label:'',
+                                width:200,
+								 required:true ,precision:0" />
+             				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.CreatedDate)</td>
+	   <td> 
+			   			                  <input id="@Html.IdFor(model => model.CreatedDate)" 
+			       name="@Html.NameFor(model => model.CreatedDate)"
+                   value="@Html.ValueFor(model => model.CreatedDate)"
+           		   tabindex="7"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'创建时间',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+			  				   </td>
+	   	   </tr>
+	   	    <tr>
+      	   <td class="control-label">@Html.DisplayNameFor(model => model.CreatedBy)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.CreatedBy)" 
+				   name="@Html.NameFor(model => model.CreatedBy)" 
+				   value="@Html.ValueFor(model => model.CreatedBy)"
+				   tabindex="8" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'创建用户',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,20]'" />
+			  				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LastModifiedDate)</td>
+	   <td> 
+			   			                  <input id="@Html.IdFor(model => model.LastModifiedDate)" 
+			       name="@Html.NameFor(model => model.LastModifiedDate)"
+                   value="@Html.ValueFor(model => model.LastModifiedDate)"
+           		   tabindex="9"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'最后更新时间',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+			  				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.LastModifiedBy)</td>
+	   <td> 
+			   			  			<input id="@Html.IdFor(model => model.LastModifiedBy)" 
+				   name="@Html.NameFor(model => model.LastModifiedBy)" 
+				   value="@Html.ValueFor(model => model.LastModifiedBy)"
+				   tabindex="10" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'最后更新用户',
+								 label:'',
+                                width:200,
+								 required:false ,validType:'length[0,20]'" />
+			  				   </td>
+	   	    		<td></td> <td></td>
+		     </tr>
+	    <tfoot>
+        <tr>
+        <tr>
+    </tfoot>
+</table>
+
+</form>
+<!--end form表单界面-->
+<!--========================================================================================-->
+  
+</div>
+<script type="text/javascript">
+    //load data by foreign key
+    var companyid = 0;
+    function loadData(id,data){
+         companyid = id;
+         $('#company_form').form('load', data);
+             }
+    var $editform = $('#company_form');
+    //save item
+    function saveitem() {
+         
+        if ($editform.form('enableValidation').form('validate')) {
+            var company = $editform.serializeJSON();
+            var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+
+            $.ajax({
+                    type: "POST",
+                    url: "/Companies/EditAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        company:company
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(function (response,textStatus, jqXHR) {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！");
+                        $('#detailswindow').window("close");
+                    } else {
+                        $.messager.alert("错误", "保存失败！" + response.err, "error");
+                    }
+                    })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                        $.messager.alert("错误", "保存失败！" + errorThrown,"error");
+                    });
+        }
+    }
+    // cancel
+    function cancelitem() {
+        $('#detailswindow').window('close');
+    }
+    // reload
+    function refreshitem() {
+        $('#detailswindow').window('close');
+    }
+
+ 
+		 
+</script>
+
+

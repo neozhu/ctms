@@ -1,0 +1,264 @@
+﻿﻿@model WebApp.Models.TmOrderException
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin tmorderexception form  -->
+<form id="tmorderexception_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--FWO号-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--业务类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TRQ_TYPE)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--箱号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TURES_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TURES_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--箱型-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TURES_TCO) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TURES_TCO)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--箱状态-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZXZT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZXZT)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--订单状态-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZZT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZZT)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TOR_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TOR_ID)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--FO状态-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZFOZT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZFOZT)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--操作类型-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCZLX) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCZLX)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--接单日期-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ZJDRQ)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZJDRQ)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--派车单号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ShipOrderNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ShipOrderNo)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--车辆-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.VEHICLERES_ID) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.VEHICLERES_ID)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--车板号-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PLATENUMBER_P) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PLATENUMBER_P)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--司机姓名-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZSJXM) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZSJXM)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--调度员-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZDDY) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZDDY)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--派车日期-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZPCRQ) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ZPCRQ)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--备注-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ZCOMMENT) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ZCOMMENT)
+            </label>
+            </section>
+ 		 
+	    
+			  			<!--处理状态-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+		 
+	    
+			              <!--异常类型-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExType) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ExType)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--异常分类-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExClass) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ExClass)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+     <div class="row">
+			              <!--异常发送时间-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ExDateTime)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ExDateTime)
+			    </label>
+            </section>
+			  		 
+	    
+			              <!--异常说明-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExDescription) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ExDescription)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--处理结果-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExResult) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ExResult)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--处理时间-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExDoneDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ExDoneDate)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <!--处理人-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DoneUser) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DoneUser)
+            </label>
+            </section>
+ 		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!-- end tmorderexception form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

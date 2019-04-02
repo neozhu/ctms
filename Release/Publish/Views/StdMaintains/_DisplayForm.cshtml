@@ -1,0 +1,54 @@
+﻿﻿@model WebApp.Models.StdMaintain
+ <!-- 输出form表单界面 -->
+<form id="stdmaintain_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-4">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Hours)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Hours)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-4">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#stdmaintain_form').form('load', data);
+            
+    }
+
+
+   var stdmaintainid=@Model.Id;
+    $(function(){
+        initFormData(stdmaintainid);
+    });
+ </script>
+

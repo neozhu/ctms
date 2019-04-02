@@ -1,0 +1,143 @@
+﻿﻿@model WebApp.Models.TyMount
+ <!-- 输出form表单界面 -->
+<form id="tymount_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PlateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Axles) </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Axles)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Loc)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Loc)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartNo)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Spec)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Spec)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BuyDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.BuyDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.UseDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.UseDate)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM1)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.KM1)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.UnDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.UnDate)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM2)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.KM2)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerCode)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerName)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#tymount_form').form('load', data);
+            
+    }
+
+
+   var tymountid=@Model.Id;
+    $(function(){
+        initFormData(tymountid);
+    });
+ </script>
+

@@ -1,0 +1,12 @@
+﻿<div class="login-info">
+  <span>
+    <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+      <img src="@Auth.GetAvatarsByName(User.Identity.Name)" alt="me" class="online" />
+      <span>@User.Identity.Name.ToLower()</span>
+      <i class="fa fa-angle-down"></i>
+      <input type="hidden" id="hdId" />
+      <input type="hidden" id="hdUserName" />
+      <input type="hidden" id="currentuser" value="@User.Identity.Name" />
+    </a>
+  </span>
+</div>

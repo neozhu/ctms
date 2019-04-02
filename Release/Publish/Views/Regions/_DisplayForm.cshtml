@@ -1,0 +1,59 @@
+﻿﻿@model WebApp.Models.Region
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin region form  -->
+<form id="region_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <!--区域代码-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--上级区域代码-->
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ParentCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ParentCode)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--区域名称-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+ 		 
+	    
+			              <!--类型-->
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Type)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Type)
+            </label>
+            </section>
+ 		 
+	   </div>
+	    
+	    
+</fieldset>
+</form>
+<!-- end region form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+
+

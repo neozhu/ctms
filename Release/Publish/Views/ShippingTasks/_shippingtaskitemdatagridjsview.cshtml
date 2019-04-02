@@ -1,0 +1,703 @@
+﻿@model WebApp.Models.ShippingTaskItem
+
+<script type="text/javascript">
+    //是否开启行内编辑
+    const SUBEDITINLINE = false;
+   //初始化 ShippingTaskItem datagrid
+   var $shippingtaskitemsdg = $('#shippingtaskitems_datagrid');
+   //当前行记录
+   var shippingtaskitem = {};
+   //datagrid CRUD method
+    var shippingtaskitems_editIndex = undefined;
+    //取消
+    function shippingtaskitems_reject() {
+		$shippingtaskitemsdg.datagrid('rejectChanges');
+		shippingtaskitems_editIndex = undefined;
+    }
+    //重新加载数据
+    function shippingtaskitems_reload() {
+			if (shippingtaskitems_endEditing()) {
+				$shippingtaskitemsdg.datagrid('reload');
+			}
+	}
+    //关闭编辑状态
+	function shippingtaskitems_endEditing() {
+			if (shippingtaskitems_editIndex === undefined) {
+                return true; 
+            }
+			if ($shippingtaskitemsdg.datagrid('validateRow', shippingtaskitems_editIndex)) {
+				$shippingtaskitemsdg.datagrid('endEdit', shippingtaskitems_editIndex);
+				shippingtaskitems_editIndex = undefined;
+                return true;
+			} else {
+				const invalidinput = $('input.validatebox-invalid');
+                const fieldnames = invalidinput.map((index, item) => {
+                  return $(item).attr('placeholder') || $(item).attr('id');
+                });
+                $.messager.alert('提示', `${Array.from(fieldnames)} 输入有误.`, 'error');
+				return false;
+			}
+		}
+    //单击列开启编辑功能
+	function shippingtaskitems_onClickCell(index, field) {
+			var _operates = ['_operate1', 'ck'];
+			if (!SUBEDITINLINE || $.inArray(field, _operates) >= 0) {
+				return false;
+			}
+			if (shippingtaskitems_editIndex !== index) {
+				if (shippingtaskitems_endEditing()) {
+					$shippingtaskitemsdg.datagrid('selectRow', index)
+							.datagrid('beginEdit', index);
+                    shippingtaskitems_editIndex = index;
+					var ed = $shippingtaskitemsdg.datagrid('getEditor', { index: index, field: field });
+					if (ed) {
+						($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+					}
+				} else {
+					$shippingtaskitemsdg.datagrid('selectRow', shippingtaskitems_editIndex);
+				}
+			}
+		}
+    //双击弹出编辑当前行对话框
+    function shippingtaskitems_onDblClickRow(index, row) {
+        if (!SUBEDITINLINE) {
+            open_shippingtaskitemdlg(index, row, 'Modified');
+        }
+    }
+    //订阅对话框新增返回事件
+  $(document).on('shippingtaskitem_form.add', (e, index, item) => {
+    if (vaildateitemcount(item) && vaildateitemcontainerNo(item,0)) {
+      $shippingtaskitemsdg.datagrid("insertRow",
+        {
+          index: 0,
+          row: item
+        });
+    }
+  });
+
+    //订阅对话框修改返回事件
+  $(document).on('shippingtaskitem_form.edit', (e, index, item) => {
+    if (vaildateitemcontainerNo(item,1)) {
+      $shippingtaskitemsdg.datagrid('updateRow', {
+        index: index,
+        row: item
+      });
+    }
+  });
+  //验证添加记录不能重复,不能超过2个
+  function vaildateitemcount(item) {
+    const rows = $shippingtaskitemsdg.datagrid('getRows');
+    const length1 = rows.filter(row => row.Drirect == item.Drirect).length;
+    if (length1 >= 2) {
+      $.messager.alert('提示', '去程派车最多不能超过2个集装箱','info');
+      return false;
+    }
+    const length2 = rows.filter(row => row.Drirect == item.Drirect).length;
+    if (length2 >= 2) {
+      $.messager.alert('提示', '回程派车最多不能超过2个集装箱', 'info');
+      return false;
+    }
+    return true;
+  }
+  //验证添加记录不能重复,不能超过2个
+  function vaildateitemcontainerNo(item,count) {
+    const rows = $shippingtaskitemsdg.datagrid('getRows');
+    const length = rows.filter((row) => {
+      if (row.Id == '0') {
+        return row.TURES_ID == item.TURES_ID;
+      } else {
+        return row.Id != item.Id && row.TURES_ID == item.TURES_ID;
+      }
+
+    }).length;
+    if (length > count) {
+      $.messager.alert('提示', `该[${item.TURES_ID}]集装箱号已经存在,不许重复派车`, 'info');
+      return false;
+    } else {
+      return true;
+    }
+  }
+  //新增派车记录是验证状态,如果状态已发运不允许再添加
+  function allowappenditem() {
+    const status = $('#ZCZT').combobox('getValue');
+    if (status == "1") {
+      return true;
+    } else {
+      $.messager.alert('提示', '只有派车状态才能添加派车明细', 'info');
+      return false;
+    }
+  }
+
+  //新增回程记录
+  function shippingtaskitems_append1() {
+    if (!allowappenditem()) {
+      return false;
+    }
+    var item = {
+        Id:'0',
+        Drirect: '1',
+        ZQSD: '',
+        ZQSDMS: '',
+        ZMDD: '',
+        ZMDDMS: '',
+        TURES_ID: '-',
+        TURES_TCO: '20GP',
+        ZZT: '0',
+        TRQ_TYPE: 'OE01',
+        TRQ_ID: '-',
+        ShipOrderNo: shippingtaskid
+      };
+      open_shippingtaskitemdlg(0, item, 'Added');
+    }
+    //新增去程记录
+  function shippingtaskitems_append() {
+    if (!allowappenditem()) {
+      return false;
+    }
+    var item = {
+      Id: '0',
+      Drirect: '0',
+      ZQSD: '',
+      ZQSDMS: '',
+      ZMDD: '',
+      ZMDDMS: '',
+      TURES_ID: '-',
+      TURES_TCO: '20GP',
+      ZZT: '0',
+      TRQ_TYPE: 'OE01',
+      TRQ_ID: '-',
+      ShipOrderNo: shippingtaskid
+    };
+    if (!SUBEDITINLINE) {
+
+      open_shippingtaskitemdlg(0, item, 'Added');
+    } else {
+      if (shippingtaskitems_endEditing()) {
+        //对必填字段进行默认值初始化
+        $shippingtaskitemsdg.datagrid('insertRow',
+          {
+            index: 0,
+            row: item
+          });
+        shippingtaskitems_editIndex = 0;
+        $shippingtaskitemsdg.datagrid('selectRow', shippingtaskitems_editIndex)
+          .datagrid('beginEdit', shippingtaskitems_editIndex);
+      }
+    }
+  }
+  //删除派车记录前需要判断状态,如果已经发运,完成不能删除
+  function allowdeleteitem() {
+    const status = $('#ZCZT').combobox('getValue');
+    if (status == "1") {
+      return true;
+    } else {
+      $.messager.alert('提示', '只有派车状态才能删除','info');
+      return false;
+    }
+  }
+    //删除编辑的行
+  function shippingtaskitems_removeit() {
+    if (!allowdeleteitem()) {
+      return false;
+    }
+    if (shippingtaskitems_editIndex !== undefined) {
+      $shippingtaskitemsdg.datagrid('cancelEdit', shippingtaskitems_editIndex)
+        .datagrid('deleteRow', shippingtaskitems_editIndex);
+      shippingtaskitems_editIndex = undefined;
+    } else {
+      var row = $shippingtaskitemsdg.datagrid('getSelected');
+      if (row) {
+        if (row.Id > 0) {
+          shippingtaskitems_deletechecked();
+        } else {
+          var rowindex = $shippingtaskitemsdg.datagrid('getRowIndex', row);
+          $shippingtaskitemsdg.datagrid('deleteRow', rowindex);
+        }
+      } else {
+        $.messager.alert('提示', '没有选中删除的记录.', 'info');
+      }
+    }
+  }
+    //删除选中的行
+    function shippingtaskitems_deletechecked() {
+            var rows = $shippingtaskitemsdg.datagrid('getChecked');
+            if (rows.length > 0) {
+                var id = rows.filter(item=>item.Id!=null).map(item => {
+                    return item.Id;
+                });
+                $.messager.confirm('确认', `你确定要删除这 <span class='badge bg-color-red'>${id.length}</span> 行记录?`,result => {
+                    if (result) {
+                        $.post('/ShippingTaskItems/DeleteCheckedAsync', { id: id })
+                         .done(response => {
+                            if (response.success) {
+                                $shippingtaskitemsdg.datagrid('reload');
+                            } else {
+                                $.messager.alert('错误', response.err,'error');
+                            }
+                         });
+                    }
+                });  
+            } else {
+                $.messager.alert('提示', '请先选择要删除的记录!','question');
+            }
+      }
+    //提交保存后台数据库
+  function shippingtaskitems_accept() {
+    return new Promise((resolve, reject) => {
+      if (shippingtaskitems_endEditing()) {
+        if ($shippingtaskitemsdg.datagrid('getChanges').length > 0) {
+          const inserted = $shippingtaskitemsdg.datagrid('getChanges', 'inserted').map(item => {
+            item.TrackingState = 1;
+            return item;
+          });
+          const deleted = $shippingtaskitemsdg.datagrid('getChanges', 'deleted').map(item => {
+            item.TrackingState = 3;
+            return item;
+          });
+          const updated = $shippingtaskitemsdg.datagrid('getChanges', 'updated').map(item => {
+            item.TrackingState = 2;
+            return item;
+          });
+          //过滤已删除的重复项
+          const changed = inserted.concat(updated.filter(item => {
+            return !deleted.includes(item);
+          })).concat(deleted);
+          //console.table(changed);
+          if (MODELSTATE === 'Added') {
+            resolve({ success: true, changed });
+          } else {
+            $.post('/ShippingTaskItems/SaveDataAsync', { shippingtaskitems: changed })
+              .done(response => {
+                response.changed = changed;
+                resolve(response);
+                //console.log(response);
+                if (response.success) {
+                  toastr.success('保存成功');
+                  $shippingtaskitemsdg.datagrid('acceptChanges');
+                  $shippingtaskitemsdg.datagrid('reload');
+                } else {
+                  $.messager.alert('错误', response.err, 'error');
+                }
+              })
+              .fail((jqXHR, textStatus, errorThrown) => {
+                //console.log(errorThrown);
+                resolve({ success: false, err: errorThrown });
+                $.messager.alert('异常', errorThrown, 'error');
+              });
+          }
+        } else {
+          if (MODELSTATE === 'Added') {
+            resolve({ success: false });
+            $.messager.alert('提示', '请添加派车明细' , 'info');
+          } else {
+            resolve({ success: true});
+          }
+          
+        }
+      } else {
+        resolve({ success: false });
+      }
+    });
+  }
+
+
+  $(() => {
+    $shippingtaskitemsdg.datagrid({
+      rownumbers: true,
+      idField: 'Id',
+      sortName: 'Drirect',
+      sortOrder: 'asc',
+      remoteFilter: true,
+      singleSelect: false,
+      checkOnSelect: true,
+      selectOnCheck: true,
+      method: 'get',
+      onDblClickRow: shippingtaskitems_onDblClickRow,
+      onClickCell: shippingtaskitems_onClickCell,
+      onSelect: function (index, row) {
+        shippingtaskitem = row;
+      },
+      onEndEdit: function (index, row) {
+
+      },
+      onBeforeEdit: function (index, row) {
+        row.editing = true;
+        $(this).datagrid('refreshRow', index);
+      },
+      onAfterEdit: function (index, row) {
+        row.editing = false;
+        $(this).datagrid('refreshRow', index);
+      },
+      onCancelEdit: function (index, row) {
+        row.editing = false;
+        $(this).datagrid('refreshRow', index);
+      },
+      rowStyler: function (index, row) {
+        if (row.Drirect == 0) {
+          return 'background-color:#1E88E5;color:#fff;font-weight:bold;';
+        } else {
+          return 'background-color:#2E7D32;color:#fff;font-weight:bold;';
+        }
+      },
+      pagination: true,
+      striped: true,
+      columns: [[
+        { field: 'ck', checkbox: true },
+        { field: 'Id', title: '<span class="required">@Html.DisplayNameFor(model => model.Id)</span>', width: 100, sortable: true, resizable: true, hidden: true },
+        {
+          field: 'Drirect',
+          title: '@Html.DisplayNameFor(model => model.Drirect)',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.Drirect)', required: false, validType: 'length[0,5]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: drirectformatter,
+        },
+        {
+          field: 'ZQSD',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span>',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZQSD)', required: true, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true,
+          hidden:true
+        },
+        {
+          field: 'ZQSDMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span>',
+          width: 200,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZQSDMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'ZMDD',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span>',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZMDD)', required: true, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true,
+          hidden: true
+        },
+        {
+          field: 'ZMDDMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span>',
+          width: 200,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZMDDMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'ZFBCKHJ',
+          title: '@Html.DisplayNameFor(model => model.ZFBCKHJ)',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFBCKHJ)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'ZSBTDH',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZSBTDH)</span>',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSBTDH)', required: true, validType: 'length[11,40]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'TURES_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TURES_ID)</span>',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_ID)', required: true, validType: 'length[11,40]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'TURES_TCO',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TURES_TCO)</span>',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TURES_TCO)', required: true, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'ZCZLX',
+          title: '@Html.DisplayNameFor(model => model.ZCZLX)',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCZLX)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: zczlxformatter
+        },
+        {
+          field: 'ZXZT',
+          title: '@Html.DisplayNameFor(model => model.ZXZT)',
+          width: 120,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZXZT)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: efformatter
+        },
+        {
+          field: 'ZZT',
+          title: '@Html.DisplayNameFor(model => model.ZZT)',
+          width: 100,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZZT)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: tmstatusformatter
+        },
+        {
+          field: 'QUA_PCS_VAL',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+          width: 100,
+          align: 'right',
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal'
+            }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: numberformatter
+        },
+        {
+          field: 'QUA_PCS_UNI',
+          title: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)',
+          width: 100,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.QUA_PCS_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {
+          field: 'PKGUN_WEI_VAL',
+          title: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+          width: 100,
+          align: 'right',
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.PKGUN_WEI_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal'
+            }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: numberformatter
+        },
+        {
+          field: 'PKGUN_WEI_UNI',
+          title: '@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)',
+          width: 100,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.PKGUN_WEI_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {
+          field: 'GRO_VOL_VAL',
+          title: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+          width: 100,
+          align: 'right',
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.GRO_VOL_VAL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal'
+            }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: numberformatter
+        },
+        {
+          field: 'GRO_VOL_UNI',
+          title: '@Html.DisplayNameFor(model => model.GRO_VOL_UNI)',
+          width: 100,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.GRO_VOL_UNI)', required: false, validType: 'length[0,3]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: unitformatter
+        },
+        {
+          field: 'ZWXPDJ',
+          title: '@Html.DisplayNameFor(model => model.ZWXPDJ)',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZWXPDJ)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'TRQ_TYPE',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_TYPE)', required: true, validType: 'length[2,4]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: trqtypeformatter
+        },
+        {
+          field: 'TRQ_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span>',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_ID)', required: true, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'TOR_ID',
+          title: '@Html.DisplayNameFor(model => model.TOR_ID)',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.TOR_ID)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'ZFOZT',
+          title: '@Html.DisplayNameFor(model => model.ZFOZT)',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFOZT)', required: false, validType: 'length[0,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: fostatusformatter
+        },
+        {
+          field: 'SHIPPER_ID',
+          title: '@Html.DisplayNameFor(model => model.SHIPPER_ID)',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.SHIPPER_ID)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          hidden:true
+        },
+        {
+          field: 'ZFHDWMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span>',
+          width: 260,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZFHDWMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {
+          field: 'CONSIGNEE_ID',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span>',
+          width: 140,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.CONSIGNEE_ID)', required: true, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true,
+          hidden: true
+        },
+        {
+          field: 'ZSHDWMS',
+          title: '@Html.DisplayNameFor(model => model.ZSHDWMS)',
+          width: 260,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDWMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+      ]]
+    });
+    //初始化 datagrid filter
+    $shippingtaskitemsdg.datagrid('enableFilter', [
+      {
+        field: 'QUA_PCS_VAL',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: 'PKGUN_WEI_VAL',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {
+        field: 'GRO_VOL_VAL',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+    ]);
+  });
+      
+</script>
+
+
+ 

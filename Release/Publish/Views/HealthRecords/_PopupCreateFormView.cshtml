@@ -1,0 +1,230 @@
+﻿﻿@model WebApp.Models.HealthRecord
+<!-- 弹出窗体form表单 -->
+ <div id="createwindow" hidden="hidden" class="easyui-window" 
+      title="新增数据" 
+      data-options="modal:true,
+                    closed:true,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1440px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                 <div class="btn-group btn-group-sm">
+                       <button onclick="saveitem()" class="btn btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </button>
+                </div>
+                <div class="btn-group btn-group-sm">
+                       <button onclick="printitem()" class="btn btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </button>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <div class="btn-group btn-group-sm">
+                <button type="button" class="btn   btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="healthrecord_createform" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Name)" 
+				   name="@Html.NameFor(model => model.Name)" 
+				   value="@Html.ValueFor(model => model.Name)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Name)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Code)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Code)" 
+				   name="@Html.NameFor(model => model.Code)" 
+				   value="@Html.ValueFor(model => model.Code)"
+				   tabindex="1" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Code)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Hospital)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Hospital)" 
+				   name="@Html.NameFor(model => model.Hospital)" 
+				   value="@Html.ValueFor(model => model.Hospital)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Hospital)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Content)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Content)" 
+				   name="@Html.NameFor(model => model.Content)" 
+				   value="@Html.ValueFor(model => model.Content)"
+				   tabindex="3" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Content)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.SDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.SDate)" 
+			       name="@Html.NameFor(model => model.SDate)"
+                   value="@Html.ValueFor(model => model.SDate)"
+           		   tabindex="4"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.NDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.NDate)" 
+			       name="@Html.NameFor(model => model.NDate)"
+                   value="@Html.ValueFor(model => model.NDate)"
+           		   tabindex="5"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.NDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="6" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Amount)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Remark)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="7" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Remark)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,100]'" />
+				   </td>
+	   	   </tr>
+	   	           </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var healthrecordid = 0;
+    function loadCreateData(data) {
+         $("#createwindow").window("open");
+         healthrecordid = 0;
+         $('#healthrecord_form').form('load', data);
+             }
+    var $createform = $('#healthrecord_createform');
+    // save item
+    function createitem() { 
+        if ($createform.form('enableValidation').form('validate')) {
+            var healthrecord = $createform.serializeJSON();
+                        var token = $('input[name="__RequestVerificationToken"]', $createform).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/HealthRecords/CreateAsync",
+                    data: {
+                        __RequestVerificationToken: token,
+                        healthrecord:healthrecord
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#createwindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#createwindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

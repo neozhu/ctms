@@ -1,0 +1,243 @@
+﻿﻿@model WebApp.Models.TyMount
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin tymount form  -->
+<form id="tymount_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Axles) </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Axles)"
+				   name="@Html.NameFor(model => model.Axles)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Axles)" 
+				   value="@Html.ValueFor(model => model.Axles)"
+				   tabindex="1" 
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Axles)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Loc)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Loc)" 
+				   name="@Html.NameFor(model => model.Loc)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Loc)" 
+				   value="@Html.ValueFor(model => model.Loc)"
+				   tabindex="2" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Loc)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartNo)" 
+				   name="@Html.NameFor(model => model.PartNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartNo)" 
+				   value="@Html.ValueFor(model => model.PartNo)"
+				   tabindex="3" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartNo)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Spec)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Spec)" 
+				   name="@Html.NameFor(model => model.Spec)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Spec)" 
+				   value="@Html.ValueFor(model => model.Spec)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Spec)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.BuyDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.BuyDate)" 
+			       name="@Html.NameFor(model => model.BuyDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.BuyDate)" 
+				   tabindex="5" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.BuyDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.BuyDate)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.UseDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.UseDate)" 
+			       name="@Html.NameFor(model => model.UseDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.UseDate)" 
+				   tabindex="6" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.UseDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.UseDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM1)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.KM1)"
+				   name="@Html.NameFor(model => model.KM1)" 
+                   placeholder="@Html.DisplayNameFor(model => model.KM1)" 
+				   value="@Html.ValueFor(model => model.KM1)"
+				   tabindex="7" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.KM1)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.UnDate) </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.UnDate)" 
+			       name="@Html.NameFor(model => model.UnDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.UnDate)" 
+				   tabindex="8" 
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.UnDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.UnDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM2)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.KM2)"
+				   name="@Html.NameFor(model => model.KM2)" 
+                   placeholder="@Html.DisplayNameFor(model => model.KM2)" 
+				   value="@Html.ValueFor(model => model.KM2)"
+				   tabindex="9" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.KM2)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="10" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="11" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerCode)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="12" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerName)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end tymount form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#tymount_form').form('load', data);
+            
+    }
+
+
+   var tymountid=@Model.Id;
+    $(function(){
+        initFormData(tymountid);
+    });
+ </script>
+

@@ -1,0 +1,43 @@
+﻿﻿@model WebApp.Models.ReserveVehicle
+<!-- 弹出窗体form表单 -->
+ <div id="mapwindow" hidden="hidden" class="easyui-window" 
+      title="GPS跟踪" 
+      data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:1350px;height:520px">
+    
+   <div id="container" style="width: 100%;height: 100%;"></div>
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script src="https://webapi.amap.com/maps?v=1.4.12&key=您申请的key值"></script>
+<script type="text/javascript">
+    //load data by foreign key
+   
+  function open_mapwindow() {
+    $('#mapwindow').window('open');
+    var map = new AMap.Map('container', {
+      resizeEnable: true, //是否监控地图容器尺寸变化
+      zoom: 6, //初始化地图层级
+      center: [120.980737, 31.385598] //初始化地图中心点
+    });
+
+  }
+</script>
+
+

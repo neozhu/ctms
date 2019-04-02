@@ -1,0 +1,293 @@
+﻿﻿@model WebApp.Models.MaintainDetail
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin maintaindetail form  -->
+<form id="maintaindetail_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Name)" 
+				   name="@Html.NameFor(model => model.Name)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Name)" 
+				   value="@Html.ValueFor(model => model.Name)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Name)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Trouble)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Trouble)" 
+				   name="@Html.NameFor(model => model.Trouble)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Trouble)" 
+				   value="@Html.ValueFor(model => model.Trouble)"
+				   tabindex="1" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Trouble)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.WHour)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.WHour)"
+				   name="@Html.NameFor(model => model.WHour)" 
+                   placeholder="@Html.DisplayNameFor(model => model.WHour)" 
+				   value="@Html.ValueFor(model => model.WHour)"
+				   tabindex="2" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.WHour)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="3" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber1)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber1)" 
+				   name="@Html.NameFor(model => model.PlateNumber1)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber1)" 
+				   value="@Html.ValueFor(model => model.PlateNumber1)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber1)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartNo)" 
+				   name="@Html.NameFor(model => model.PartNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartNo)" 
+				   value="@Html.ValueFor(model => model.PartNo)"
+				   tabindex="5" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartName)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartName)" 
+				   name="@Html.NameFor(model => model.PartName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartName)" 
+				   value="@Html.ValueFor(model => model.PartName)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartName)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Spec) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Spec)" 
+				   name="@Html.NameFor(model => model.Spec)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Spec)" 
+				   value="@Html.ValueFor(model => model.Spec)"
+				   tabindex="7" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Spec)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Model)" 
+				   name="@Html.NameFor(model => model.Model)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Model)" 
+				   value="@Html.ValueFor(model => model.Model)"
+				   tabindex="8" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Model)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Unit)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Unit)" 
+				   name="@Html.NameFor(model => model.Unit)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Unit)" 
+				   value="@Html.ValueFor(model => model.Unit)"
+				   tabindex="9" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Unit)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Price)"
+				   name="@Html.NameFor(model => model.Price)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Price)" 
+				   value="@Html.ValueFor(model => model.Price)"
+				   tabindex="10" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Price)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Qty)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Qty)"
+				   name="@Html.NameFor(model => model.Qty)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Qty)" 
+				   value="@Html.ValueFor(model => model.Qty)"
+				   tabindex="11" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Qty)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="12" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Amount)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Solved)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Solved)" 
+				   name="@Html.NameFor(model => model.Solved)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Solved)" 
+				   value="@Html.ValueFor(model => model.Solved)"
+				   tabindex="13" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Solved)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Worker)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Worker)" 
+				   name="@Html.NameFor(model => model.Worker)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Worker)" 
+				   value="@Html.ValueFor(model => model.Worker)"
+				   tabindex="14" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Worker)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.MaintainHeadId)</span> </label>
+            <label class="input">
+			      @Html.DropDownListFor(model => model.MaintainHeadId, ViewBag.MaintainHeadId as List<SelectListItem>, htmlAttributes: new { @class = "select2" }) 
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.MaintainHeadId)</b>
+			    </label>
+            </section>
+	 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.OrderNo) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="16" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.OrderNo)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end maintaindetail form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#maintaindetail_form').form('load', data);
+            
+    }
+
+
+   var maintaindetailid=@Model.Id;
+    $(function(){
+        initFormData(maintaindetailid);
+    });
+ </script>
+

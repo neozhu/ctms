@@ -1,0 +1,217 @@
+﻿﻿@model WebApp.Models.MaintainHead
+ <!-- 输出form表单界面 -->
+<form id="maintainhead_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.OrderNo)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Type)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Type)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Proposer) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Proposer)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.FactoryCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FactoryCode)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.FactoryName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.FactoryName)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Budget)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Budget)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.WHour)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.WHour)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PDate)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.PDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.CDate)
+			    </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Status)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Description)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ConfirmUser) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ConfirmUser)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerCode)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerName)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+    <div class="row">
+        <section class="col col-md-12 col-lg-12">
+    <!-- details tabs -->
+    <div class="tabs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#tab-maintaindetails"> MaintainDetails</a></li>
+				   
+		 </ul>
+		 <!-- Tab panes -->
+         <div class="tab-content">
+		 		  <div id="tab-maintaindetails" class="tab-pane active">
+            <div class="panel-body">
+                <div class="table-responsive">
+				<table id="maintaindetails_datagrid" >
+                </table>
+				<div id="maintaindetails_toolbar" style="height:auto">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'fa fa-refresh fa-fw',plain:true" onclick="maintaindetails_reload()">刷新</a>
+                </div>
+                </div>
+            </div>
+        </div>
+		  	</div>
+	</div>
+ 
+<!--end details tabs -->
+        </section>
+    </div>
+
+
+
+@Html.Partial("_maintaindetaildatagridjsview", new WebApp.Models.MaintainDetail())
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#maintainhead_form').form('load', data);
+          var url='/MaintainDetails/GetDataByMaintainHeadIdAsync?maintainheadid='+ id;
+          $maintaindetailsdg.datagrid('load',url);
+          $maintaindetailsdg.datagrid('resize');
+            
+    }
+
+
+   var maintainheadid=@Model.Id;
+    //tab change && datagrid resize
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href"); 
+                if(target=="#tab-maintaindetails")
+             $$maintaindetailsdgdg.datagrid("resize");
+            });
+    $(function(){
+        initFormData(maintainheadid);
+    });
+ </script>
+

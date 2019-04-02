@@ -1,0 +1,282 @@
+﻿﻿@model WebApp.Models.TyRefurbishment
+<!-- 弹出窗体form表单 -->
+ <div id="detailswindow" hidden="hidden" class="easyui-window" 
+      title="明细数据" 
+      data-options="modal:true,
+                    closed:true,
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:200,
+                    openAnimation:'slide',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    }
+                    " style="width:1440px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                       <a href="javascript:saveitem()" class="btn btn-sm btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </a>
+                </div>
+                <div class="btn-group">
+                       <a href="javascript:printitem()" class="btn btn-sm btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <button type="button" class="btn btn-sm btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="tyrefurbishment_form" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+   <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartNo)" 
+				   name="@Html.NameFor(model => model.PartNo)" 
+				   value="@Html.ValueFor(model => model.PartNo)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartNo)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Spec)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Spec)" 
+				   name="@Html.NameFor(model => model.Spec)" 
+				   value="@Html.ValueFor(model => model.Spec)"
+				   tabindex="1" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Spec)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span></td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.RDate)" 
+			       name="@Html.NameFor(model => model.RDate)"
+                   value="@Html.ValueFor(model => model.RDate)"
+           		   tabindex="2"  required
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.RDate)',
+								 label:'',
+                                 width:200,
+								 required:true,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Status)"
+				   name="@Html.NameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="3" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Status)',
+								 label:'',
+                                 width:200,
+								 required:true " />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber1)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PlateNumber1)" 
+				   name="@Html.NameFor(model => model.PlateNumber1)" 
+				   value="@Html.ValueFor(model => model.PlateNumber1)"
+				   tabindex="4" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber1)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="5" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Amount)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.SupplierCode)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SupplierCode)" 
+				   name="@Html.NameFor(model => model.SupplierCode)" 
+				   value="@Html.ValueFor(model => model.SupplierCode)"
+				   tabindex="6" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SupplierCode)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.SupplierName)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.SupplierName)" 
+				   name="@Html.NameFor(model => model.SupplierName)" 
+				   value="@Html.ValueFor(model => model.SupplierName)"
+				   tabindex="7" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.SupplierName)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label">@Html.DisplayNameFor(model => model.EDate)</td>
+	   <td> 
+                <input id="@Html.IdFor(model => model.EDate)" 
+			       name="@Html.NameFor(model => model.EDate)"
+                   value="@Html.ValueFor(model => model.EDate)"
+           		   tabindex="8"  
+				   class="easyui-datebox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.EDate)',
+								 label:'',
+                                 width:200,
+								 required:false,
+								 formatter:dateformatter" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PlateNumber2)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PlateNumber2)" 
+				   name="@Html.NameFor(model => model.PlateNumber2)" 
+				   value="@Html.ValueFor(model => model.PlateNumber2)"
+				   tabindex="9" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PlateNumber2)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerCode)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="10" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerCode)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,10]'" />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.PartnerName)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="11" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.PartnerName)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,50]'" />
+				   </td>
+	   	   </tr>
+	   	           </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var tyrefurbishmentid = 0;
+    function loadData(id,data) {
+         $("#detailswindow").window("open");
+         tyrefurbishmentid = id;
+         $('#tyrefurbishment_form').form('load', data);
+             }
+    var $editform = $('#tyrefurbishment_form');
+    // save item
+    function saveitem() { 
+        if ($editform.form('enableValidation').form('validate')) {
+            var tyrefurbishment = $editform.serializeJSON();
+                        var url = '/TyRefurbishments/EditAsync';
+            if (tyrefurbishment.Id <= 0 || tyrefurbishment.Id === null || tyrefurbishment.Id === '') {
+                url = '/TyRefurbishments/CreateAsync';
+            }
+            var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+            $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        __RequestVerificationToken: token,
+                        tyrefurbishment:tyrefurbishment
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#detailswindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#detailswindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

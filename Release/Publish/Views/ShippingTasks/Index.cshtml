@@ -1,0 +1,1396 @@
+﻿@model WebApp.Models.ShippingTask
+@{
+    ViewBag.Title = "长程派车";
+}
+<!-- MAIN CONTENT -->
+<div id="content">
+  <!-- quick navigation bar -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+      <h1 class="page-title txt-color-blueDark">
+        <i class="fa fa-table fa-fw "></i>
+        调度管理
+        <span>
+          >
+          长程派车
+        </span>
+      </h1>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+    </div>
+  </div>
+  <!-- end quick navigation bar -->
+  <!-- widget grid -->
+  <section id="widget-grid" class="">
+    <!-- row -->
+    <div class="row">
+      <!-- NEW WIDGET START -->
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+          <!-- widget options:
+          usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+          data-widget-colorbutton="false"
+          data-widget-editbutton="false"
+          data-widget-togglebutton="false"
+          data-widget-deletebutton="false"
+          data-widget-fullscreenbutton="false"
+          data-widget-custombutton="false"
+          data-widget-collapsed="true"
+          data-widget-sortable="false"
+          -->
+          <header>
+            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <h2>长程派车</h2>
+          </header>
+
+          <!-- widget div-->
+          <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+              <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body no-padding">
+              <div class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+              </div>
+              <div class="widget-body-toolbar">
+                <div class="row">
+                  <div class="col-sm-8  ">
+                    <!-- 开启授权控制请参考 @@if (Html.IsAuthorize("Create") -->
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="append()" class="btn btn-default"> <i class="fa fa-plus"></i> @Html.L("Add") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="printshippingtask()" class="btn btn-default"> <i class="fa fa-print"></i> 打印派车单 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="checkeddocompleted()" class="btn btn-default btn-success"> <i class="fa fa-bookmark-o"></i> 运输完成 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="removeit()" class="btn btn-default"> <i class="fa fa-trash-o"></i> @Html.L("Delete") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="accept()" class="btn btn-default"> <i class="fa fa-floppy-o"></i> @Html.L("Save") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="reload()" class="btn btn-default"> <i class="fa fa-refresh"></i> @Html.L("Refresh") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="reject()" class="btn btn-default"> <i class="fa fa-ban"></i> @Html.L("Cancel") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm hidden-xs">
+                      <button type="button" onclick="importexcel()" class="btn btn-default"><i class="fa fa-cloud-upload"></i> @Html.L("Import") </button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="javascript:importexcel()"><i class="fa fa-file-excel-o"></i>  @Html.L("Upload") </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:downloadtemplate()"><i class="fa fa-download"></i> @Html.L("Download") </a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group btn-group-sm hidden-xs hidden-md">
+                      <button onclick="exportexcel()" class="btn btn-default"> <i class="fa fa-file-excel-o"></i> @Html.L("Export") </button>
+                    </div>
+                    <div class="btn-group btn-group-sm visible-lg-inline-block">
+                      <button onclick="print()" class="btn btn-default"> <i class="fa fa-print"></i> 重打派车单 </button>
+                    </div>
+                    <div class="btn-group btn-group-sm visible-lg-inline-block">
+                      <button onclick="dohelp()" class="btn btn-default"> <i class="fa fa-question-circle-o"></i> @Html.L("Help") </button>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 text-align-right visible-lg-inline-block">
+                    <div class="btn-group btn-group-sm">
+                      <button onclick="window.history.back()" class="btn btn-sm btn-success"> <i class="fa fa-chevron-left"></i> @Html.L("GoBack") </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="alert alert-warning no-margin fade in">
+                <button class="close" data-dismiss="alert">
+                  ×
+                </button>
+                <i class="fa-fw fa fa-info"></i>
+                注意事项:
+              </div>
+              <!--begin datagrid-content -->
+              <div class="table-responsive">
+                <table id="shippingtasks_datagrid"></table>
+              </div>
+              <!--end datagrid-content -->
+            </div>
+            <!-- end widget content -->
+          </div>
+          <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+      </article>
+      <!-- WIDGET END -->
+    </div>
+    <!-- end row -->
+  </section>
+  <!-- end widget grid -->
+  <!-- file upload partial view -->
+  @{Html.RenderPartial("_ImportWindow", new ViewDataDictionary { { "EntityName", "ShippingTask" } });}
+    <!-- end file upload partial view -->
+    <!-- detail popup window -->
+    @{Html.RenderPartial("_PopupDetailFormView", new WebApp.Models.ShippingTask());}
+    @{Html.RenderPartial("_popupSelectTmOrderWindow", new WebApp.Models.TmOrder());}
+    @{Html.RenderPartial("_popupShippingCostView", new WebApp.Models.ShippingTaskCost());}
+    @{Html.RenderPartial("_popupExWindow", new WebApp.Models.TmOrderException());}
+
+
+  @*@Html.Partial("_ImportWindow", new ViewDataDictionary { { "EntityName", "ShippingTask" } })
+  <!-- end file upload partial view -->
+  <!-- Partial popup window -->
+  @Html.Partial("_PopupDetailFormView", new WebApp.Models.ShippingTask())
+  @Html.Partial("_popupSelectTmOrderWindow", new WebApp.Models.TmOrder())
+  @Html.Partial("_popupShippingCostView", new WebApp.Models.ShippingTaskCost())
+  @Html.Partial("_popupExWindow", new WebApp.Models.TmOrderException())*@
+  <!-- end detail popup window -->
+
+</div>
+<!-- END MAIN CONTENT -->
+<link href="~/Scripts/plugin/print/print.min.css" rel="stylesheet" />
+@section Scripts {
+  <script src="~/Scripts/plugin/jquery.serializfiles/jquery.form.serializefiles.js"></script>
+  <script src="~/Scripts/plugin/print/print.min.js"></script>
+  <script type="text/javascript">
+
+      //是否启用弹窗口模式新增编辑数据
+      const POPUPMODE = true;
+      //是否强制从后台取值
+      const REQUIRBACKEND = false;
+      //是否开启行内编辑
+      const EDITINLINE = false;
+      //上传导入参数设定
+      const entityname = "ShippingTask";
+      var shippingtask = {};
+
+      //下载Excel导入模板
+      function downloadtemplate() {
+          //默认模板路径存放位置
+          const url = '/FileUpload/Download?file=/ExcelTemplate/ShippingTask.xlsx';
+          $.fileDownload(url)
+           .done(() => {
+                    //console.log('file download a success!');
+                    toastr.success('模板下载完成!');
+                })
+           .fail(() => {
+               $.messager.alert('失败','没有下载到导入模板[ShippingTask.xlsx]文件!','error');
+            });
+       }
+       //打印
+  function print() {
+    var rows = $dg.datagrid('getChecked');
+    if (rows.length > 0) {
+      printJS('/ShippingTasks/printview/' + rows[0].ShipOrderNo);
+    } else {
+      $.messager.alert('提示', '请选择需要打印的记录', 'info');
+    }
+
+            //$dg.datagrid('print', 'DataGrid');
+       }
+        //打开Excel上传窗口
+	   function importexcel() {
+		    $('#importwindow').window('open');
+	   }
+	   //执行导出下载Excel
+	   function exportexcel() {
+				const filterRules = JSON.stringify($dg.datagrid('options').filterRules);
+				//console.log(filterRules);
+				$.messager.progress({ title: '正在执行导出!' });
+				let formData = new FormData();
+				formData.append('filterRules', filterRules);
+				formData.append('sort', 'ShipOrderNo');
+				formData.append('order', 'asc');
+				$.postDownload('/ShippingTasks/ExportExcel', formData).then(res => {
+                    $.messager.progress('close');
+                    toastr.success('导出成功!');
+                }).catch(err => {
+                    //console.log(err);
+                    $.messager.progress('close');
+                    $.messager.alert('失败', err.statusText, 'error');
+                });
+
+  }
+  //勾选记录运输完成
+  function checkeddocompleted() {
+    const rows = $dg.datagrid('getChecked');
+    if (rows.length > 0) {
+      rows.forEach(item => {
+        const id = item.ShipOrderNo;
+        if (item.ZCZT == "2") {
+          $.get('/ShippingTasks/DoCompleted?id=' + id).done(res => {
+            $.messager.progress('close');
+            if (res.success) {
+              closewindow();
+              toastr.success(`[${id}]运输完成`);
+              $dg.datagrid('reload');
+            } else {
+              toastr.error(`[${id}]异常${res.err}`);
+            }
+          });
+        }
+        else {
+          toastr.warning(`[${id}]不满足条件`);
+        }
+
+      });
+
+    } else {
+      $.messager.alert('提示', '请选需要操作的记录', 'info');
+    }
+  }
+        //显示帮助信息
+        function dohelp() {
+            toastr.info('有问题请联系管理员 <br><i class="fa fa-envelope-o" aria-hidden="true"></i> : demo@admin.com','帮助');
+        }
+       var editIndex = undefined;
+       //重新加载数据
+	   function reload() {
+			if (endEditing()) {
+			    $dg.datagrid('reload');
+		    }
+	   }
+      //关闭编辑状态
+	  function endEditing() {
+			if (editIndex === undefined) {
+                return true;
+            }
+			if ($dg.datagrid('validateRow', editIndex)) {
+				$dg.datagrid('endEdit', editIndex);
+				editIndex = undefined;
+                return true;
+			} else {
+				const invalidinput = $('input.validatebox-invalid','.datagrid');
+                const fieldnames = invalidinput.map((index, item) => {
+                  return $(item).attr('placeholder') || $(item).attr('id');
+                });
+                $.messager.alert('提示', `${Array.from(fieldnames)} 输入有误.`, 'error');
+				return false;
+			}
+		}
+    //单击列开启编辑功能
+	function onClickCell(index, field) {
+        shippingtask = $dg.datagrid('getRows')[index];
+	    const _operates = ['_operate1', 'ck'];
+		if (!EDITINLINE || $.inArray(field, _operates) >= 0) {
+				return;
+		}
+		if (editIndex !== index) {
+		    if (endEditing()) {
+			    $dg.datagrid('selectRow', index)
+				   .datagrid('beginEdit', index);
+                hook = true;
+                editIndex = index;
+				const ed = $dg.datagrid('getEditor', { index: index, field: field });
+				if (ed) {
+						($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+				}
+			} else {
+				$dg.datagrid('selectRow', editIndex);
+			}
+		}
+  }
+  //获取派车单号
+  async function getsokey() {
+    let key = await $.get('/api/KeyGenerator/GetSOKey');
+    return key;
+  }
+    //新增记录
+  async function append() {
+
+    const shiporderkey = await getsokey();
+    let item = {
+      ShipOrderNo: shiporderkey,
+      ZCZT:"0",
+      ZPCLX: '0',
+      ZCPH: '-',
+      ZCBH: '-',
+      ZCZT: 1,
+      ZBZ: '',
+      ZSFSB: false,
+      ZDDY: $.getUserName(),
+      ZDDPCSJ: moment().format('YYYY-MM-DD HH:mm:00'),
+      ZYYWCSJ: moment().format('YYYY-MM-DD HH:mm:00'),
+      ZSJKSYYSJ: null,
+      ZSJYYWXSJ: null,
+      ZQSD: '',
+      ZQSDMS: '',
+      ZMDD: '',
+      ZMDDMS: '',
+      ZBKH: '-',
+      ZSJXM: '',
+      ZSJDH: '',
+      ZSJSFZ: '',
+      ZJSF: '-',
+      ZJSFMS: '-',
+      ZJSBZ: '',
+      ZYHDM: '',
+      Compensation: 0,
+
+    };
+        if (POPUPMODE) {
+            //弹出新增窗口
+          showPopupCreateWindow(item);
+        } else {
+			if (endEditing()) {
+				//对必填字段进行默认值初始化
+				$dg.datagrid('insertRow',
+                              {
+                                  index: 0,
+                                  row: item
+                              });
+				editIndex = 0;
+				$dg.datagrid('selectRow', editIndex)
+					.datagrid('beginEdit', editIndex);
+                hook = true;
+			}
+        }
+	}
+    //删除编辑的行
+	function removeit() {
+       if (EDITINLINE) {
+          if ($dg.datagrid('getChecked').length > 0) {
+            deletechecked();
+            return;
+          }
+          if (editIndex !== undefined) {
+    			$dg.datagrid('cancelEdit', editIndex)
+					.datagrid('deleteRow', editIndex);
+			   editIndex = undefined;
+               hook = true;
+           }else{
+              const row = $dg.datagrid('getSelected');
+              if(row){
+                const rowindex = $dg.datagrid('getRowIndex', row);
+                $dg.datagrid('deleteRow', rowindex);
+                hook = true;
+              }else{
+                $.messager.alert('提示', '请选中需要删除的记录.', 'info');
+              }
+           }
+        } else {
+		   if ($dg.datagrid('getChecked').length > 0) {
+              deletechecked();
+           }
+           else {
+              $.messager.alert('提示', '请选中需要删除的记录.', 'info');
+           }
+        }
+	}
+    //删除该行
+    function deleteRow(id) {
+          $.messager.confirm('确认', '你确定要删除该记录?', result => {
+                if (result) {
+                    $.post('/ShippingTasks/DeleteCheckedAsync', { id: [id] })
+                         .done(response => {
+                                if (response.success) {
+                                    toastr.success('删除成功');
+                                    $dg.datagrid('uncheckAll');
+                                    $dg.datagrid('reload');
+                                } else {
+                                    $.messager.alert('错误', response.err,'error');
+                                }
+                          })
+                          .fail((jqXHR, textStatus, errorThrown) => {
+						        $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+					      });
+                    }
+                });
+
+     }
+    //删除选中的行
+    function deletechecked() {
+        const rows = $dg.datagrid('getChecked');
+        if (rows.length > 0) {
+            const id = rows.filter(item=>item.ShipOrderNo!=null).map(item => {
+                   return item.ShipOrderNo;
+                });
+            $.messager.confirm('确认', `你确定要删除这 <span class='badge bg-color-red'>${id.length} </span> 行记录?`, result => {
+                if (result) {
+                    $.post('/ShippingTasks/DeleteCheckedAsync', { id: id })
+                         .done(response => {
+                                if (response.success) {
+                                    toastr.success('删除成功');
+                                    $dg.datagrid('uncheckAll');
+                                    $dg.datagrid('reload');
+                                } else {
+                                    $.messager.alert('错误', response.err,'error');
+                                }
+                          })
+                          .fail((jqXHR, textStatus, errorThrown) => {
+						     $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+					      });
+                    }
+                });
+         } else {
+                $.messager.alert('提示', '请先选择要删除的记录!','question');
+         }
+     }
+    //提交保存后台数据库
+  function accept() {
+    if (endEditing()) {
+      if ($dg.datagrid('getChanges').length > 0) {
+        const inserted = $dg.datagrid('getChanges', 'inserted').map(item => {
+          item.TrackingState = 1;
+          return item;
+        });
+        const updated = $dg.datagrid('getChanges', 'updated').map(item => {
+          item.TrackingState = 2
+          return item;
+        });
+        const deleted = $dg.datagrid('getChanges', 'deleted').map(item => {
+          item.TrackingState = 3
+          return item;
+        });
+        //过滤已删除的重复项
+        const changed = inserted.concat(updated.filter(item => {
+          return !deleted.includes(item);
+        })).concat(deleted);
+        //console.table(changed);
+        $.post('/ShippingTasks/SaveDataAsync', { shippingtasks: changed })
+          .done(response => {
+            //console.log(response);
+            if (response.success) {
+              toastr.success('保存成功');
+              $dg.datagrid('acceptChanges');
+              $dg.datagrid('reload');
+              hook = false;
+            } else {
+              $.messager.alert('错误', response.err, 'error');
+            }
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+          });
+      }
+    }
+  }
+	function reject() {
+	    $dg.datagrid('rejectChanges');
+	    editIndex = undefined;
+        hook = false;
+	}
+	function getChanges() {
+	    const rows = $dg.datagrid('getChanges');
+		//console.log(rows.length + ' rows are changed!');
+	}
+    //弹出明细信息
+	function showDetailsWindow(id,row,index) {
+        if (REQUIRBACKEND) {
+			//console.log(index, row);
+            $.get('/ShippingTasks/PopupEditAsync/' + id)
+             .done(data => {
+                //console.log(data);
+                loadData(id,data,'Modified');
+              })
+             .fail((jqXHR, textStatus, errorThrown) => {
+					$.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+		      });
+        } else {
+            loadData(id, JSON.parse(row),'Modified');
+        }
+	}
+    //弹出新建窗口
+  function showPopupCreateWindow(item) {
+        //获取初始化对象
+        if (REQUIRBACKEND) {
+            $.get('/ShippingTasks/PopupCreate')
+                .done(data => {
+                    loadData(-1,data,'Added');
+                 })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+                });
+        } else {
+          loadData(item.ShipOrderNo, item,'Added');
+        }
+  }
+  //打印派车单
+  function printshippingtask() {
+    var rows = $dg.datagrid('getChecked');
+    if (rows.length > 0) {
+      var row = rows[0];
+      if (row.ZCZT == 1) {
+        doprintshippingtask(row.ShipOrderNo);
+      } else {
+        $.messager.alert('提示', '只有派车状态才能打印');
+      }
+    } else {
+      $.messager.alert('提示', '请选中需要打印的派车单');
+    }
+  }
+  function printshippingtask1() {
+    var zczt = $('#ZCZT').combobox('getValue');
+    if (zczt == 1) {
+      var key = $('#ShipOrderNo').textbox('getValue');
+      doprintshippingtask(key);
+      } else {
+        $.messager.alert('提示', '只有派车状态才能打印');
+      }
+
+  }
+  //调用打印派车单接口
+  function doprintshippingtask(shiporderno) {
+    $.messager.progress({ title: '正在执行打印....' });
+    $.get('/ShippingTasks/DoPrint?id=' + shiporderno).done(res => {
+      $.messager.progress('close');
+      if (res.success) {
+        closewindow();
+        toastr.success('更新完成');
+        $dg.datagrid('reload');
+        printJS('/ShippingTasks/printview/' + shiporderno);
+      } else {
+        $.messager.alert('异常', `${res.err} `, 'error');
+      }
+
+    });
+
+  }
+    //初始化定义datagrid
+    var $dg = $('#shippingtasks_datagrid');
+  $(() => {
+    //定义datagrid结构
+    $dg.datagrid({
+      rownumbers: true,
+      checkOnSelect: false,
+      selectOnCheck: false,
+      idField: 'ShipOrderNo',
+      sortName: 'ShipOrderNo',
+      sortOrder: 'desc',
+      remoteFilter: true,
+      singleSelect: true,
+      onBeforeLoad: function () {
+        //datagrid resize when jarvisWidgets resized.
+        const that = $(this);
+        $(window).on("resize.jarvisWidgets", () => {
+          that.datagrid('resize');
+        })
+      },
+      onSelect: function (index, row) {
+        shippingtask = row;
+      },
+      onBeginEdit: function (index, row) {
+
+      },
+      onEndEdit: function (index, row) {
+
+      },
+      onBeforeEdit: function (index, row) {
+        row.editing = true;
+        $(this).datagrid('refreshRow', index);
+      },
+      onAfterEdit: function (index, row) {
+        row.editing = false;
+        $(this).datagrid('refreshRow', index);
+      },
+      onCancelEdit: function (index, row) {
+        row.editing = false;
+        $(this).datagrid('refreshRow', index);
+      },
+      url: '/ShippingTasks/GetDataAsync',
+      method: 'get',
+      onClickCell: onClickCell,
+      pagination: true,
+      striped: true,
+      frozenColumns: [[
+        /*开启CheckBox选择功能*/
+        { field: 'ck', checkbox: true },
+        {
+          field: '_operate1',
+          title: '@Html.L("Command")',
+          width: 85,
+          sortable: false,
+          resizable: true,
+          formatter: function showdetailsformatter(value, row, index) {
+            if (!row.editing) {
+              return '<div class="btn-group">\
+                                                         <button onclick="showDetailsWindow(\'' + row.ShipOrderNo + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="查看明细" ><i class="fa fa-pencil-square-o"></i> </button>\
+                                                         <button onclick="deleteRow(\'' + row.ShipOrderNo + '\',\'' + JSON.stringify(row).replace(/\"/g, '&quot;') + '\',' + index + ')" class="btn btn-default btn-xs" title="删除记录" ><i class="fa fa-trash-o"></i> </button>\
+                                                      </div>';
+            } else {
+              return '<button class="btn btn-default btn-xs" disabled title="查看明细"  ><i class="fa fa-pencil-square-o"></i> </button>';
+            }
+          }
+        }
+      ]],
+      columns: [[
+        {    /*派车单号*/
+          field: 'ShipOrderNo',
+          title: '@Html.DisplayNameFor(model => model.ShipOrderNo)',
+          width: 120,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ShipOrderNo)', required: false, validType: 'length[8,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*派车类型*/
+          field: 'ZPCLX',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZPCLX)</span>',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZPCLX)', required: true, validType: 'length[1,2]' }
+          },
+          sortable: true,
+          resizable: true,
+          formatter: transportationformatter
+        },
+        {    /*车牌号*/
+          field: 'ZCPH',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZCPH)</span>',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCPH)', required: true, validType: 'length[7,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*车板号*/
+          field: 'ZCBH',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZCBH)</span>',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZCBH)', required: true, validType: 'length[7,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {     /*派车状态*/
+          field: 'ZCZT',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZCZT)</span>',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZCZT)',
+              required: true,
+              validType: 'integer',
+
+            }
+          },
+          formatter: tmstatusformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*备注*/
+          field: 'ZBZ',
+          title: '@Html.DisplayNameFor(model => model.ZBZ)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZBZ)', required: false, validType: 'length[0,100]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {  /*是否甩板*/
+          field: 'ZSFSB',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZSFSB)</span>',
+          width: 120,
+          align: 'center',
+          hidden: false,
+          editor: {
+            type: 'booleaneditor',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZSFSB)',
+              required: true
+            }
+          },
+          formatter: booleanformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*调度员*/
+          field: 'ZDDY',
+          title: '@Html.DisplayNameFor(model => model.ZDDY)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZDDY)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {   /*调度派车时间*/
+          field: 'ZDDPCSJ',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZDDPCSJ)</span>',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZDDPCSJ)', required: true }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*要求运输完成时间*/
+          field: 'ZYYWCSJ',
+          title: '@Html.DisplayNameFor(model => model.ZYYWCSJ)',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZYYWCSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*实际开始运输时间*/
+          field: 'ZSJKSYYSJ',
+          title: '@Html.DisplayNameFor(model => model.ZSJKSYYSJ)',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJKSYYSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {   /*实际运输完成时间*/
+          field: 'ZSJYYWXSJ',
+          title: '@Html.DisplayNameFor(model => model.ZSJYYWXSJ)',
+          width: 120,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'datebox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJYYWXSJ)', required: false }
+          },
+          formatter: dateformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*起始地*/
+          field: 'ZQSD',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZQSD)</span>',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZQSD)', required: true, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*起始地描述*/
+          field: 'ZQSDMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZQSDMS)</span>',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZQSDMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*目的地*/
+          field: 'ZMDD',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZMDD)</span>',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZMDD)', required: true, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*目的地描述*/
+          field: 'ZMDDMS',
+          title: '<span class="required">@Html.DisplayNameFor(model => model.ZMDDMS)</span>',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZMDDMS)', required: true, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*白卡号*/
+          field: 'ZBKH',
+          title: '@Html.DisplayNameFor(model => model.ZBKH)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZBKH)', required: false, validType: 'length[0,30]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机姓名*/
+          field: 'ZSJXM',
+          title: '@Html.DisplayNameFor(model => model.ZSJXM)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJXM)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机电话*/
+          field: 'ZSJDH',
+          title: '@Html.DisplayNameFor(model => model.ZSJDH)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJDH)', required: false, validType: 'length[0,20]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*司机身份证号码*/
+          field: 'ZSJSFZ',
+          title: '@Html.DisplayNameFor(model => model.ZSJSFZ)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZSJSFZ)', required: false, validType: 'length[0,50]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*结算方*/
+          field: 'ZJSF',
+          title: '@Html.DisplayNameFor(model => model.ZJSF)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJSF)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*结算方名称*/
+          field: 'ZJSFMS',
+          title: '@Html.DisplayNameFor(model => model.ZJSFMS)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJSFMS)', required: false, validType: 'length[0,80]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*结算备注*/
+          field: 'ZJSBZ',
+          title: '@Html.DisplayNameFor(model => model.ZJSBZ)',
+          width: 260,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZJSBZ)', required: false, validType: 'length[0,100]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*油耗代码*/
+          field: 'ZYHDM',
+          title: '@Html.DisplayNameFor(model => model.ZYHDM)',
+          width: 130,
+          hidden: false,
+          editor: {
+            type: 'textbox',
+            options: { prompt: '@Html.DisplayNameFor(model => model.ZYHDM)', required: false, validType: 'length[0,10]' }
+          },
+          sortable: true,
+          resizable: true
+        },
+        {    /*运输里程*/
+          field: 'ZYSLC',
+          title: '@Html.DisplayNameFor(model => model.ZYSLC)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZYSLC)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*箱公里*/
+          field: 'ZXGL',
+          title: '@Html.DisplayNameFor(model => model.ZXGL)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZXGL)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*应耗油*/
+          field: 'ZYHY',
+          title: '@Html.DisplayNameFor(model => model.ZYHY)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZYHY)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*补贴*/
+          field: 'Compensation',
+          title: '@Html.DisplayNameFor(model => model.Compensation)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.Compensation)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+        {    /*GPS记录里程*/
+          field: 'ZGPSJLLC',
+          title: '@Html.DisplayNameFor(model => model.ZGPSJLLC)',
+          width: 100,
+          align: 'right',
+          hidden: false,
+          editor: {
+            type: 'numberbox',
+            options: {
+              prompt: '@Html.DisplayNameFor(model => model.ZGPSJLLC)',
+              required: false,
+              precision: 2,
+              validType: 'decimal',
+
+            }
+          },
+          formatter: numberformatter,
+          sortable: true,
+          resizable: true
+        },
+      ]]
+    });
+
+    $dg.datagrid('enableFilter', [
+      {   /*派车类型*/
+        field: 'ZPCLX',
+        type: 'transportationfilter'
+
+      },
+      {   /*派车状态*/
+        field: 'ZCZT',
+        type: 'tmstatusfilter'
+
+      },
+      {   /*运输里程*/
+        field: 'ZYSLC',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {   /*箱公里*/
+        field: 'ZXGL',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {   /*应耗油*/
+        field: 'ZYHY',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {   /*补贴*/
+        field: 'Compensation',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {   /*GPS记录里程*/
+        field: 'ZGPSJLLC',
+        type: 'numberbox',
+        op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+      },
+      {     /*调度派车时间*/
+        field: 'ZDDPCSJ',
+        type: 'dateRange',
+        options: {
+          onChange: value => {
+            $dg.datagrid('addFilterRule', {
+              field: 'ZDDPCSJ',
+              op: 'between',
+              value: value
+            });
+
+            $dg.datagrid('doFilter');
+          }
+        }
+      },
+      {     /*要求运输完成时间*/
+        field: 'ZYYWCSJ',
+        type: 'dateRange',
+        options: {
+          onChange: value => {
+            $dg.datagrid('addFilterRule', {
+              field: 'ZYYWCSJ',
+              op: 'between',
+              value: value
+            });
+
+            $dg.datagrid('doFilter');
+          }
+        }
+      },
+      {     /*实际开始运输时间*/
+        field: 'ZSJKSYYSJ',
+        type: 'dateRange',
+        options: {
+          onChange: value => {
+            $dg.datagrid('addFilterRule', {
+              field: 'ZSJKSYYSJ',
+              op: 'between',
+              value: value
+            });
+
+            $dg.datagrid('doFilter');
+          }
+        }
+      },
+      {     /*实际运输完成时间*/
+        field: 'ZSJYYWXSJ',
+        type: 'dateRange',
+        options: {
+          onChange: value => {
+            $dg.datagrid('addFilterRule', {
+              field: 'ZSJYYWXSJ',
+              op: 'between',
+              value: value
+            });
+
+            $dg.datagrid('doFilter');
+          }
+        }
+      },
+      {   /*是否甩板*/
+        field: 'ZSFSB',
+        type: 'booleanfilter'
+      },
+    ]);
+  });
+
+  </script>
+  <!--begin popup detailview javascript block -->
+  <script type="text/javascript">
+    //判断新增编辑状态
+    var MODELSTATE = 'Added';
+    var shippingtaskid = null;
+    var hasChanged = false;
+    var currentitem = {};
+    function loadData(id, data, state) {
+      MODELSTATE = state;
+      shippingtaskid = id;
+      $("#detailswindow").window("open");
+      $('#ZQSD').combotree({ url: '/Regions/GetTreeDataAsync' });
+      $('#ZMDD').combotree({ url: '/Regions/GetTreeDataAsync' });
+      $('#shippingtask_form').form('reset');
+      $('#shippingtask_form').form('load', data);
+      currentitem = data;
+      var url = '/ShippingTaskItems/GetDataByShipOrderNoAsync?shiporderno=' + shippingtaskid;
+      $shippingtaskitemsdg.datagrid('load', url);
+      $shippingtaskitemsdg.datagrid('resize');
+      //优化初始化加载速度
+      //$('#ZMDD').combogrid('grid').datagrid('load', '/TMLocs/GetComboGridDataAsync');
+      //$('#ZQSD').combogrid('grid').datagrid('load', '/TMLocs/GetComboGridDataAsync');
+      $('#ZCBH').combogrid('grid').datagrid('load', '/Vehicles/GetComboGridDataAsync2');
+      $('#ZCPH').combogrid('grid').datagrid('load', '/Vehicles/GetComboGridDataAsync1');
+      $('#ZYHDM').combogrid('grid').datagrid('load', '/StdConsumes/GetComboGridDataAsync');
+      
+    }
+    var $editform = $('#shippingtask_form');
+    //async 保存数据
+    async function saveitem() {
+      if ($editform.form('enableValidation').form('validate')) {
+        //判断甩板
+        var checked = $('#ZSFSB').prop('checked');
+        var bloc = $('#BLoc').textbox('getValue');
+        if (checked && bloc.length == 0) {
+          $.messager.alert('提示', '请输入甩板位置');
+          return false;
+        }
+        let shippingtask = $editform.serializeJSON();
+        //获取明细表数据
+
+        const shippingtaskitems_res = await shippingtaskitems_accept();
+        if (!shippingtaskitems_res.success) {
+          return false;
+        } else {
+          if (shippingtaskitems_res.changed) {
+            shippingtask.ShippingTaskItems = shippingtaskitems_res.changed;
+          }
+        }
+
+        let url = '/ShippingTasks/EditAsync';
+        //判断是新增或是修改方法
+        if (MODELSTATE === 'Added') {
+          url = '/ShippingTasks/CreateAsync';
+        }
+        var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: {
+            __RequestVerificationToken: token,
+            shippingtask: shippingtask
+          },
+          dataType: 'json',
+          contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+        })
+          .done(response => {
+            if (response.success) {
+              hasChanged = false;
+              $editform.form('disableValidation');
+              $dg.datagrid('reload');
+              $('#detailswindow').window("close");
+              toastr.success("保存成功");
+              $('#ZCBH').combogrid('grid').datagrid('load', '/Vehicles/GetComboGridDataAsync2');
+              $('#ZCPH').combogrid('grid').datagrid('load', '/Vehicles/GetComboGridDataAsync1');
+            } else {
+              $.messager.alert("错误", response.err, "error");
+            }
+          })
+          .fail((jqXHR, textStatus, errorThrown) => {
+            $.messager.alert('异常', `${jqXHR.status}: ${jqXHR.statusText} `, 'error');
+          });
+      }
+    }
+    //关闭窗口
+    function closewindow() {
+      $('#detailswindow').window('close');
+    }
+    //甩板操作
+    function doknockout() {
+      var checked = $('#ZSFSB').prop('checked');
+      var bloc = $('#BLoc').textbox('getValue');
+      var status = $('#ZCZT').combobox('getValue');
+      if (status == '1' || status == '2') {
+        var shippingorderno = $('#ShipOrderNo').textbox('getValue');
+        if (checked && bloc.length > 0) {
+          $.messager.progress({ title: '正在执行....' });
+          $.get('/ShippingTasks/DoKnockout?id=' + shippingorderno + "&bloc=" + bloc).done(res => {
+            $.messager.progress('close');
+            if (res.success) {
+              hasChanged = false;
+              closewindow();
+              toastr.success('甩板成功');
+              $dg.datagrid('reload');
+            } else {
+              $.messager.alert('异常', `${res.err} `, 'error');
+            }
+          });
+
+        } else {
+          $.messager.alert('提示', '请选择是否甩板并且输入甩板的位置!');
+        }
+      } else {
+        $.messager.alert('提示', '只有发运状态才能甩板!');
+      }
+    }
+    //维护费用
+    function openshippingcostwindow() {
+      currentitem.User = $.getUserName();
+      opencostwindow(currentitem);
+    }
+    //运输完成
+    function docompleted() {
+      var status = $('#ZCZT').combobox('getValue');
+      var shippingorderno = $('#ShipOrderNo').textbox('getValue');
+      if (status >= 2) {
+        $.messager.progress({ title: '正在执行....' });
+        $.get('/ShippingTasks/DoCompleted?id=' + shippingorderno).done(res => {
+          $.messager.progress('close');
+          if (res.success) {
+            closewindow();
+            toastr.success('运输完成');
+            $dg.datagrid('reload');
+          } else {
+            $.messager.alert('异常', `${res.err} `, 'error');
+          }
+        });
+      } else {
+        $.messager.alert('提示', '没有打印派车单不允许完成操作!');
+      }
+
+    }
+
+    //显示异常登记窗口
+    function showexceptionwindow() {
+      openexwindow(currentitem);
+    }
+    //判断是否有没有保存的记录
+    function hasmodified() {
+      if (hasChanged) return hasChanged;
+      if (!shippingtaskitems_endEditing()) {
+        return true;
+      }
+      const shippingtaskitems = $shippingtaskitemsdg.datagrid("getChanges");
+      if (MODELSTATE == 'Modified' && shippingtaskitems.length > 0) {
+        return true;
+      }
+      return false;
+
+    }
+    $('a[data-toggle="tab"]').on('shown.bs.tab', e => {
+      const target = $(e.target).attr("href");
+      if (target === "#tab-shippingtaskitems")
+        $shippingtaskitemsdg.datagrid("resize");
+    });
+
+
+
+    //回车光标移动到下个输入控件
+    $(() => {
+      //如果是枚举类型需要把numberbox改成combobox
+      //派车状态
+      $('#ZCZT').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //如果是枚举类型需要把numberbox改成combobox
+      //运输里程
+      $('#ZYSLC').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //如果是枚举类型需要把numberbox改成combobox
+      //箱公里
+      $('#ZXGL').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //如果是枚举类型需要把numberbox改成combobox
+      //应耗油
+      $('#ZYHY').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //如果是枚举类型需要把numberbox改成combobox
+      //补贴
+      $('#Compensation').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //如果是枚举类型需要把numberbox改成combobox
+      //GPS记录里程
+      $('#ZGPSJLLC').numberbox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //日期类型 调度派车时间
+      $('#ZDDPCSJ').datebox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //日期类型 要求运输完成时间
+      $('#ZYYWCSJ').datebox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //日期类型 实际开始运输时间
+      $('#ZSJKSYYSJ').datebox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+      //日期类型 实际运输完成时间
+      $('#ZSJYYWXSJ').datebox('textbox').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+          $(e.target).emulateTab();
+        }
+      });
+    });
+
+
+
+
+  </script>
+
+
+  <!-- shippingtaskitem datagrid  javascript block -->
+  @Html.Partial("_shippingtaskitemdatagridjsview", new WebApp.Models.ShippingTaskItem())
+  <!--end popup detailview javascript block -->
+  <script src="~/Scripts/jquery.filerupload.min.js"></script>
+}
+
+

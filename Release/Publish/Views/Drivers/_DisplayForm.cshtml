@@ -1,0 +1,212 @@
+﻿﻿@model WebApp.Models.Driver
+ <!-- 输出form表单界面 -->
+<form id="driver_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Code) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Gender) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Gender)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Brithday)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.Brithday)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.IdentityDocumentNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.IdentityDocumentNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Address1) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Address1)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Address2) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Address2)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.MobileTelephoneNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.MobileTelephoneNumber)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TelephoneNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TelephoneNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DriverNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DriverNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DrvLicenseType) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DrvLicenseType)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.DocmentNo) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.DocmentNo)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CertifyingAuthority) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CertifyingAuthority)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.QualificationCertificateNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.QualificationCertificateNumber)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RegistrationDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RegistrationDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ExpiryDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ExpiryDate)
+			    </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.ChangeDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.ChangeDate)
+			    </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Attachment) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Attachment)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerCode)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartnerName)
+            </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#driver_form').form('load', data);
+            
+    }
+
+
+   var driverid=@Model.Id;
+    $(function(){
+        initFormData(driverid);
+    });
+ </script>
+

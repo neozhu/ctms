@@ -1,0 +1,239 @@
+﻿﻿@model WebApp.Models.OilRecord
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin oilrecord form  -->
+<form id="oilrecord_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PlateNumber)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PlateNumber)" 
+				   name="@Html.NameFor(model => model.PlateNumber)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PlateNumber)" 
+				   value="@Html.ValueFor(model => model.PlateNumber)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PlateNumber)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RDate)</span> </label>
+            <label class="input">
+            <i class="icon-append fa fa-calendar"></i>
+			<input id="@Html.IdFor(model => model.RDate)" 
+			       name="@Html.NameFor(model => model.RDate)" 
+                   placeholder="@Html.DisplayNameFor(model => model.RDate)" 
+				   tabindex="1" required
+				   class="datepicker" data-dateformat="mm/dd/yy"
+				   type="text" 
+				   value="@Html.ValueFor(model => model.RDate)"
+				    />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.RDate)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Type)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Type)"
+				   name="@Html.NameFor(model => model.Type)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Type)" 
+				   value="@Html.ValueFor(model => model.Type)"
+				   tabindex="2" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Type)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Driver)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Driver)" 
+				   name="@Html.NameFor(model => model.Driver)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Driver)" 
+				   value="@Html.ValueFor(model => model.Driver)"
+				   tabindex="3" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Driver)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.KM)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.KM)"
+				   name="@Html.NameFor(model => model.KM)" 
+                   placeholder="@Html.DisplayNameFor(model => model.KM)" 
+				   value="@Html.ValueFor(model => model.KM)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.KM)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Label)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Label)" 
+				   name="@Html.NameFor(model => model.Label)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Label)" 
+				   value="@Html.ValueFor(model => model.Label)"
+				   tabindex="5" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Label)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.LN)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.LN)"
+				   name="@Html.NameFor(model => model.LN)" 
+                   placeholder="@Html.DisplayNameFor(model => model.LN)" 
+				   value="@Html.ValueFor(model => model.LN)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.LN)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Price)"
+				   name="@Html.NameFor(model => model.Price)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Price)" 
+				   value="@Html.ValueFor(model => model.Price)"
+				   tabindex="7" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Price)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="8" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Amount)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Status)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Status)"
+				   name="@Html.NameFor(model => model.Status)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Status)" 
+				   value="@Html.ValueFor(model => model.Status)"
+				   tabindex="9" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Status)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="10" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerCode) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerCode)" 
+				   name="@Html.NameFor(model => model.PartnerCode)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerCode)" 
+				   value="@Html.ValueFor(model => model.PartnerCode)"
+				   tabindex="11" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerCode)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PartnerName) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartnerName)" 
+				   name="@Html.NameFor(model => model.PartnerName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartnerName)" 
+				   value="@Html.ValueFor(model => model.PartnerName)"
+				   tabindex="12" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartnerName)</b>
+			    </label>
+            </section>
+				 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end oilrecord form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#oilrecord_form').form('load', data);
+            
+    }
+
+
+   var oilrecordid=@Model.Id;
+    $(function(){
+        initFormData(oilrecordid);
+    });
+ </script>
+

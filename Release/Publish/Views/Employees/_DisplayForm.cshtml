@@ -1,0 +1,137 @@
+﻿﻿@model WebApp.Models.Employee
+ <!-- 输出form表单界面 -->
+<form id="employee_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+<fieldset>
+    <div class="row">
+        	    			<section class="col col-3">
+           <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Id)</span> </label>
+           <label class="label">
+            @Html.DisplayFor(model => model.Id)
+			</label>
+            </section>
+              				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Title) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Title)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Sex)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Sex)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Age)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Age)
+			    </label>
+            </section>
+              				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Brithday)</span> </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.Brithday)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.IsDeleted)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.IsDeleted)
+			    </label>
+            </section>
+              				 
+	  
+	    
+	                     <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.CompanyId)</span> </label>
+            <label class="label">
+			      @Html.DisplayFor(model => model.CompanyId)
+			</label>
+            </section>
+				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CreatedDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.CreatedDate)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CreatedBy) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CreatedBy)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LastModifiedDate) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.LastModifiedDate)
+			    </label>
+            </section>
+			  				 
+	  
+	    
+	        			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.LastModifiedBy) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.LastModifiedBy)
+            </label>
+            </section>
+			  				 
+	  
+	    
+	    </div>
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#employee_form').form('load', data);
+            
+    }
+
+
+   var employeeid=@Model.Id;
+    $(function(){
+        initFormData(employeeid);
+    });
+ </script>
+

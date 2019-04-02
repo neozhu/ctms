@@ -1,0 +1,229 @@
+﻿﻿@model WebApp.Models.StdConsume
+<!-- 弹出窗体form表单 -->
+ <div id="detailswindow" hidden="hidden" class="easyui-window" 
+      title="明细数据" 
+      data-options="modal:true,
+                    closed:true,
+                    iconCls:'icon-save',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:200,
+                    openAnimation:'slide',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                    }
+                    " style="width:960px;height:520px">
+    <!-- begin toolbar -->
+    <div class="window-body-toolbar">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                       <a href="javascript:saveitem()" class="btn btn-sm btn-default"> 
+                          <i class="fa fa-floppy-o"></i> 保存 
+                       </a>
+                </div>
+                <div class="btn-group">
+                       <a href="javascript:printitem()" class="btn btn-sm btn-default">
+                         <i class="fa fa-print"></i> 打印 
+                       </a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-align-right">
+                <button type="button" class="btn btn-sm btn-success" onclick="closewindow()">
+                    <i class="fa fa-chevron-left"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end toolbar -->
+    <!-- begin window body -->
+    <div class="padding-10">
+    <!-- begin form表单界面-->
+        <div class="row">
+            <div class="col-md-12">
+           <form id="stdconsume_form" class="easyui-form form-horizontal" method="post" data-options="novalidate:true">
+  @Html.AntiForgeryToken()
+   <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+  <table class="table table-bordered">
+   
+	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Code)" 
+				   name="@Html.NameFor(model => model.Code)" 
+				   value="@Html.ValueFor(model => model.Code)"
+				   tabindex="0" required
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Code)',
+								 label:'',
+                                 width:200,
+								 required:true ,validType:'length[0,30]'" />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Transportation)</span></td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Transportation)"
+				   name="@Html.NameFor(model => model.Transportation)" 
+				   value="@Html.ValueFor(model => model.Transportation)"
+				   tabindex="1" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Transportation)',
+								 label:'',
+                                 width:200,
+								 required:true " />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Description)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Description)" 
+				   name="@Html.NameFor(model => model.Description)" 
+				   value="@Html.ValueFor(model => model.Description)"
+				   tabindex="2" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Description)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,100]'" />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.CKM)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.CKM)"
+				   name="@Html.NameFor(model => model.CKM)" 
+				   value="@Html.ValueFor(model => model.CKM)"
+				   tabindex="3" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.CKM)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.KM)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.KM)"
+				   name="@Html.NameFor(model => model.KM)" 
+				   value="@Html.ValueFor(model => model.KM)"
+				   tabindex="4" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.KM)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Oil)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.Oil)"
+				   name="@Html.NameFor(model => model.Oil)" 
+				   value="@Html.ValueFor(model => model.Oil)"
+				   tabindex="5" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Oil)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   </tr>
+	   	    <tr>
+	   <td class="control-label"><span class="required">@Html.DisplayNameFor(model => model.Compensation)</span></td>
+	   <td> 
+             <input id="@Html.IdFor(model => model.Compensation)"
+				   name="@Html.NameFor(model => model.Compensation)" 
+				   value="@Html.ValueFor(model => model.Compensation)"
+				   tabindex="6" 
+				   class="easyui-numberbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Compensation)',
+								 label:'',
+                                 width:200,
+								 required:true  ,precision:2"  />
+				   </td>
+	   	   <td class="control-label">@Html.DisplayNameFor(model => model.Remark)</td>
+	   <td> 
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="7" 
+				   class="easyui-textbox" 
+				   type="text" 
+				   data-options="prompt:'@Html.DisplayNameFor(model => model.Remark)',
+								 label:'',
+                                 width:200,
+								 required:false ,validType:'length[0,100]'" />
+				   </td>
+	   	    		<td></td> <td></td>
+		     </tr>
+	       </table>
+     </form>
+     </div>
+    </div>
+<!--end form表单界面-->
+<!--========================================================================================-->
+     </div>
+    <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<script type="text/javascript">
+    //load data by foreign key
+    var stdconsumeid = 0;
+    function loadData(id,data) {
+         $("#detailswindow").window("open");
+         stdconsumeid = id;
+         $('#stdconsume_form').form('load', data);
+             }
+    var $editform = $('#stdconsume_form');
+    // save item
+    function saveitem() { 
+        if ($editform.form('enableValidation').form('validate')) {
+            var stdconsume = $editform.serializeJSON();
+                        var url = '/StdConsumes/EditAsync';
+            if (stdconsume.Id <= 0 || stdconsume.Id === null || stdconsume.Id === '') {
+                url = '/StdConsumes/CreateAsync';
+            }
+            var token = $('input[name="__RequestVerificationToken"]', $editform).val();
+            $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        __RequestVerificationToken: token,
+                        stdconsume:stdconsume
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+                })
+                .done(response => {
+                    if (response.success) {
+                        $dg.datagrid('reload');
+                        $.messager.alert("提示", "保存成功！","info");
+                        $('#detailswindow').window("close");
+                    } else {
+                        $.messager.alert("错误",   response.err, "error");
+                    }
+                    })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                        $.messager.alert("异常",   errorThrown,"error");
+                    });
+        }
+    }
+    // close window
+    function closewindow() {
+        $('#detailswindow').window('close');
+    }
+    // print form
+    function printitem() {
+         console.log('print.....');
+    }
+
+ 
+</script>
+
+

@@ -1,0 +1,464 @@
+﻿@model WebApp.Models.MoveContainer
+@{
+  ViewBag.Title = "移箱记录";
+}
+<div id="mvrecordwindow" hidden="hidden" class="easyui-dialog"
+     title="移箱记录" style="padding:15px"
+     data-options="
+                iconCls: 'icon-more',
+                modal:true,
+                closed:true,
+                cache: false,
+                resizable:true,
+                width:1020,
+                height:500,
+                title:'移箱记录',
+                onResize:function(){
+                },
+                onOpen:function(){
+                  
+                },
+                buttons: [{
+                    text:'关闭',
+                    handler:function(){
+                        $('#mvrecordwindow').dialog('close');
+                    }
+                }]
+            ">
+  <div class="widget-body no-padding">
+    <div class="table-responsive">
+      <table id="movecontainers_datagrid"></table>
+    </div>
+  </div>
+  </div>
+
+
+  <script type="text/javascript">
+    var recorddg = $('#movecontainers_datagrid');
+    function initrecorddatagrid(trqid, troid) {
+      const url = '/MoveContainers/GetDataWithTroIdAsync?trqid=' + trqid + '&torid=' + troid;
+      recorddg.datagrid({
+        rownumbers: true,
+        checkOnSelect: false,
+        selectOnCheck: false,
+        idField: 'Id',
+        sortName: 'Id',
+        sortOrder: 'desc',
+        remoteFilter: true,
+        singleSelect: true,
+        url: url,
+        method: 'get',
+        pagination: true,
+        striped: true,
+        onSelect: function (index, row) {
+          movecontainer = row;
+        },
+        onBeginEdit: function (index, row) {
+
+        },
+        onEndEdit: function (index, row) {
+
+        },
+        onBeforeEdit: function (index, row) {
+          row.editing = true;
+          $(this).datagrid('refreshRow', index);
+        },
+        onAfterEdit: function (index, row) {
+          row.editing = false;
+          $(this).datagrid('refreshRow', index);
+        },
+        onCancelEdit: function (index, row) {
+          row.editing = false;
+          $(this).datagrid('refreshRow', index);
+        },
+        columns: [[
+          { /*Id*/
+            field: 'Id',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.Id)</span>',
+            width: 120,
+            sortable: true,
+            resizable: true,
+            hidden: true
+          },
+          {    /*箱号*/
+            field: 'TURES_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.TURES_ID)</span>',
+            width: 110,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TURES_ID)', required: true, validType: 'length[11,11]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*箱型*/
+            field: 'TURES_TCO',
+            title: '@Html.DisplayNameFor(model => model.TURES_TCO)',
+            width: 80,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TURES_TCO)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*箱状态*/
+            field: 'ZXZT',
+            title: '@Html.DisplayNameFor(model => model.ZXZT)',
+            width: 80,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZXZT)', required: false, validType: 'length[0,5]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: efformatter
+          },
+          {    /*分拨仓库*/
+            field: 'ZFBCKHJ',
+            title: '@Html.DisplayNameFor(model => model.ZFBCKHJ)',
+            width: 120,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFBCKHJ)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*原堆场位置(排/列/高)*/
+            field: 'FromLoc',
+            title: '@Html.DisplayNameFor(model => model.FromLoc)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.FromLoc)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*新堆场位置(排/列/高)*/
+            field: 'ToLoc',
+            title: '@Html.DisplayNameFor(model => model.ToLoc)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ToLoc)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {   /*操作日期*/
+            field: 'RDate',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.RDate)</span>',
+            width: 100,
+            align: 'right',
+            hidden: false,
+            editor: {
+              type: 'datebox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.RDate)', required: true }
+            },
+            formatter: dateformatter,
+            sortable: true,
+            resizable: true
+          },
+          {    /*操作类型*/
+            field: 'OpType',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.OpType)</span>',
+            width: 100,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.OpType)', required: true, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: movetypeformatter
+          },
+          {    /*移箱费用*/
+            field: 'Cost',
+            title: '@Html.DisplayNameFor(model => model.Cost)',
+            width: 100,
+            align: 'right',
+            hidden: false,
+            editor: {
+              type: 'numberbox',
+              options: {
+                prompt: '@Html.DisplayNameFor(model => model.Cost)',
+                required: false,
+                precision: 2,
+                validType: 'decimal',
+
+              }
+            },
+            formatter: numberformatter,
+            sortable: true,
+            resizable: true
+          },
+          {     /*翻箱次数*/
+            field: 'FCount',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.FCount)</span>',
+            width: 100,
+            align: 'right',
+            hidden: false,
+            editor: {
+              type: 'numberbox',
+              options: {
+                prompt: '@Html.DisplayNameFor(model => model.FCount)',
+                required: true,
+                validType: 'integer',
+
+              }
+            },
+            formatter: intformatter,
+            sortable: true,
+            resizable: true
+          },
+          {    /*集装箱状态*/
+            field: 'CStatus',
+            title: '@Html.DisplayNameFor(model => model.CStatus)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.CStatus)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: cstatusformatter
+          },
+          
+          {    /*派车单号*/
+            field: 'ShipOrderNo',
+            title: '@Html.DisplayNameFor(model => model.ShipOrderNo)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ShipOrderNo)', required: false, validType: 'length[8,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*执行运输公司*/
+            field: 'TSPEXECID',
+            title: '@Html.DisplayNameFor(model => model.TSPEXECID)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TSPEXECID)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*车辆*/
+            field: 'VEHICLERES_ID',
+            title: '@Html.DisplayNameFor(model => model.VEHICLERES_ID)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.VEHICLERES_ID)', required: false, validType: 'length[0,40]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*车板号*/
+            field: 'PLATENUMBER_P',
+            title: '@Html.DisplayNameFor(model => model.PLATENUMBER_P)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.PLATENUMBER_P)', required: false, validType: 'length[0,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*发货单位*/
+            field: 'SHIPPER_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.SHIPPER_ID)</span>',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.SHIPPER_ID)', required: true, validType: 'length[8,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*发货单位名称*/
+            field: 'ZFHDWMS',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.ZFHDWMS)</span>',
+            width: 260,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFHDWMS)', required: true, validType: 'length[0,80]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*收货单位*/
+            field: 'CONSIGNEE_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.CONSIGNEE_ID)</span>',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.CONSIGNEE_ID)', required: true, validType: 'length[8,10]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*收货单位名称*/
+            field: 'ZSHDWMS',
+            title: '@Html.DisplayNameFor(model => model.ZSHDWMS)',
+            width: 260,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZSHDWMS)', required: false, validType: 'length[0,80]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*FWO号*/
+            field: 'TRQ_ID',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_ID)</span>',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_ID)', required: true, validType: 'length[8,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*业务类型*/
+            field: 'TRQ_TYPE',
+            title: '<span class="required">@Html.DisplayNameFor(model => model.TRQ_TYPE)</span>',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TRQ_TYPE)', required: true, validType: 'length[2,4]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: trqtypeformatter
+          },
+          {    /*FO号*/
+            field: 'TOR_ID',
+            title: '@Html.DisplayNameFor(model => model.TOR_ID)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.TOR_ID)', required: false, validType: 'length[8,20]' }
+            },
+            sortable: true,
+            resizable: true
+          },
+          {    /*FO状态*/
+            field: 'ZFOZT',
+            title: '@Html.DisplayNameFor(model => model.ZFOZT)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZFOZT)', required: false, validType: 'length[0,2]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: fostatusformatter
+          },
+          {    /*订单状态*/
+            field: 'ZZT',
+            title: '@Html.DisplayNameFor(model => model.ZZT)',
+            width: 130,
+            hidden: false,
+            editor: {
+              type: 'textbox',
+              options: { prompt: '@Html.DisplayNameFor(model => model.ZZT)', required: false, validType: 'length[0,10]' }
+            },
+            sortable: true,
+            resizable: true,
+            formatter: tmstatusformatter
+          },
+        ]]
+      });
+
+      recorddg.datagrid('enableFilter', [
+        {   /*Id*/
+          field: 'Id',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {    /*箱状态*/
+          field: 'ZXZT',
+          type: 'effilter'
+        },
+        {    /*操作类型*/
+          field: 'OpType',
+          type: 'movetypefilter'
+        },
+        {    /*集装箱状态*/
+          field: 'CStatus',
+          type: 'cstatusfilter'
+        },
+        {    /*业务类型*/
+          field: 'TRQ_TYPE',
+          type: 'trqtypefilter'
+        },
+        {    /*FO状态*/
+          field: 'ZFOZT',
+          type: 'fostatusfilter'
+        },
+        {    /*FO状态*/
+          field: 'ZZT',
+          type: 'tmstatusfilter'
+        },
+        {   /*翻箱次数*/
+          field: 'FCount',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {   /*移箱费用*/
+          field: 'Cost',
+          type: 'numberbox',
+          op: ['equal', 'notequal', 'less', 'lessorequal', 'greater', 'greaterorequal']
+        },
+        {     /*操作日期*/
+          field: 'RDate',
+          type: 'dateRange',
+          options: {
+            onChange: value => {
+              recorddg.datagrid('addFilterRule', {
+                field: 'RDate',
+                op: 'between',
+                value: value
+              });
+
+              recorddg.datagrid('doFilter');
+            }
+          }
+        },
+      ]);
+
+
+
+
+    }
+    $(function () {
+
+      
+
+    })
+  </script>

@@ -1,0 +1,157 @@
+﻿﻿@model WebApp.Models.Partner
+ <!-- 输出form表单界面 -->
+<form id="partner_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Name)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Name)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Code)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Code)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Role)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Role)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ContactName)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ContactName)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.ContactMobileTelephoneNumber)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.ContactMobileTelephoneNumber)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Type)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Type)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RegisteredAddress) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.RegisteredAddress)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.PermitNumber) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PermitNumber)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.CountrySubdivisionCode) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.CountrySubdivisionCode)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.RegisteredCapital)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.RegisteredCapital)
+			    </label>
+            </section>
+              		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.UnifiedSocialCreditldentifier) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.UnifiedSocialCreditldentifier)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.BusinessScope) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.BusinessScope)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Description) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Description)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.TMKey) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.TMKey)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.RegistrationDatetime) </label>
+            <label class="label">
+            
+			@Html.DisplayFor(model => model.RegistrationDatetime)
+			    </label>
+            </section>
+			  		 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#partner_form').form('load', data);
+            
+    }
+
+
+   var partnerid=@Model.Id;
+    $(function(){
+        initFormData(partnerid);
+    });
+ </script>
+

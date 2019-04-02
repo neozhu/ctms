@@ -1,0 +1,154 @@
+﻿@model WebApp.Models.TmOrder
+
+<link href="~/Content/css/smartadmin.min.css" rel="stylesheet" />
+<section id="widget-grid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="product-content product-wrap clearfix product-deatil">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <h2 class="name" style="text-align:center">
+              CONTAINER LOAD PLAN<br>
+              装 箱 单
+                                 <small style="text-align:left">
+                                   <span>装箱单号: @Model.TRQ_ID</span>
+                                   <span style="text-align:right;float:right">打印日期: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:00")</span> &nbsp; &nbsp;<span style="text-align:right;float:right">开航日期: @(Model.ZKHRQ.HasValue ? Model.ZKHRQ.Value.ToString("yyyy/MM/dd") : "")</span>
+                                 </small>
+           
+            </h2>
+            <table class="table table-bordered">
+              <tr>
+                <td colspan="4" width="30%">
+                  冷藏温度
+                  <br><br>
+                </td>
+                <td>装货港<br>@Model.ZQYG</td>
+                <td>卸货港<br>@Model.ZMDG</td>
+                <td>交货地<br>@Model.ZJHD</td>
+                <td colspan="3">SHIPER'S/PACKER'S DECLARATIONS:<br><br></td>
+              </tr>
+              <tr>
+                <td>
+                  等级<br><br>
+                </td>
+                <td>
+                  危规页码<br>
+                  @Model.ZWXPDJ
+                </td>
+                <td>
+                  联合国编码<br><br>
+                </td>
+                <td>
+                  闪点<br><br>
+                </td>
+                <td>提单号</td>
+                <td>件数与包装</td>
+                <td>毛重</td>
+                <td>尺码</td>
+                <td>货名</td>
+                <td>唛头</td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  船名/航次<br>
+                  @Model.ZCMHC  /  @Model.ZHCHC
+                  <br>
+                </td>
+                <td rowspan="5">@Model.ZSBTDH</td>
+                <td rowspan="5">@Model.QUA_PCS_VAL @Model.QUA_PCS_UNI</td>
+                <td rowspan="5">@Model.GRO_WEI_VAL @Model.PKGUN_WEI_UNI</td>
+                <td rowspan="5" >@Model.GRO_VOL_VAL @Model.GRO_VOL_UNI</td>
+                <td rowspan="5"  style="position: relative;">
+                  @Model.GNAME
+                  <div style="position: absolute; bottom: 10px;">
+                  港区:@Model.ZGQ<br>
+                  进港时间: @Model.ZJGSJ<br>
+                  离港时间: @Model.ZLGSJ
+                    </div>
+                </td>
+                <td rowspan="5">@Model.MARK  </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  箱号<br>
+                  @Model.TURES_ID
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  封号<br>
+                  @Model.ZFH1
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  箱型<br>
+                  20` 40` 45`
+                  <br>
+                </td>
+                <td colspan="2">
+                  箱类<br>
+                  GP=普通箱  TK=油罐箱<br>
+                  RF=冷藏箱  PF=平板箱<br>
+                  OT=开顶箱  HC=高箱<br>
+                  FR=框架箱  HT=挂衣箱 
+              
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  箱型<br>
+                  @Model.TURES_TCO
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  装箱人名称/地址<br>
+                  @Model.ZFHDWMS <br> @Model.ZTHDZMS
+                  <br>
+                  电话号码:
+                </td>
+                <td>
+                  驾驶员签收及车号<br>
+                  @Model.ZSJZJH<br>
+                  @Model.VEHICLERES_ID
+                </td>
+                <td>总件数</td>
+                <td>总货重</td>
+                <td>总尺码</td>
+                <td rowspan="3" colspan="2">
+                  备注:<br>
+                  @Model.ZTHYQBZL
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  装箱日期<br>
+                  @(Model.ZFOJHTHRQZGRQS.HasValue ? Model.ZFOJHTHRQZGRQS.Value.ToString("yyyy/MM/dd") : "")
+                </td>
+                <td rowspan="2" colspan="2">码头收箱签收和日期<br></td>
+                <td rowspan="2">
+                  集装箱皮重<br>
+                  @Model.PKGUN_WEI_VAL
+                </td >
+                <td rowspan="2">
+                  货/箱总重量<br>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  装箱人签名<br><br>
+                   
+                </td>
+              </tr>
+            </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

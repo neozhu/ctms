@@ -1,0 +1,59 @@
+﻿﻿@model WebApp.Models.Attachment
+<!-- 弹出窗体form表单 -->
+<div id="attachmentswindow" hidden="hidden" class="easyui-window"
+     title="附件信息"
+     data-options="modal:true,
+                    closed:true,
+                    maximized:false,
+                    iconCls:'icon-more',
+                    footer:'#windowfooter',
+                    closeDuration:200,
+                    closeAnimation:'slide',
+                    openDuration:300,
+                    openAnimation:'slide',
+                    onOpen:function(){
+                       $(this).window('vcenter');
+                       $(this).window('hcenter');
+                       loadfiles();
+                    },
+                    onRestore:function(){
+                    },
+                    onMaximize:function(){
+                    }
+                    " style="width:960px;height:520px">
+  <!-- begin toolbar -->
+  <div class="window-body-toolbar">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="btn-group btn-group-sm">
+          <button onclick="uploadfiles()" class="btn btn-default">
+            <i class="fa fa-floppy-o"></i> 上传附件
+          </button>
+        </div>
+       
+      </div>
+      <div class="col-sm-4 text-align-right">
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn   btn-success" onclick="closeuploadwindow()">
+            <i class="fa fa-chevron-left"></i>
+            @Html.L("Close")
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end toolbar -->
+  <!-- begin window body -->
+  <div class="widget-body">
+     <input id="iuploadfiles" type="file" multiple value="" style="visibility:hidden"/>
+    <p id="gallery" style="padding:10px">
+
+    </p>
+ 
+    <!--========================================================================================-->
+  </div>
+  <!--end window body -->
+</div>
+<div id="windowfooter" style="padding:5px;">&nbsp;</div>
+<!-- 弹出窗体form表单 -->
+<!-- 弹出编辑对话框 -->

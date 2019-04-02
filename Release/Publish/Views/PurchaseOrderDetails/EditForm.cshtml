@@ -1,0 +1,199 @@
+﻿﻿@model WebApp.Models.PurchaseOrderDetail
+<!-- begin master section -->
+<div class="row">
+    <div class="col col-lg-12 col-md-12">
+<!--begin purchaseorderdetail form  -->
+<form id="purchaseorderdetail_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartNo)" 
+				   name="@Html.NameFor(model => model.PartNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartNo)" 
+				   value="@Html.ValueFor(model => model.PartNo)"
+				   tabindex="0" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartName)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.PartName)" 
+				   name="@Html.NameFor(model => model.PartName)" 
+                   placeholder="@Html.DisplayNameFor(model => model.PartName)" 
+				   value="@Html.ValueFor(model => model.PartName)"
+				   tabindex="1" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PartName)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Spec) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Spec)" 
+				   name="@Html.NameFor(model => model.Spec)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Spec)" 
+				   value="@Html.ValueFor(model => model.Spec)"
+				   tabindex="2" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Spec)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Model)" 
+				   name="@Html.NameFor(model => model.Model)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Model)" 
+				   value="@Html.ValueFor(model => model.Model)"
+				   tabindex="3" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Model)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Unit)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Unit)" 
+				   name="@Html.NameFor(model => model.Unit)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Unit)" 
+				   value="@Html.ValueFor(model => model.Unit)"
+				   tabindex="4" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Unit)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Price)"
+				   name="@Html.NameFor(model => model.Price)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Price)" 
+				   value="@Html.ValueFor(model => model.Price)"
+				   tabindex="5" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Price)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Qty)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Qty)"
+				   name="@Html.NameFor(model => model.Qty)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Qty)" 
+				   value="@Html.ValueFor(model => model.Qty)"
+				   tabindex="6" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Qty)</b>
+			    </label>
+            </section>
+				 
+	    
+			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="input">
+            <input id="@Html.IdFor(model => model.Amount)"
+				   name="@Html.NameFor(model => model.Amount)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Amount)" 
+				   value="@Html.ValueFor(model => model.Amount)"
+				   tabindex="7" required
+				   type="text" 
+				   />
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Amount)</b>
+			    </label>
+            </section>
+				 
+	   </div>
+	    
+     <div class="row">
+            <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.Remark)" 
+				   name="@Html.NameFor(model => model.Remark)" 
+                   placeholder="@Html.DisplayNameFor(model => model.Remark)" 
+				   value="@Html.ValueFor(model => model.Remark)"
+				   tabindex="8" 
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.Remark)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span> </label>
+            <label class="input">
+			<input id="@Html.IdFor(model => model.OrderNo)" 
+				   name="@Html.NameFor(model => model.OrderNo)" 
+                   placeholder="@Html.DisplayNameFor(model => model.OrderNo)" 
+				   value="@Html.ValueFor(model => model.OrderNo)"
+				   tabindex="9" required
+				   type="text" 
+				   />
+             <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.OrderNo)</b>
+			    </label>
+            </section>
+				 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PurchaseOrderHeadId)</span> </label>
+            <label class="input">
+			      @Html.DropDownListFor(model => model.PurchaseOrderHeadId, ViewBag.PurchaseOrderHeadId as List<SelectListItem>, htmlAttributes: new { @class = "select2" }) 
+                 <b class="tooltip tooltip-bottom-right">@Html.DisplayNameFor(model => model.PurchaseOrderHeadId)</b>
+			    </label>
+            </section>
+	 
+	    
+   </div>
+</fieldset>
+</form>
+<!-- end purchaseorderdetail form  -->
+</div>
+</div>
+<!-- end master section -->
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#purchaseorderdetail_form').form('load', data);
+            
+    }
+
+
+   var purchaseorderdetailid=@Model.Id;
+    $(function(){
+        initFormData(purchaseorderdetailid);
+    });
+ </script>
+

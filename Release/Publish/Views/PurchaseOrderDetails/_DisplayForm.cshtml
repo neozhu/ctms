@@ -1,0 +1,122 @@
+﻿﻿@model WebApp.Models.PurchaseOrderDetail
+ <!-- 输出form表单界面 -->
+<form id="purchaseorderdetail_form" class="smart-form" method="post" novalidate >
+@Html.AntiForgeryToken()
+  <input type="hidden" id="@Html.IdFor(model => model.Id)" 
+                       name="@Html.NameFor(model => model.Id)" 
+                       value="@Html.ValueFor(model => model.Id)" />
+ <fieldset>
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartNo)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PartName)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.PartName)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Spec) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Spec)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Model) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Model)
+            </label>
+            </section>
+			  		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Unit)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Unit)
+            </label>
+            </section>
+			  		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Price)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Price)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Qty)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Qty)
+			    </label>
+            </section>
+              		 
+	    
+			  			<section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.Amount)</span> </label>
+            <label class="label">
+            @Html.DisplayFor(model => model.Amount)
+			    </label>
+            </section>
+              		 
+	   </div>
+	    
+     <div class="row">
+			              <section class="col col-3">
+            <label class="label">@Html.DisplayNameFor(model => model.Remark) </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.Remark)
+            </label>
+            </section>
+			  		 
+	    
+			              <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.OrderNo)</span> </label>
+            <label class="label">
+			 @Html.DisplayFor(model => model.OrderNo)
+            </label>
+            </section>
+			  		 
+	    
+            <section class="col col-3">
+            <label class="label"><span class="required">@Html.DisplayNameFor(model => model.PurchaseOrderHeadId)</span> </label>
+            <label class="label">
+			      @Html.DisplayFor(model => model.PurchaseOrderHeadId)
+			</label>
+            </section>
+			 
+	    
+   </div>
+	    
+</fieldset>
+</form>
+<!--========================================================================================-->
+ 
+
+ <script type="text/javascript">
+    //初始化from赋值
+    function initFormData(id) {
+            //$('#purchaseorderdetail_form').form('load', data);
+            
+    }
+
+
+   var purchaseorderdetailid=@Model.Id;
+    $(function(){
+        initFormData(purchaseorderdetailid);
+    });
+ </script>
+
